@@ -13,6 +13,11 @@
         android:theme="@style/Theme.HandmakeApp"
         tools:targetApi="31">
         <activity
+            android:name=".order"
+            android:exported="false"
+            android:label="@string/title_activity_order"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
+        <activity
             android:name=".cart"
             android:exported="false" />
     </application>
