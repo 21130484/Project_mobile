@@ -14,5 +14,3 @@
 .cxx
 local.properties
 .idea
-/build.gradle.kts
-/settings.gradle.kts
