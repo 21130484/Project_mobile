@@ -1,5 +1,6 @@
 # Đồ án bộ môn Lập trình trên thiết bị di động
 > Nhóm trưởng là Mân Nguyễn Toàn Phước.
+
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
 
