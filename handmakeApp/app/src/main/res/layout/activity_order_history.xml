@@ -27,7 +27,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:background="None"
-                android:text="<"
+                android:text="v"
                 android:textSize="20dp" />
 
             <TextView
