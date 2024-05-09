@@ -23,10 +23,7 @@
                 android:id="@+id/back"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:background="None"
-                android:text="v"
                 android:textSize="20dp" />
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
@@ -59,7 +56,8 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginRight="10dp"
-                    android:src="@tools:sample/avatars" />
+                    android:src="@drawable/ic_launcher_background"
+               />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -97,7 +95,6 @@
                     android:id="@+id/change"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:background="None"
                     android:textColor="#F44336"
                     android:textStyle="bold"
                     android:textSize="11dp"
@@ -123,7 +120,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginRight="10dp"
-                        android:src="@tools:sample/avatars" />
+                        android:src="@drawable/ic_launcher_background"
+                       />
 
                     <TextView
                         android:id="@+id/textView9"
@@ -148,7 +146,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="text"
-                    android:background="None"
                     android:layout_marginTop="10dp"
                     android:text="Nhập ghi chú của bạn tại đây" />
 
@@ -172,7 +169,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginRight="10dp"
-                        android:src="@tools:sample/avatars" />
+                        android:src="@drawable/ic_launcher_background"
+                       />
 
                     <TextView
                         android:id="@+id/textView11"
@@ -279,7 +277,8 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginRight="10dp"
-                    android:src="@tools:sample/avatars" />
+                    android:src="@drawable/ic_launcher_background"
+                    />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -337,7 +336,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="#00BCD4"
                 android:text="ĐẶT HÀNG"
-                android:drawableLeft="/drawable/check.svg"/>
+                />
         </LinearLayout>
 
     </LinearLayout>

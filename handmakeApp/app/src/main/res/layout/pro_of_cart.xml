@@ -51,7 +51,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="10dp"
-                android:src="@tools:sample/avatars" />
+                android:src="@drawable/ic_launcher_background" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,7 +107,6 @@
                         android:id="@+id/decrease"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="None"
                         android:textColor="@color/black"
                         android:outlineProvider="bounds"
                         android:text="-" />
@@ -124,7 +123,6 @@
                         android:id="@+id/increase"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="None"
                         android:textColor="@color/black"
                         android:outlineProvider="bounds"
                         android:text="+" />

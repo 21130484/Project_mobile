@@ -26,8 +26,6 @@
                 android:id="@+id/back"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:background="None"
-                android:text="v"
                 android:textSize="20dp" />
 
             <TextView
@@ -59,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:background="None"
+                    android:shadowColor="@color/background"
                     android:text="Chờ xác nhận"
                     android:textColor="#00BCD4"
                     android:textSize="12dp" />
@@ -71,7 +69,7 @@
                     android:layout_alignTop="@id/waiting"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@id/waiting"
-                    android:background="None"
+
                     android:text="Đang giao hàng"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
@@ -83,7 +81,7 @@
                     android:layout_alignTop="@id/button3"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@id/button3"
-                    android:background="None"
+
                     android:text="Đã giao hàng"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
@@ -95,7 +93,7 @@
                     android:layout_alignTop="@id/button4"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@id/button4"
-                    android:background="None"
+
                     android:text="Đã hoàn thành"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
