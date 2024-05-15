@@ -39,15 +39,17 @@ public class ProductListArrayAdapter extends ArrayAdapter<Product> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         convertView = inflater.inflate(layoutId, null);
-        Product item = mylist.get(position);
-        ImageView imgItem = convertView.findViewById(R.id.img_item);
-//load image: tại sao getId luôn bằng 0?
-        new LoadImageTask(imgItem).execute(item.getId());
 
+        Product item = mylist.get(position);
+
+//load image: tại sao getId luôn bằng 0?
+        ImageView imgItem = convertView.findViewById(R.id.img_item);
         TextView txtName = convertView.findViewById(R.id.txt_name);
-        txtName.setText(item.getName());
         TextView txtPrice = convertView.findViewById(R.id.txt_price);
+        new LoadImageTask(imgItem).execute(item.getId());
+        txtName.setText(item.getName());
         txtPrice.setText(item.getSellingPrice() + "");
+
         return convertView;
     }
 
