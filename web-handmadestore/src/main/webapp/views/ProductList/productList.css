@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+/*danh mục*/
+.content .category ul {
+    padding: 0;
+}
+
+.content ul li {
+    text-decoration: none;
+    list-style: none;
+}
+
+.content .category {
+    background: #afe2ea;
+    height: 100%;
+}
+
+.content .category .title {
+    text-align: center;
+    padding-top: 5%;
+}
+
+.content .category ul li {
+    width: 100%;
+}
+
+.content .category ul li:hover {
+    background: white;
+}
+
+.content .category ul li a {
+    text-decoration: none;
+    padding: 5%;
+}
+
+/*Sản phẩm*/
+.content .productList ul li img {
+    width: 80%;
+    height: 100%;
+    margin-top: 10%;
+}
+
+.content .productList ul li img:hover {
+    width: 85%;
+}
+
+.content .productList .products .product_li .item_product a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5em;
+}
+
+.content .productList .products .product_li .item_product a.image {
+    height: 10em;
+}
+
+.content .productList .products .product_li .item_product {
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    position: relative;
+}
+
+.product_li {
+    width: 25%;
+    margin-top: 1rem;
+    margin-bottom: 1.5em;
+}
+
+.item_product {
+    height: 23em;
+}
+
+.content .productList .products .product_li .item_product a p {
+    color: black;
+}
+
+.content .productList .products .product_li .item_product a p:hover {
+    color: red;
+}
+
+.content .productList .products .product_li .item_product p {
+    color: red;
+}
+
+.content .productList .products .product_li .item_product .add-to-cart {
+    background: #8b8b8b;
+    font-size: 1rem;
+    height: 10vh;
+    padding: 0;
+    cursor: pointer;
+    visibility: hidden;
+    border: 0;
+}
+.content .productList .products .product_li .item_product .add-to-cart a{
+    height: 9vh;
+}
+.content .productList .products .product_li .item_product .add-to-cart span{
+    color: white;
+}
+
+.content .productList .products .product_li .item_product:hover .add-to-cart {
+    visibility: visible;
+}
+
+.content .productList .products .product_li .item_product .add-to-cart:hover {
+    background: red;
+}
+
+.add-to-cart {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/*Số trang*/
+.pagination a {
+    text-decoration: none;
+    border: 1px #e8f7fa solid;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.pagination strong {
+    text-decoration: none;
+    border: 1px #e8f7fa solid;
+    text-align: center;
+    padding: 0.5rem;
+    background: deepskyblue;
+}
+/*Sort*/
+.menu_sort {
+    padding: 0;
+    margin: 0;
+    margin-left: 5px;
+    border: 1px solid grey;
+}
+
+.list_sort {
+    width: 23vh;
+    text-align: center;
+}
+
+.menu_sort li .sort_submenu {
+    padding: 0;
+    left: 0;
+    top: 100%;
+    border-radius: 0;
+}
+
+.menu_sort li .sort li {
+    border-bottom: 1px solid grey;
+}
+
+.menu_sort li .sort_submenu {
+    display: none;
+}
+
+.menu_sort:hover .sort_submenu {
+    display: block;
+}
+
+.sort_submenu .sort_item:hover {
+    background: red;
+    color: white;
+}

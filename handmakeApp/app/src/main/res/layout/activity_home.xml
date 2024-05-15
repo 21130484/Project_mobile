@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="408dp"
+            android:layout_height="111dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +58,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <GridView
+        android:id="@+id/gv"
         android:layout_width="match_parent"
-        android:layout_height="365dp"
+        android:layout_height="501dp"
         android:numColumns="2" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

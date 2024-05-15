@@ -47,4 +47,11 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
+
+//    Okhttp: kết nối -> tải, upload dữ liệu
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+//    org.json: xử lý file json
+    implementation("org.json:json:20210307")
+//    picasso: tải, hiển thị hình ảnh bằng url
+    implementation("com.squareup.picasso:picasso:2.5.2")
 }
