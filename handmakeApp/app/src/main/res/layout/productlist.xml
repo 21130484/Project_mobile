@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".listProduct.productList">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+      >
+        <ImageView
+            android:src="@drawable/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            >
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đồ HandMade"
+            android:layout_gravity="center"
+            android:textSize="25dp"
+            android:layout_marginLeft="70dp"
+            android:textStyle="bold"
+            >
+        </TextView>
+        <ImageView
+            android:id="@+id/find"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/find"
+            android:layout_marginLeft="50dp">
+        </ImageView>
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/cart"
+            android:layout_marginLeft="10dp">
+        </ImageView>
+    </LinearLayout>
+<!--    Tạo submenu Lọc-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_marginRight="20dp"
+        >
+        <ImageView
+            android:id="@+id/filterPrice"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/filter">
+
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lọc"
+            android:textSize="20dp"
+            android:textStyle="bold"
+        >
+
+    </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <ListView
+            android:id="@+id/listProduct"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+        </ListView>
+        <ListView
+            android:id="@+id/listProducts"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+        </ListView>
+
+    </LinearLayout>
+
+</LinearLayout>
