@@ -47,7 +47,7 @@ public class ProductAPI {
                 int categoryId = jsonObject.getInt("categoryId");
                 int discountId = jsonObject.getInt("discountId");
                 int isSale = jsonObject.getInt("isSale");
-                products.add(new Product(name, description, costPrice, sellingPrice, quantity, soldout, categoryId, isSale));
+                products.add(new Product(id,name, description, costPrice, sellingPrice, quantity, soldout, categoryId, isSale));
             }
         } catch (IOException | JSONException e) {
             Log.e("error", e.toString());

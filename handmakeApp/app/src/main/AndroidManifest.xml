@@ -17,7 +17,7 @@
             android:exported="false">
 
         </activity>
-<!--DETAIL PRODUCT START-->
+        <!--DETAIL PRODUCT START-->
 
         <activity
             android:name=".activity_handle.Home"
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
 
-<!--DETAIL PRODUCT END-->
+        <!--DETAIL PRODUCT END-->
 
         <activity
             android:name=".order"
