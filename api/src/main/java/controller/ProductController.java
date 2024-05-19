@@ -31,7 +31,7 @@ public class ProductController extends HttpServlet {
             if (action.equals("getAllProduct")) {
                 List<Product> products = productDAO.getAll();
                 objectMapper.writeValue(resp.getOutputStream(), products);
-            } else if (action.equals("getImageByIdProduct")) {
+            } else if (action.equals("getImageByProductId")) {
                 String productId = req.getParameter("productId");
                 if (productId != null) {
                     List<Image> images = imageDAO.getImagesForProduct(productId);

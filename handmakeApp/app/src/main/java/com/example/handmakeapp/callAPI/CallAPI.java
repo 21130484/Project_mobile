@@ -1,6 +1,8 @@
 package com.example.handmakeapp.callAPI;
 
+import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
+import com.example.handmakeapp.model.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,6 +17,12 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface CallAPI {
+    public final static String SERVER_IP = "192.168.137.1";//ipconfig
+    public final static String SERVER_PORT = "8080";
+
+    public static String getAbsoluteURL() {
+        return "http://" + SERVER_IP + ":" + SERVER_PORT + "/api/";
+    }
 
     Gson gson = new GsonBuilder()
             .registerTypeAdapter(Date.class, new DateDeserializer())
@@ -22,7 +30,7 @@ public interface CallAPI {
 
 
     CallAPI api = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/api_war_exploded/")
+            .baseUrl(getAbsoluteURL())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(CallAPI.class);
@@ -30,4 +38,9 @@ public interface CallAPI {
     @GET("order")
     Call<List<Order>> getAllOrder(@Query("userId") int userId);
 
+    @GET("api-product?action=getAllProduct")
+    Call<List<Product>> getAllProduct();
+
+    @GET("api-product?action=getImageByProductId")
+    Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);
 }
