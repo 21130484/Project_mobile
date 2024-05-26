@@ -30,7 +30,7 @@
 <!--DETAIL PRODUCT END-->
 
         <activity
-            android:name=".home.Home"
+            android:name=".listProduct.productList"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
             <intent-filter>
