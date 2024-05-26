@@ -34,7 +34,7 @@ public class Home extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(layoutManager);
 
-        new NetworkTask().execute();
+//        new NetworkTask().execute();
 
     }
 
