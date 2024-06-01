@@ -57,17 +57,12 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/filter">
-
         </ImageView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lọc"
-            android:textSize="20dp"
-            android:textStyle="bold"
-        >
-
-    </TextView>
+       <Spinner
+           android:id="@+id/filterProductList"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content">
+       </Spinner>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
