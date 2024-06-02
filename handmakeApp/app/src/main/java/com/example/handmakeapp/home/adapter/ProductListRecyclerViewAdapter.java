@@ -42,7 +42,6 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Product product = products.get(position);
-        Log.e("product", product.toString());
         if (productImage != null && !productImage.isEmpty() && productImage.get(product.getId()) != null) {
             String imageUrl = CallAPI.getAbsoluteURL() + "/" + productImage.get(product.getId()).get(0).getPath();
             Picasso.get().load(imageUrl).into(holder.imgItem);
