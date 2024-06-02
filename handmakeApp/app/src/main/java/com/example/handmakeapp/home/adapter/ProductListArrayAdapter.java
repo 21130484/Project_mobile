@@ -2,7 +2,6 @@ package com.example.handmakeapp.home.adapter;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,18 +19,25 @@ import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class ProductListArrayAdapter extends ArrayAdapter<Product> {
     Activity context;
     int layoutId;
     List<Product> mylist;
+    HashMap<Integer, List<Image>> productImage;
 
     public ProductListArrayAdapter(Activity context, int layoutId, List<Product> mylist) {
         super(context, layoutId, mylist);
         this.context = context;
         this.layoutId = layoutId;
         this.mylist = mylist;
+        new LoadImageTask(mylist).execute();
+    }
+
+    public void setFilterList(List<Product> filterList) {
+        this.mylist = filterList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -39,39 +45,45 @@ public class ProductListArrayAdapter extends ArrayAdapter<Product> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         convertView = inflater.inflate(layoutId, null);
-
         Product item = mylist.get(position);
 
-//load image: tại sao getId luôn bằng 0?
         ImageView imgItem = convertView.findViewById(R.id.img_item);
         TextView txtName = convertView.findViewById(R.id.txt_name);
         TextView txtPrice = convertView.findViewById(R.id.txt_price);
-        new LoadImageTask(imgItem).execute(item.getId());
+
+
+        if (productImage != null && !productImage.isEmpty() && productImage.get(item.getId()) != null) {
+            String imageUrl = CallAPI.getAbsoluteURL() + "/" + productImage.get(item.getId()).get(0).getPath();
+            Picasso.get().load(imageUrl).into(imgItem);
+        }
         txtName.setText(item.getName());
         txtPrice.setText(item.getSellingPrice() + "");
 
         return convertView;
     }
 
-    private class LoadImageTask extends AsyncTask<Integer, Void, List<Image>> {
-        private ImageView imgItem;
+    private class LoadImageTask extends AsyncTask<Integer, Void, HashMap<Integer, List<Image>>> {
+        List<Product> getIdList;
 
-        public LoadImageTask(ImageView imgItem) {
-            this.imgItem = imgItem;
+        public LoadImageTask(List<Product> getIdList) {
+            this.getIdList = getIdList;
         }
 
         @Override
-        protected List<Image> doInBackground(Integer... params) {
-            int productId = params[0];
-            Log.e("product Id", productId + "");
-            return ProductMapping.getInstance().getImageByIdProduct(productId);
+        protected HashMap<Integer, List<Image>> doInBackground(Integer... params) {
+            productImage = new HashMap<>();
+            for (Product p : getIdList) {
+                int productId = p.getId();
+                List<Image> images = ProductMapping.getInstance().getImageByIdProduct(productId);
+                productImage.put(productId, images);
+            }
+            return productImage;
         }
 
         @Override
-        protected void onPostExecute(List<Image> images) {
-            if (images != null && !images.isEmpty()) {
-                String imageUrl = CallAPI.getAbsoluteURL() + "/" + images.get(0).getPath();
-                Picasso.get().load(imageUrl).into(imgItem);
+        protected void onPostExecute(HashMap<Integer, List<Image>> map) {
+            if (map != null && !map.isEmpty()) {
+
             }
         }
     }

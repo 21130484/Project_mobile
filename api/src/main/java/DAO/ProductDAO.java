@@ -29,5 +29,13 @@ public class ProductDAO {
         );
         return product.isEmpty() ? null : product.get();
     }
-}
+    public static List<Product> getTopSoldoutProduct(int number) {
+        List<Product> products = JDBIConnection.me().connect().withHandle(handle ->
+                handle.createQuery("SELECT * FROM product where soldout > 0 order by soldout limit ?")
+                        .bind(0, number)
+                        .mapToBean(Product.class)
+                        .stream().toList());
+        return products;
+    }
 
+}

@@ -1,12 +1,10 @@
-package com.example.handmakeapp.home.mapping;
+package com.example.handmakeapp.data_api;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.model.Image;
-import com.example.handmakeapp.model.Product;
-import com.example.handmakeapp.order;
+import com.example.handmakeapp.bean.Image;
+import com.example.handmakeapp.bean.Product;
+import com.example.handmakeapp.ServerInformation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,18 +17,19 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
 
-public class ProductMapping {
-    private static ProductMapping instance;
+public class ProductAPI {
+    private static ProductAPI instance;
 
-    public static ProductMapping getInstance() {
-        if (instance == null) instance = new ProductMapping();
+    public static ProductAPI getInstance() {
+        if (instance == null) instance = new ProductAPI();
         return instance;
     }
 
-    public void mappingProductObject(OkHttpClient client, Request request, List<Product> result) {
+    public List<Product> getAllProduct() {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(ServerInformation.getAbsoluteURL() + "/api-product?action=getAllProduct").build();
+        List<Product> products = new ArrayList<>();
         try {
             Response resp = client.newCall(request).execute();
             String data = resp.body().string();
@@ -48,30 +47,17 @@ public class ProductMapping {
                 int categoryId = jsonObject.getInt("categoryId");
                 int discountId = jsonObject.getInt("discountId");
                 int isSale = jsonObject.getInt("isSale");
-                result.add(new Product(id, name, description, costPrice, sellingPrice, quantity, soldout, categoryId, isSale));
+                products.add(new Product(id,name, description, costPrice, sellingPrice, quantity, soldout, categoryId, isSale));
             }
         } catch (IOException | JSONException e) {
             Log.e("error", e.toString());
         }
+        return products;
     }
 
-    public List<Product> getAllProduct() {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getAllProduct").build();
-        List<Product> products = new ArrayList<>();
-        mappingProductObject(client, request, products);
-        return products;
-    }
-    public List<Product> getTopSoldoutProduct() {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getTopSoldoutProduct").build();
-        List<Product> products = new ArrayList<>();
-        mappingProductObject(client, request, products);
-        return products;
-    }
     public List<Image> getImageByIdProduct(int productId) {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getImageByProductId&productId=" + productId).build();
+        Request request = new Request.Builder().url(ServerInformation.getAbsoluteURL() + "/api-product?action=getImageByIdProduct&productId=" + productId).build();
         List<Image> images = new ArrayList<>();
         try {
             Response resp = client.newCall(request).execute();

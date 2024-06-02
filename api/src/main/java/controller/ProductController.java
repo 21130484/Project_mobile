@@ -43,6 +43,9 @@ public class ProductController extends HttpServlet {
                     Product products = productDAO.getProductById(productId);
                     objectMapper.writeValue(resp.getOutputStream(), products);
                 }
+            } else if(action.equals("getTopSoldoutProduct")){
+                List<Product> products = productDAO.getTopSoldoutProduct(15);
+                objectMapper.writeValue(resp.getOutputStream(), products);
             }
         }
     }

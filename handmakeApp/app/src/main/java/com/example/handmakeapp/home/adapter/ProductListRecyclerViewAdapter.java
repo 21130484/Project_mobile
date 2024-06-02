@@ -18,13 +18,18 @@ import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
 
-public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<ProductListRecyclerViewAdapter.MyViewHolder>{
+public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<ProductListRecyclerViewAdapter.MyViewHolder> {
     private List<Product> products;
 
-    public ProductListRecyclerViewAdapter(List<Product> products){
+    HashMap<Integer, List<Image>> productImage;
+
+    public ProductListRecyclerViewAdapter(List<Product> products) {
+
         this.products = products;
+        new LoadImageTask(products).execute();
     }
 
     @NonNull
@@ -38,9 +43,12 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Product product = products.get(position);
         Log.e("product", product.toString());
-        new LoadImageTask(product.getId(),holder.imgItem).execute(product.getId());
+        if (productImage != null && !productImage.isEmpty() && productImage.get(product.getId()) != null) {
+            String imageUrl = CallAPI.getAbsoluteURL() + "/" + productImage.get(product.getId()).get(0).getPath();
+            Picasso.get().load(imageUrl).into(holder.imgItem);
+        }
         holder.txtName.setText(product.getName());
-        holder.txtPrice.setText(product.getSellingPrice()+"");
+        holder.txtPrice.setText(product.getSellingPrice() + "");
     }
 
     @Override
@@ -48,10 +56,11 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
         return products.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgItem;
         private TextView txtName;
         private TextView txtPrice;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imgItem = itemView.findViewById(R.id.img_item);
@@ -59,26 +68,29 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
             txtPrice = itemView.findViewById(R.id.txt_price);
         }
     }
-    private class LoadImageTask extends AsyncTask<Integer, Void, List<Image>> {
-        private int productId;
-        private ImageView imgItem;
 
-        public LoadImageTask(int productId, ImageView imgItem) {
-            this.productId = productId;
-            this.imgItem = imgItem;
+    private class LoadImageTask extends AsyncTask<Integer, Void, HashMap<Integer, List<Image>>> {
+        List<Product> getIdList;
+
+        public LoadImageTask(List<Product> getIdList) {
+            this.getIdList = getIdList;
         }
 
         @Override
-        protected List<Image> doInBackground(Integer... params) {
-            Log.e("product Id", productId + "");
-            return ProductMapping.getInstance().getImageByIdProduct(productId);
+        protected HashMap<Integer, List<Image>> doInBackground(Integer... params) {
+            productImage = new HashMap<>();
+            for (Product p : getIdList) {
+                int productId = p.getId();
+                List<Image> images = ProductMapping.getInstance().getImageByIdProduct(productId);
+                productImage.put(productId, images);
+            }
+            return productImage;
         }
 
         @Override
-        protected void onPostExecute(List<Image> images) {
-            if (images != null && !images.isEmpty()) {
-                String imageUrl = CallAPI.getAbsoluteURL() + "/" + images.get(0).getPath();
-                Picasso.get().load(imageUrl).into(imgItem);
+        protected void onPostExecute(HashMap<Integer, List<Image>> map) {
+            if (map != null && !map.isEmpty()) {
+
             }
         }
     }

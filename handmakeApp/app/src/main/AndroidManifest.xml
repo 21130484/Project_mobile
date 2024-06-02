@@ -19,18 +19,17 @@
             android:exported="false">
 
         </activity>
-<!--DETAIL PRODUCT START-->
-
+        <!--DETAIL PRODUCT START-->
         <activity
             android:name=".detail_product.DetailActivity"
             android:exported="false">
 
         </activity>
 
-<!--DETAIL PRODUCT END-->
+        <!--DETAIL PRODUCT END-->
 
         <activity
-            android:name=".listProduct.productList"
+            android:name=".home.Home"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
             <intent-filter>
