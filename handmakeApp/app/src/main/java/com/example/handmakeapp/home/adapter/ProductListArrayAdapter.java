@@ -20,6 +20,7 @@ import com.example.handmakeapp.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class ProductListArrayAdapter extends ArrayAdapter<Product> {
     Activity context;
@@ -37,6 +38,7 @@ public class ProductListArrayAdapter extends ArrayAdapter<Product> {
 
     public void setFilterList(List<Product> filterList) {
         this.mylist = filterList;
+        new LoadImageTask(mylist).execute();
         notifyDataSetChanged();
     }
 

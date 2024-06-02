@@ -3,6 +3,7 @@ package com.example.handmakeapp.home.mapping;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.handmakeapp.bean.Category;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
@@ -95,5 +96,32 @@ public class ProductMapping {
             Log.e("error", e.toString());
         }
         return images;
+    }
+
+    public List<Category> getCategories() {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getCategories").build();
+        List<Category> categories = new ArrayList<>();
+        try {
+            Response resp = client.newCall(request).execute();
+            String data = resp.body().string();
+            JSONArray jsonArray = new JSONArray(data);
+            try {
+                resp = client.newCall(request).execute();
+                data = resp.body().string();
+                jsonArray = new JSONArray(data);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    int id = jsonObject.getInt("id");
+                    String name = jsonObject.getString("name");
+                    categories.add(new Category(id, name));
+                }
+            } catch (Exception e) {
+                Log.e("get image error", e.toString());
+            }
+        } catch (IOException | JSONException e) {
+            Log.e("error", e.toString());
+        }
+        return categories;
     }
 }
