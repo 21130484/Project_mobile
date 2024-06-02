@@ -20,7 +20,6 @@ import com.example.handmakeapp.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ProductListArrayAdapter extends ArrayAdapter<Product> {
     Activity context;
