@@ -29,7 +29,6 @@
                     android:id="@+id/back"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                   android:background="@drawable/back"
                     android:textSize="20dp" />
                 <TextView
                     android:id="@+id/textView"
@@ -348,7 +347,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="#00BCD4"
-        android:textColor="#F44336"
         android:text="ĐẶT HÀNG"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

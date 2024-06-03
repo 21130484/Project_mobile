@@ -10,16 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Order;
+import com.example.handmakeapp.model.OrderItem;
 
 import java.util.ArrayList;
 
-public class CustomAdapterOrder extends BaseAdapter {
+public class CustomAdapterOrderHistory extends BaseAdapter {
     Context context;
     ArrayList<Order> arrayList;
 
-    public CustomAdapterOrder(Context context, ArrayList<Order> arrayList) {
+    public CustomAdapterOrderHistory(Context context, ArrayList<Order> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -42,27 +42,32 @@ public class CustomAdapterOrder extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.pro_of_order,null);
+        convertView = inflater.inflate(R.layout.pro_of_order_his,null);
 
         Order order = arrayList.get(position);
-        TextView idItem = convertView.findViewById(R.id.textViewId);
+        OrderItem orderItem = order.getItemList().get(0); // san pham dai dien cho don hang (first)
+        TextView orderId = convertView.findViewById(R.id.textViewId);
+        TextView orderStatus = convertView.findViewById(R.id.textViewStatus);
+        ImageView imgProduct = convertView.findViewById(R.id.imageView);
         TextView nameProduct = convertView.findViewById(R.id.textViewName);
         TextView typeProduct = convertView.findViewById(R.id.textViewType);
         TextView priceProduct = convertView.findViewById(R.id.price);
-        TextView xQuantityProduct = convertView.findViewById(R.id.xquantity);
         TextView quantityProduct = convertView.findViewById(R.id.quantity);
-        ImageView imgProduct = convertView.findViewById(R.id.imageView);
+        TextView quantityOrder = convertView.findViewById(R.id.textViewOrderQuantity);
+        TextView priceOrder = convertView.findViewById(R.id.textViewTotalPrice);
 
 //        chuyen du lieu vao customeLayout
-//        idItem.setText("#"+order.getId());
-//        nameProduct.setText(order.getName());
-//        typeProduct.setText(order.getDescription());
-//        priceProduct.setText(order.getSellingPrice()+"");
-//        quantityProduct.setText(order.getQuantity() + "");
-//        xQuantityProduct.setText("x"+order.getQuantity());
-//        // Sử dụng Glide để tải ảnh
-//        Uri imageUri = Uri.parse(order.getPath()+"");
-//        Glide.with(convertView).load(imageUri).into(imgProduct);
+        orderId.setText("#"+order.getId());
+        orderStatus.setText(order.getStatus());
+        nameProduct.setText(orderItem.getName());
+        typeProduct.setText(orderItem.getDescription());
+        priceProduct.setText(orderItem.getSellingPrice()+"");
+        quantityProduct.setText("x"+order.getItemList().size());
+        quantityOrder.setText(order.getItemList().size() + " sản phẩm");
+        priceOrder.setText("Thành tiền :"+order.getTotalPrice());
+        // Sử dụng Glide để tải ảnh
+        Uri imageUri = Uri.parse(orderItem.getPath()+"");
+        Glide.with(convertView).load(imageUri).into(imgProduct);
 
         return convertView;
     }
