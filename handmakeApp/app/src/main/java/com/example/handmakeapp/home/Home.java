@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.handmakeapp.R;
-import com.example.handmakeapp.bean.Category;
+import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.home.adapter.ProductListArrayAdapter;
 import com.example.handmakeapp.home.adapter.ProductListRecyclerViewAdapter;
 import com.example.handmakeapp.home.mapping.ProductMapping;
