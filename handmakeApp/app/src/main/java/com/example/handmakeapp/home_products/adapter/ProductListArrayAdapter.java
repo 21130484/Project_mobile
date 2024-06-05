@@ -1,4 +1,4 @@
-package com.example.handmakeapp.home.adapter;
+package com.example.handmakeapp.home_products.adapter;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.home.mapping.ProductMapping;
+import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
 import com.squareup.picasso.Picasso;
@@ -55,8 +55,7 @@ public class ProductListArrayAdapter extends ArrayAdapter<Product> {
 
 
         if (productImage != null && !productImage.isEmpty() && productImage.get(item.getId()) != null) {
-            String imageUrl = CallAPI.getAbsoluteURL() + "/" + productImage.get(item.getId()).get(0).getPath();
-            Picasso.get().load(imageUrl).into(imgItem);
+            Picasso.get().load(productImage.get(item.getId()).get(0).getPath()).into(imgItem);
         }
         txtName.setText(item.getName());
         txtPrice.setText(item.getSellingPrice() + "");

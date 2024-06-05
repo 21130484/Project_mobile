@@ -58,4 +58,6 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.5.2")
 //    phung - Okhttp: kết nối -> tải, upload dữ liệu
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("com.makeramen:roundedimageview:2.3.0")
 }

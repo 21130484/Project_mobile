@@ -1,13 +1,11 @@
-package com.example.handmakeapp.home.mapping;
+package com.example.handmakeapp.home_products.mapping;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.handmakeapp.bean.Category;
+import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
-import com.example.handmakeapp.order;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,8 +18,6 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class ProductMapping {
     private static ProductMapping instance;
@@ -87,7 +83,7 @@ public class ProductMapping {
                     int id = jsonObject.getInt("id");
                     String name = jsonObject.getString("name");
                     String path = jsonObject.getString("path");
-                    images.add(new Image(id, name, path, productId));
+                    images.add(new Image(id, name, CallAPI.getAbsoluteURL() + path, productId));
                 }
             } catch (Exception e) {
                 Log.e("get image error", e.toString());

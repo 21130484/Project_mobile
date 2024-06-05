@@ -9,7 +9,7 @@ import java.util.Optional;
 public class ImageDAO {
     public static List<Image> getImagesForProduct(String productId) {
         List<Image> imageList = JDBIConnection.me().connect().withHandle(handle ->
-                handle.createQuery("SELECT * from image where productId = :productId ")
+                handle.createQuery("SELECT * from image where productId = :productId limit 50")
                         .bind("productId", productId)
                         .mapToBean(Image.class)
                         .stream().toList());

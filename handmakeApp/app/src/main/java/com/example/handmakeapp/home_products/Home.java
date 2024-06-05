@@ -1,19 +1,14 @@
-package com.example.handmakeapp.home;
+package com.example.handmakeapp.home_products;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,10 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.handmakeapp.R;
-import com.example.handmakeapp.bean.Category;
-import com.example.handmakeapp.home.adapter.ProductListArrayAdapter;
-import com.example.handmakeapp.home.adapter.ProductListRecyclerViewAdapter;
-import com.example.handmakeapp.home.mapping.ProductMapping;
+import com.example.handmakeapp.model.Category;
+import com.example.handmakeapp.home_products.adapter.ProductListArrayAdapter;
+import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
+import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Product;
 
 import java.util.ArrayList;
@@ -111,6 +106,7 @@ public class Home extends AppCompatActivity {
         gridViewAdapter = new ProductListArrayAdapter(Home.this, R.layout.activity_product_item, filterList);
         gv.setAdapter(gridViewAdapter);
     }
+
     private void filterText(String newText) {
         List<Product> filterList = new ArrayList<>();
         if (allProducts != null) {
