@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,17 +19,22 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.handmakeapp.Account;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.bean.Category;
+import com.example.handmakeapp.cart;
 import com.example.handmakeapp.home.adapter.ProductListArrayAdapter;
 import com.example.handmakeapp.home.adapter.ProductListRecyclerViewAdapter;
 import com.example.handmakeapp.home.mapping.ProductMapping;
+import com.example.handmakeapp.listProduct.productList;
 import com.example.handmakeapp.model.Product;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +55,7 @@ public class Home extends AppCompatActivity {
     ProductListRecyclerViewAdapter adapter;
     ProductListArrayAdapter gridViewAdapter;
 
+    BottomNavigationView bottomNavigation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +84,8 @@ public class Home extends AppCompatActivity {
                 return true;
             }
         });
+        // Navigation bottom
+        actionNavigationBottom();
 //        filter
         filterProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -155,4 +164,33 @@ public class Home extends AppCompatActivity {
             filterProduct.setAdapter(adapterFilter);
         }
     }
+
+    public void actionNavigationBottom() {
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.home);
+
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                if (id == R.id.home) {
+                    return true;
+                } else if (id == R.id.cart) {
+                    startActivity(new Intent(getApplicationContext(), cart.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.list) {
+                    startActivity(new Intent(getApplicationContext(), productList.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.account) {
+                    startActivity(new Intent(getApplicationContext(), Account.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
 }

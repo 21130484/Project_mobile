@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#5CE3CF"
             android:orientation="vertical">
 
@@ -58,7 +57,8 @@
             <Spinner
                 android:id="@+id/filterProductList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></Spinner>
+                android:layout_height="wrap_content"
+                android:layout_below="@id/headerLayout"></Spinner>
 
         </LinearLayout>
 
@@ -67,13 +67,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sản phẩm bán chạy" />
-
+            android:text="Sản phẩm bán chạy"
+            android:layout_below="@id/filterProductList"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </LinearLayout>
 
     <TextView
@@ -81,17 +80,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Danh sách sản phẩm"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:layout_below="@id/headerLayout"
+        android:layout_marginTop="10dp"/>
 
     <GridView
         android:id="@+id/gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="2" />
+        android:numColumns="2"
+        android:layout_below="@id/textView21"
+        android:layout_marginTop="10dp"/>
 
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-    <!--        android:id="@+id/bottom_navigation"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:menu="@menu/bottom_navigation_menu" />-->
-</LinearLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:itemTextColor="@color/color_navigation_bottom"
+            app:itemIconTint="@color/color_navigation_bottom"
+            app:menu="@menu/bottom_navigation_menu"/>
+
+</RelativeLayout>
