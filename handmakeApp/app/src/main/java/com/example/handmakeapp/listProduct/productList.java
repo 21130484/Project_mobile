@@ -1,8 +1,6 @@
 package com.example.handmakeapp.listProduct;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -21,7 +19,10 @@ public class productList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.productlist);
         AnhXa();
+
     }
+
+
 
     private void AnhXa() {
         listProduct1 = (ListView) findViewById(R.id.listProduct);
@@ -47,4 +48,6 @@ public class productList extends AppCompatActivity {
 //        });
 
     }
+
+
 }

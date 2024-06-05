@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519850369253",
+    "project_id": "handmakeapp-13e97",
+    "storage_bucket": "handmakeapp-13e97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519850369253:android:c5902360379f63edcd340c",
+        "android_client_info": {
+          "package_name": "com.example.handmakeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRYDExGxS4CPNtWpu3RgMDvvML6FIBPdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

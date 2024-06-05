@@ -3,6 +3,7 @@ package com.example.handmakeapp.callAPI;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
 import com.example.handmakeapp.model.Product;
+import com.example.handmakeapp.model.ProductDetail;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CallAPI {
@@ -30,10 +31,11 @@ public interface CallAPI {
 
 
     CallAPI api = new Retrofit.Builder()
-            .baseUrl(getAbsoluteURL())
+            .baseUrl("http://10.0.243.219:2204/ToolApi/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(CallAPI.class);
+
 
     @GET("order")
     Call<List<Order>> getAllOrder(@Query("userId") int userId);
@@ -43,4 +45,8 @@ public interface CallAPI {
 
     @GET("api-product?action=getImageByProductId")
     Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);
+
+
+
+
 }
