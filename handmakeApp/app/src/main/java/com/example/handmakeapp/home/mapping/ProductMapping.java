@@ -3,11 +3,10 @@ package com.example.handmakeapp.home.mapping;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.handmakeapp.bean.Category;
+import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
-import com.example.handmakeapp.order;
 
 import org.json.JSONArray;
 import org.json.JSONException;

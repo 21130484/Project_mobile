@@ -21,6 +21,25 @@
             android:exported="false" />
         <activity
             android:name=".login.SplashActivity"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".orderHistory"
+            android:exported="false">
+
+        </activity>
+        <!--DETAIL PRODUCT START-->
+
+        <activity
+            android:name=".detail_product.DetailActivity"
+            android:exported="false">
+
+        </activity>
+
+        <!--DETAIL PRODUCT END-->
+
+        <activity
+            android:name=".cartActivity"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" >
             <intent-filter>

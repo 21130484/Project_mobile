@@ -2,9 +2,8 @@ package controller;
 
 import DAO.OrderDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Blog;
 import model.Order;
-import utils.HttpUtil;
+import model.OrderItem;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +24,10 @@ public class OrderController extends HttpServlet {
         resp.setContentType("application/json");
         int userId = Integer.parseInt(req.getParameter("userId"));
         List<Order> orders = orderDAO.getAllOrder(userId);
-
+        for (int i = 0 ; i < orders.size(); i++){
+            List<OrderItem> orderItems = orderDAO.getItemForOrder(orders.get(i).getId());
+            orders.get(i).setItemList(orderItems);
+        }
         objectMapper.writeValue(resp.getOutputStream(), orders);
     }
 }

@@ -1,0 +1,91 @@
+package com.example.handmakeapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.handmakeapp.callAPI.CallAPI;
+import com.example.handmakeapp.model.CartItemDTO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class cartActivity extends AppCompatActivity {
+
+    CheckBox fillAll;
+    Button next;
+    TextView totalPrice;
+    ListView lv;
+    CustomAdapterCart customAdapterCart;
+    ArrayList<CartItemDTO> arrCartItems;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart);
+        Anhxa();
+        Intent intent = getIntent();
+//        int orderId = intent.getIntExtra("id");
+
+        CallAPI.api.getAllCartItem(4).enqueue(new Callback<List<CartItemDTO>>() {
+            @Override
+            public void onResponse(Call<List<CartItemDTO>> call, Response<List<CartItemDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<CartItemDTO> cartItems = response.body();
+                    Log.e("myCart from API : ", cartItems.size() + " cartItem");
+                    double total = 1;
+                    for (int i = 0 ; i < cartItems.size(); i++){
+                        total += cartItems.get(i).getSellingPrice();
+                        CartItemDTO item = new CartItemDTO(cartItems.get(i).getId(),cartItems.get(i).getCartId(),cartItems.get(i).getName(), cartItems.get(i).getDescription(),cartItems.get(i).getSellingPrice(),cartItems.get(i).getPath(),cartItems.get(i).getQuantity());
+                        arrCartItems.add(item);
+                    }
+                    next.setText("Mua hàng ("+cartItems.size()+")");
+                    totalPrice.setText(total+"");
+                    customAdapterCart.notifyDataSetChanged();
+                    Toast.makeText(cartActivity.this, "Call ok", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e("API Error", "Response code: " + response.code() + ", message: " + response.message());
+                    Toast.makeText(cartActivity.this, "Call error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CartItemDTO>> call, Throwable t) {
+                Log.e("API Error", t.getMessage(), t);
+                Toast.makeText(cartActivity.this, "Call error",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(cartActivity.this,orderActivity.class);
+                intent1.putExtra("totalPrice",totalPrice.toString());
+                startActivity(intent1);
+            }
+        });
+//        Toast.makeText(order.this, "oke", Toast.LENGTH_SHORT).show();
+    }
+
+    private void Anhxa() {
+        fillAll = findViewById(R.id.fillAll);
+        next = findViewById(R.id.next);
+        totalPrice = findViewById(R.id.totalPrice);
+        lv = findViewById(R.id.lv);
+        arrCartItems = new ArrayList<>();
+        customAdapterCart = new CustomAdapterCart(cartActivity.this, arrCartItems);
+        lv.setAdapter(customAdapterCart);
+    }
+}

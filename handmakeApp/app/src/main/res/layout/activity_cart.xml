@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".cart">
+    tools:context=".cartActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
@@ -17,7 +23,8 @@
             android:gravity="center"/>
 
         <ListView
-            android:id="@+id/listView"
+
+            android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -52,6 +59,7 @@
         android:layout_below="@+id/listView">
 
         <CheckBox
+            android:id="@+id/fillAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
@@ -73,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tổng thanh toán"/>
             <TextView
+                android:id="@+id/totalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0đ"
@@ -81,8 +90,10 @@
                 android:textStyle="bold"/>
         </LinearLayout>
         <Button
+            android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:backgroundTint="#00BCD4"
             android:text="Mua hàng (0)"/>
     </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView

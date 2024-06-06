@@ -16,7 +16,59 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18e592f3-d618-46ca-a8d8-872bcc02c784" name="Changes" comment="" />
+    <list default="true" id="18e592f3-d618-46ca-a8d8-872bcc02c784" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/main/java/DAO/CartDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/main/java/controller/CartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/main/java/model/CartItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/main/java/model/OrderItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/CustomAdapterCart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/CustomAdapterOrderHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/cartActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/model/CartItemDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/model/OrderItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/orderHistoryActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/res/drawable/back.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout-v21/activity_order.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/DAO/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/DAO/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/DTO/BlogDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/model/Blog.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/model/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/model/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/CustomAdapterOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/CustomAdapterOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/ServerInformation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/BannerItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/Discount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/Image.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/OrderDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/Rate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/bean/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/callAPI/CallAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/callAPI/CallAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/data_api/ProductAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/home/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/home/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/home/mapping/ProductMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/home/mapping/ProductMapping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/model/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/orderActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/orderActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/java/com/example/handmakeapp/orderHistory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/res/drawable/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/activity_cart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/activity_cart.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/activity_order.xml" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/activity_order.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/activity_order_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/activity_order_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/pro_of_cart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/pro_of_cart.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/pro_of_order_his.xml" beforeDir="false" afterPath="$PROJECT_DIR$/handmakeApp/app/src/main/res/layout/pro_of_order_his.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +89,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2ftbg0RGYtZbXZoozG6QXkqDrWu" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -44,17 +99,22 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "NguyenNgocQuy",
-    "last_opened_file_path": "D:/Mobile_project/handmakeApp"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging phuoc&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Mobile_project/handmakeApp&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="android.template.491210854">
       <recent name="com.example.handmakeapp" />
@@ -71,47 +131,17 @@
       <option name="ALL_USERS" value="false" />
       <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="CLEAR_APP_STORAGE" value="false" />
-      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Hybrid>
+      <option name="DEBUGGER_TYPE" value="Java" />
       <Java>
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
         <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Java>
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
@@ -124,9 +154,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -137,7 +165,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714623428710</updated>
+      <workItem from="1717685250245" duration="31000" />
+      <workItem from="1717685353878" duration="47000" />
+      <workItem from="1717685426929" duration="35000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

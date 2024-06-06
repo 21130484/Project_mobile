@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +21,5 @@ public class Order {
     private String address;
     private double shippingFee;
     private String note;
+    private List<OrderItem> itemList;
 }
