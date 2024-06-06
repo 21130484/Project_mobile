@@ -5,20 +5,36 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Image implements Parcelable {
 
   private int id;
+
+
+
+   @Expose(deserialize = false)
+  private String name;
   private String path;
 
-    // Constructor
-    public Image(int id, String path) {
+
+    @Expose(deserialize = false)
+  private int productId;
+
+
+    public Image(int id, String name, String path, int productId) {
         this.id = id;
+        this.name = name;
         this.path = path;
+        this.productId = productId;
     }
 
     protected Image(Parcel in) {
         id = in.readInt();
+        name = in.readString();
         path = in.readString();
+        productId = in.readInt();
     }
 
     public int getId() {
@@ -38,12 +54,13 @@ public class Image implements Parcelable {
     }
 
 
-
     @Override
     public String toString() {
         return "Image{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", path='" + path + '\'' +
+                ", productId=" + productId +
                 '}';
     }
 
@@ -67,7 +84,9 @@ public class Image implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
       dest.writeInt(id);
+      dest.writeString(name);
       dest.writeString(path);
+      dest.writeInt(productId);
 
     }
 }

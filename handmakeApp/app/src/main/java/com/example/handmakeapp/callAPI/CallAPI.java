@@ -18,7 +18,11 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CallAPI {
-    public final static String SERVER_IP = "192.168.5.129";//ipconfig
+
+    /**
+     * kin : 10.0.250.163
+     */
+    public final static String SERVER_IP = "10.0.250.163";//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
@@ -31,7 +35,7 @@ public interface CallAPI {
 
 
     CallAPI api = new Retrofit.Builder()
-            .baseUrl("http://10.0.243.219:2204/ToolApi/")
+            .baseUrl(getAbsoluteURL())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(CallAPI.class);
@@ -40,12 +44,14 @@ public interface CallAPI {
     @GET("order")
     Call<List<Order>> getAllOrder(@Query("userId") int userId);
 
-    @GET("api-product?action=getAllProduct")
+    @GET("product?action=getAllProduct")
     Call<List<Product>> getAllProduct();
 
-    @GET("api-product?action=getImageByProductId")
+    @GET("product?action=getImageByProductId")
     Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);
 
+    @GET("product")
+    Call<ProductDetail> getPDById(@Query("action") String action, @Query("productId") int id);
 
 
 

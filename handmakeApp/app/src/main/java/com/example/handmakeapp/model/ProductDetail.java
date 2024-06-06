@@ -12,27 +12,39 @@ public class ProductDetail implements Parcelable {
     private String name;
     private String description;
     private int sellingPrice;
+
+    private int stock;
+    private int categoryId;
+    private int discountId;
+    private int isSale;
     private List<Image> imageList;
     private List<Rate> rateList;
 
-    public ProductDetail(int id, String name, String description, int sellingPrice, List<Image> imageList, List<Rate> rateList) {
+    public ProductDetail(int id, String name, String description, int sellingPrice, int stock, int categoryId, int discountId, int isSale, List<Image> imageList, List<Rate> rateList) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.sellingPrice = sellingPrice;
+        this.stock = stock;
+        this.categoryId = categoryId;
+        this.discountId = discountId;
+        this.isSale = isSale;
         this.imageList = imageList;
         this.rateList = rateList;
     }
 
     protected ProductDetail(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.description =  in.readString();
-        this.sellingPrice = in.readInt();
-        this.imageList = in.createTypedArrayList(Image.CREATOR);
-        this.rateList = in.createTypedArrayList(Rate.CREATOR);
+        id = in.readInt();
+        name = in.readString();
+       description =  in.readString();
+       sellingPrice = in.readInt();
+        stock = in.readInt();
+        categoryId = in.readInt();
+        discountId = in.readInt();
+        isSale = in.readInt();
+        imageList = in.createTypedArrayList(Image.CREATOR);
+        rateList = in.createTypedArrayList(Rate.CREATOR);
     }
-
 
     public int getId() {
         return id;
@@ -66,6 +78,38 @@ public class ProductDetail implements Parcelable {
         this.sellingPrice = sellingPrice;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public int getDiscountId() {
+        return discountId;
+    }
+
+    public void setDiscountId(int discountId) {
+        this.discountId = discountId;
+    }
+
+    public int getIsSale() {
+        return isSale;
+    }
+
+    public void setIsSale(int isSale) {
+        this.isSale = isSale;
+    }
+
     public List<Image> getImageList() {
         return imageList;
     }
@@ -82,18 +126,6 @@ public class ProductDetail implements Parcelable {
         this.rateList = rateList;
     }
 
-    @Override
-    public String toString() {
-        return "ProductDetail{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", sellingPrice=" + sellingPrice +
-                ", imageList=" + imageList +
-                ", rateList=" + rateList +
-                '}';
-    }
-
     public static final Creator<ProductDetail> CREATOR = new Creator<ProductDetail>() {
         @Override
         public ProductDetail createFromParcel(Parcel source) {
@@ -108,6 +140,22 @@ public class ProductDetail implements Parcelable {
     };
 
     @Override
+    public String toString() {
+        return "ProductDetail{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", sellingPrice=" + sellingPrice +
+                ", stock=" + stock +
+                ", categoryId=" + categoryId +
+                ", discountId=" + discountId +
+                ", isSale=" + isSale +
+                ", imageList=" + imageList +
+                ", rateList=" + rateList +
+                '}';
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
@@ -118,6 +166,10 @@ public class ProductDetail implements Parcelable {
         dest.writeString(name);
         dest.writeString(description);
         dest.writeInt(sellingPrice);
+        dest.writeInt(stock);
+        dest.writeInt(categoryId);
+        dest.writeInt(discountId);
+        dest.writeInt(isSale);
         dest.writeTypedList(imageList);
         dest.writeTypedList(rateList);
     }

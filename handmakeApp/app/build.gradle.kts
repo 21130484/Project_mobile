@@ -36,6 +36,8 @@ android {
     }
 }
 
+
+
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -64,4 +66,9 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.5.2")
 //    phung - Okhttp: kết nối -> tải, upload dữ liệu
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    //Kien - implement rating reviews
+//    implementation ("com.github.Inconnu08:android-ratingreviews:1.2.0")
+
+
 }

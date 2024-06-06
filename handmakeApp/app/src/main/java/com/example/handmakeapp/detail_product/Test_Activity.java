@@ -52,28 +52,24 @@ public class Test_Activity extends AppCompatActivity {
                                   }
         );
     }
-
-
-
-
     private void getProductById(int id) {
-
-
-
-        CallAPI.api.getProductById(id).enqueue(new Callback<ProductDetail>() {
+        CallAPI.api.getPDById("getProductDetailsById", id).enqueue(new Callback<ProductDetail>() {
             @Override
             public void onResponse(Call<ProductDetail> call, Response<ProductDetail> response) {
                 Log.e("Kien", "onSuccess");
                 ProductDetail p = response.body();
                 if(p != null) {
-
                     Log.e("Kien", p.toString());
 
                 //Chuyển sang DetailActivity truyền ProductDetail.
-                Intent intent = new Intent(Test_Activity.this, DetailActivity.class);
+                    Intent intent = new Intent(Test_Activity.this, DetailActivity.class);
                     intent.putExtra("productDetail", p);
                     startActivity(intent);
 
+                }
+
+                else {
+                    Log.e("Kien", response.code()+ "");
                 }
             }
             @Override

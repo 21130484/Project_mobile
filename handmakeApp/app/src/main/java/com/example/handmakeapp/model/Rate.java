@@ -11,30 +11,24 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Rate implements Parcelable {
-    private int userId;
+    private String userName;
     private int starRatings;
     private String comment;
     private long createDate;
 
-    public Rate(int userId, int starRatings, String comment, long createDate) {
-        this.userId = userId;
+    public Rate(String userName, int starRatings, String comment, long createDate) {
+        this.userName = userName;
         this.starRatings = starRatings;
         this.comment = comment;
         this.createDate = createDate;
     }
-    protected Rate(Parcel in){
-        userId = in.readInt();
-        starRatings = in.readInt();
-        comment = in.readString();
-        createDate = in.readLong();
+
+    public String getUserName() {
+        return userName;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getStarRatings() {
@@ -63,7 +57,12 @@ public class Rate implements Parcelable {
 
     @Override
     public String toString() {
-        return "Rate{}";
+        return "Rate{" +
+                "userName='" + userName + '\'' +
+                ", starRatings=" + starRatings +
+                ", comment='" + comment + '\'' +
+                ", createDate=" + createDate +
+                '}';
     }
 
     @Override
@@ -73,10 +72,16 @@ public class Rate implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(userId);
+        dest.writeString(userName);
         dest.writeInt(starRatings);
         dest.writeString(comment);
         dest.writeLong(createDate);
+    }
+    protected Rate(Parcel in){
+        userName = in.readString();
+        starRatings = in.readInt();
+        comment = in.readString();
+        createDate = in.readLong();
     }
 
 
