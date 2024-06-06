@@ -6,6 +6,8 @@ public class Product {
     private String description;
     private double costPrice;
     private double sellingPrice;
+
+    private double finalPrice;
     private int quantity;
     private int soldout;
     private int categoryId;
@@ -15,16 +17,25 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, String description, double costPrice, double sellingPrice, int quantity, int soldout, int categoryId, int isSale) {
+    public Product(int id, String name, String description, double costPrice, double sellingPrice, double finalPrice, int quantity, int soldout, int categoryId, int isSale) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.costPrice = costPrice;
         this.sellingPrice = sellingPrice;
+        this.finalPrice = finalPrice;
         this.quantity = quantity;
         this.soldout = soldout;
         this.categoryId = categoryId;
         this.isSale = isSale;
+    }
+
+    public double getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(double finalPrice) {
+        this.finalPrice = finalPrice;
     }
 
     public int getId() {

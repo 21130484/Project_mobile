@@ -52,14 +52,15 @@ public class ProductListArrayAdapter extends ArrayAdapter<Product> {
         ImageView imgItem = convertView.findViewById(R.id.img_item);
         TextView txtName = convertView.findViewById(R.id.txt_name);
         TextView txtPrice = convertView.findViewById(R.id.txt_price);
-
+        TextView txtFinalPrice = convertView.findViewById(R.id.txt_FinalPrice);
 
         if (productImage != null && !productImage.isEmpty() && productImage.get(item.getId()) != null) {
             Picasso.get().load(productImage.get(item.getId()).get(0).getPath()).into(imgItem);
         }
         txtName.setText(item.getName());
         txtPrice.setText(item.getSellingPrice() + "");
-
+        if (item.getFinalPrice() > 0)
+            txtFinalPrice.setText(item.getFinalPrice() + "");
         return convertView;
     }
 

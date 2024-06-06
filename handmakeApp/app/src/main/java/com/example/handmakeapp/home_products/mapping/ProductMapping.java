@@ -40,12 +40,13 @@ public class ProductMapping {
                 String description = jsonObject.getString("description");
                 double costPrice = jsonObject.getDouble("costPrice");
                 double sellingPrice = jsonObject.getDouble("sellingPrice");
+                double finalPrice = jsonObject.getDouble("finalPrice");
                 int quantity = jsonObject.getInt("quantity");
                 int soldout = jsonObject.getInt("soldout");
                 int categoryId = jsonObject.getInt("categoryId");
                 int discountId = jsonObject.getInt("discountId");
                 int isSale = jsonObject.getInt("isSale");
-                result.add(new Product(id, name, description, costPrice, sellingPrice, quantity, soldout, categoryId, isSale));
+                result.add(new Product(id, name, description, costPrice, sellingPrice, finalPrice, quantity, soldout, categoryId, isSale));
             }
         } catch (IOException | JSONException e) {
             Log.e("error", e.toString());
@@ -59,13 +60,23 @@ public class ProductMapping {
         mappingProductObject(client, request, products);
         return products;
     }
+
     public List<Product> getTopSoldoutProduct() {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getTopSoldoutProduct").build();
+        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getTopSoldoutProducts").build();
         List<Product> products = new ArrayList<>();
         mappingProductObject(client, request, products);
         return products;
     }
+
+    public List<Product> getDiscountProducts() {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getDiscountProducts").build();
+        List<Product> products = new ArrayList<>();
+        mappingProductObject(client, request, products);
+        return products;
+    }
+
     public List<Image> getImageByIdProduct(int productId) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getImageByProductId&productId=" + productId).build();

@@ -1,6 +1,7 @@
 package DAO;
 
 import DBConnection.JDBIConnection;
+import model.Category;
 import model.Product;
 
 import java.util.Collections;
@@ -29,6 +30,7 @@ public class ProductDAO {
         );
         return product.isEmpty() ? null : product.get();
     }
+
     public static List<Product> getTopSoldoutProduct(int number) {
         List<Product> products = JDBIConnection.me().connect().withHandle(handle ->
                 handle.createQuery("SELECT * FROM product where soldout > 0 order by soldout limit ?")
@@ -38,4 +40,36 @@ public class ProductDAO {
         return products;
     }
 
+    public static List<Category> getCategories() {
+        List<Category> categories = JDBIConnection.me().connect().withHandle(handle ->
+                handle.createQuery("SELECT * FROM category")
+                        .mapToBean(Category.class)
+                        .stream().toList());
+        return categories;
+    }
+
+    public static List<Product> getDiscountProducts() {
+        JDBIConnection.me().connect().useHandle(handle -> {
+            handle.createUpdate("UPDATE product p " +
+                            "JOIN discount d ON p.discountId = d.id " +
+                            "SET p.finalPrice = CASE " +
+                            "    WHEN NOW() BETWEEN d.startDate AND d.endDate THEN p.sellingPrice - (p.sellingPrice * d.percentageOff) " +
+                            "    ELSE null " +
+                            "END " +
+                            "WHERE p.discountId IS NOT NULL")
+                    .execute();
+        });
+        List<Product> products = JDBIConnection.me().connect().withHandle(handle ->
+                handle.createQuery("SELECT p.* FROM product p " +
+                                "JOIN discount d ON p.discountId = d.id " +
+                                "WHERE p.discountId IS NOT NULL " +
+                                "AND NOW() BETWEEN d.startDate AND d.endDate")
+                        .mapToBean(Product.class)
+                        .stream().toList());
+        return products;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getDiscountProducts());
+    }
 }

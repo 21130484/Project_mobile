@@ -47,6 +47,8 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
         }
         holder.txtName.setText(product.getName());
         holder.txtPrice.setText(product.getSellingPrice() + "");
+        if (product.getFinalPrice() > 0)
+            holder.txtFinalPrice.setText(product.getFinalPrice() + "");
     }
 
     @Override
@@ -59,11 +61,14 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
         private TextView txtName;
         private TextView txtPrice;
 
+        private TextView txtFinalPrice;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imgItem = itemView.findViewById(R.id.img_item);
             txtName = itemView.findViewById(R.id.txt_name);
             txtPrice = itemView.findViewById(R.id.txt_price);
+            txtFinalPrice = itemView.findViewById(R.id.txt_FinalPrice);
         }
     }
 

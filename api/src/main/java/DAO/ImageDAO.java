@@ -13,7 +13,6 @@ public class ImageDAO {
                         .bind("productId", productId)
                         .mapToBean(Image.class)
                         .stream().toList());
-
         return imageList;
     }
 }
