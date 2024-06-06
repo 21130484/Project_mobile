@@ -8,7 +8,7 @@
     android:background="#ccc"
     android:gravity="start"
     android:orientation="vertical"
-    tools:context=".Account">
+    tools:context=".account.Account">
 
     <TextView
         android:id="@+id/taiKhoan"

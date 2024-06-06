@@ -3,8 +3,6 @@ package com.example.handmakeapp.listProduct;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -12,7 +10,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.handmakeapp.Account;
+import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.cart;
 import com.example.handmakeapp.home.Home;

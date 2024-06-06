@@ -2,19 +2,15 @@ package com.example.handmakeapp.home;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.handmakeapp.Account;
+import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.bean.Category;
 import com.example.handmakeapp.cart;

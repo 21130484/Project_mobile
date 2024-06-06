@@ -24,13 +24,9 @@ public class MailService extends AsyncTask<Void,Void,Void> {
 
     private Context mContext;
     private Session mSession;
-
     private String mEmail;
     private String mSubject;
     private String mMessage;
-
-    private boolean check = false;
-
     private ProgressDialog mProgressDialog;
 
     //Constructor
@@ -45,7 +41,7 @@ public class MailService extends AsyncTask<Void,Void,Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         //Show progress dialog while sending email
-        mProgressDialog = ProgressDialog.show(mContext,"Sending message", "Please wait...",false,false);
+        mProgressDialog = ProgressDialog.show(mContext,"Đang gửi mail", "Vui lòng đợi...",false,false);
     }
 
     @Override
@@ -57,7 +53,7 @@ public class MailService extends AsyncTask<Void,Void,Void> {
         }
 
         //Show success toast
-        Toast.makeText(mContext,"Message Sent",Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext,"Đã gửi mail thành công.",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -92,15 +88,10 @@ public class MailService extends AsyncTask<Void,Void,Void> {
             message.setContent(mMessage, "text/html; charset=utf-8");
             // send message
             Transport.send(message);
-            check = true;
         } catch (MessagingException | UnsupportedEncodingException e) {
-            check = false;
             throw new RuntimeException(e);
         }
         return null;
     }
 
-    public boolean isCheck() {
-        return check;
-    }
 }

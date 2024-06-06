@@ -1,8 +1,10 @@
 package com.example.handmakeapp.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,8 @@ public class Login extends AppCompatActivity {
     TextView etPasswordForget,signUp;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,17 +56,24 @@ public class Login extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         etPasswordForget = (TextView) findViewById(R.id.etPasswordForget);
         signUp = (TextView) findViewById(R.id.signUp);
+        progressDialog = new ProgressDialog(this);
     }
 
     private void signIn(String email, String password) {
+        progressDialog.show();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             goToHome();
+
+                            Log.d("Email", user.getEmail());
+                            Log.d("UID", user.getUid());
+                            finishAffinity();
                         } else {
                             AndroidToast.showToast(Login.this, "Authentication failed.");
                         }

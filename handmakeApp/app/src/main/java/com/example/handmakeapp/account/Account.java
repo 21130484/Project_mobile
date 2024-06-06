@@ -1,8 +1,10 @@
-package com.example.handmakeapp;
+package com.example.handmakeapp.account;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -11,17 +13,30 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.handmakeapp.R;
+import com.example.handmakeapp.cart;
 import com.example.handmakeapp.home.Home;
 import com.example.handmakeapp.listProduct.productList;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Account extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
+    LinearLayout thongTin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         actionNavigationBottom();
+        thongTin = findViewById(R.id.thongTin);
+        thongTin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Account.this, ManagerAccount.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void actionNavigationBottom() {
@@ -50,5 +65,15 @@ public class Account extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void getUserInformation() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user == null) {
+            return;
+        } else {
+
+        }
     }
 }
