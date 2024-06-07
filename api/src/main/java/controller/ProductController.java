@@ -3,6 +3,7 @@ package controller;
 import DAO.ImageDAO;
 import DAO.ProductDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import model.Category;
 import model.Image;
 import model.Product;
 
@@ -43,8 +44,14 @@ public class ProductController extends HttpServlet {
                     Product products = productDAO.getProductById(productId);
                     objectMapper.writeValue(resp.getOutputStream(), products);
                 }
-            } else if(action.equals("getTopSoldoutProduct")){
+            } else if (action.equals("getTopSoldoutProduct")) {
                 List<Product> products = productDAO.getTopSoldoutProduct(15);
+                objectMapper.writeValue(resp.getOutputStream(), products);
+            } else if (action.equals("getCategories")) {
+                List<Category> categories = productDAO.getCategories();
+                objectMapper.writeValue(resp.getOutputStream(), categories);
+            } else if (action.equals("getDiscountProducts")) {
+                List<Product> products = productDAO.getDiscountProducts();
                 objectMapper.writeValue(resp.getOutputStream(), products);
             }
         }

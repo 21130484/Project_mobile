@@ -1,12 +1,10 @@
-package com.example.handmakeapp.home;
+package com.example.handmakeapp.home_products;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,30 +13,25 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.model.Category;
-import com.example.handmakeapp.home.adapter.ProductListArrayAdapter;
-import com.example.handmakeapp.home.adapter.ProductListRecyclerViewAdapter;
-import com.example.handmakeapp.home.mapping.ProductMapping;
-import com.example.handmakeapp.listProduct.productList;
+import com.example.handmakeapp.home_products.adapter.ProductListArrayAdapter;
+import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
+import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Product;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Home extends AppCompatActivity {
+public class Products extends AppCompatActivity {
     SearchView sv;
-    RecyclerView rv;
     GridView gv;
     Spinner filterProduct;
     List<Category> categories = new ArrayList<>();
@@ -46,25 +39,17 @@ public class Home extends AppCompatActivity {
     HashMap<Integer, Integer> categoryIdMapping = new HashMap<>();//vị trí - categoryId
 
     List<Product> allProducts;
-    List<Product> topSoldoutProducts;
-    ProductListRecyclerViewAdapter adapter;
     ProductListArrayAdapter gridViewAdapter;
 
-    BottomNavigationView bottomNavigation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        rv = findViewById(R.id.rv);
+        setContentView(R.layout.activity_productlist);
         gv = findViewById(R.id.gv);
         sv = findViewById(R.id.searchview);
         filterProduct = findViewById(R.id.filterProductList);
         options.add("Tất cả sản phẩm");
         sv.clearFocus();
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        rv.setLayoutManager(layoutManager);
-
         // Execute network task to fetch data
         new NetworkTask().execute();
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -79,8 +64,6 @@ public class Home extends AppCompatActivity {
                 return true;
             }
         });
-        // Navigation bottom
-        actionNavigationBottom();
 //        filter
         filterProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -112,9 +95,10 @@ public class Home extends AppCompatActivity {
     }
 
     private void filterCategory(List<Product> filterList) {
-        gridViewAdapter = new ProductListArrayAdapter(Home.this, R.layout.activity_product_item, filterList);
+        gridViewAdapter = new ProductListArrayAdapter(Products.this, R.layout.activity_product_item, filterList);
         gv.setAdapter(gridViewAdapter);
     }
+
     private void filterText(String newText) {
         List<Product> filterList = new ArrayList<>();
         if (allProducts != null) {
@@ -136,7 +120,6 @@ public class Home extends AppCompatActivity {
         @Override
         protected List<Product> doInBackground(Void... voids) {
             categories = ProductMapping.getInstance().getCategories();
-            topSoldoutProducts = ProductMapping.getInstance().getTopSoldoutProduct();
             allProducts = ProductMapping.getInstance().getAllProduct();
             if (categories != null && !categories.isEmpty()) {
                 for (Category c : categories) {
@@ -149,43 +132,12 @@ public class Home extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Product> products) {
-            adapter = new ProductListRecyclerViewAdapter(topSoldoutProducts);
-            rv.setAdapter(adapter);
-            gridViewAdapter = new ProductListArrayAdapter(Home.this, R.layout.activity_product_item, products);
+            gridViewAdapter = new ProductListArrayAdapter(Products.this, R.layout.activity_product_item, products);
             gv.setAdapter(gridViewAdapter);
 
-            ArrayAdapter<String> adapterFilter = new ArrayAdapter<>(Home.this, android.R.layout.simple_spinner_item, options);
+            ArrayAdapter<String> adapterFilter = new ArrayAdapter<>(Products.this, android.R.layout.simple_spinner_item, options);
             adapterFilter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             filterProduct.setAdapter(adapterFilter);
         }
     }
-
-    public void actionNavigationBottom() {
-        bottomNavigation = findViewById(R.id.bottom_navigation);
-        bottomNavigation.setSelectedItemId(R.id.home);
-
-        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if (id == R.id.home) {
-                    return true;
-                } else if (id == R.id.cart) {
-                    startActivity(new Intent(getApplicationContext(), cart.class));
-                    overridePendingTransition(0,0);
-                    return true;
-                } else if (id == R.id.list) {
-                    startActivity(new Intent(getApplicationContext(), productList.class));
-                    overridePendingTransition(0,0);
-                    return true;
-                } else if (id == R.id.account) {
-                    startActivity(new Intent(getApplicationContext(), Account.class));
-                    overridePendingTransition(0,0);
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
 }

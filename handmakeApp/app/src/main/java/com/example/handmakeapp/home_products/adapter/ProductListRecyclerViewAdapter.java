@@ -1,7 +1,6 @@
-package com.example.handmakeapp.home.adapter;
+package com.example.handmakeapp.home_products.adapter;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.home.mapping.ProductMapping;
+import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
 import com.squareup.picasso.Picasso;

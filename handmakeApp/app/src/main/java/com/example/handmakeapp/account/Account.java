@@ -6,16 +6,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.cart;
-import com.example.handmakeapp.home.Home;
+import com.example.handmakeapp.home_products.Home;
 import com.example.handmakeapp.listProduct.productList;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;

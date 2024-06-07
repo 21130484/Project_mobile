@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmakeapp.AndroidToast;
 import com.example.handmakeapp.R;
-import com.example.handmakeapp.home.Home;
+import com.example.handmakeapp.home_products.Home;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
