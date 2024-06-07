@@ -22,7 +22,7 @@ public interface CallAPI {
     /**
      * kin : 10.0.250.163
      */
-    public final static String SERVER_IP = "10.0.250.163";//ipconfig
+    public final static String SERVER_IP = "172.16.1.82";//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
