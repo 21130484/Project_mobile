@@ -20,7 +20,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface CallAPI {
-    public final static String SERVER_IP = "192.168.1.10".trim();//ipconfig
+    public final static String SERVER_IP = "172.20.21.18".trim();//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {

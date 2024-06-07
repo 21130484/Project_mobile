@@ -69,4 +69,7 @@ dependencies {
     implementation(files("libs/activation.jar"))
     implementation(files("libs/additionnal.jar"))
     implementation(files("libs/mail.jar"))
+//  phung - thanh image slide
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("com.makeramen:roundedimageview:2.3.0")
 }

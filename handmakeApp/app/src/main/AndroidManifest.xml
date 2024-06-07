@@ -68,7 +68,7 @@
             android:name=".detail_product.DetailActivity"
             android:exported="false" /> <!-- DETAIL PRODUCT END -->
         <activity
-            android:name=".home.Home"
+            android:name=".home_products.Home"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" >
         </activity>

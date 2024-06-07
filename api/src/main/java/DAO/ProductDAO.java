@@ -1,6 +1,7 @@
 package DAO;
 
 import DBConnection.JDBIConnection;
+import model.Category;
 import model.Product;
 
 import java.util.Collections;
@@ -37,5 +38,24 @@ public class ProductDAO {
                         .stream().toList());
         return products;
     }
-
+    public static List<Category> getCategories() {
+        List<Category> categories = JDBIConnection.me().connect().withHandle(handle ->
+                handle.createQuery("SELECT * FROM category")
+                        .mapToBean(Category.class)
+                        .stream().toList());
+        return categories;
+    }
+    public static List<Product> getDiscountProducts() {
+        List<Product> products = JDBIConnection.me().connect().withHandle(handle ->
+                handle.createQuery("SELECT p.* FROM product p " +
+                                "JOIN discount d ON p.discountId = d.id " +
+                                "WHERE p.discountId IS NOT NULL " +
+                                "AND NOW() BETWEEN d.startDate AND d.endDate")
+                        .mapToBean(Product.class)
+                        .stream().toList());
+        return products;
+    }
+    public static void main(String[] args) {
+        System.out.println(getAll());
+    }
 }

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.cart;
-import com.example.handmakeapp.home.Home;
+import com.example.handmakeapp.home_products.Home;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class productList extends AppCompatActivity {
