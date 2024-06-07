@@ -22,7 +22,7 @@ public interface CallAPI {
     /**
      * kin : 10.0.250.163
      */
-    public final static String SERVER_IP = "172.16.1.82";//ipconfig
+    public final static String SERVER_IP = "10.0.239.36";//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
@@ -44,10 +44,10 @@ public interface CallAPI {
     @GET("order")
     Call<List<Order>> getAllOrder(@Query("userId") int userId);
 
-    @GET("product?action=getAllProduct")
+    @GET("api-product?action=getAllProduct")
     Call<List<Product>> getAllProduct();
 
-    @GET("product?action=getImageByProductId")
+    @GET("api-product?action=getImageByProductId")
     Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);
 
     @GET("product")
