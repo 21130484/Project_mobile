@@ -1,5 +1,6 @@
 package com.example.handmakeapp.callAPI;
 
+import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
 import com.example.handmakeapp.model.Product;
@@ -13,8 +14,10 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface CallAPI {
@@ -44,6 +47,7 @@ public interface CallAPI {
     @GET("order")
     Call<List<Order>> getAllOrder(@Query("userId") int userId);
 
+
     @GET("api-product?action=getAllProduct")
     Call<List<Product>> getAllProduct();
 
@@ -54,5 +58,15 @@ public interface CallAPI {
     Call<ProductDetail> getPDById(@Query("action") String action, @Query("productId") int id);
 
 
+
+    @GET("cart")
+    Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
+    @FormUrlEncoded
+    @POST("cart")
+    Call<CartItemDTO> updateQuantity(
+            @Field("newQuantity") int newQuantity,
+            @Field("cartId") int cartId,
+            @Field("cartItemId") int cartItemId
+    );
 
 }

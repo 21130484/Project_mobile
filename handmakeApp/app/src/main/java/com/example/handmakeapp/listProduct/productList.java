@@ -1,18 +1,27 @@
 package com.example.handmakeapp.listProduct;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.R;
+import com.example.handmakeapp.cart;
+import com.example.handmakeapp.home_products.Home;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class productList extends AppCompatActivity {
-     ListView listProduct1;
+    ListView listProduct1;
     ListView listProduct2;
     Spinner filterProduct;
+
+    BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +29,7 @@ public class productList extends AppCompatActivity {
         setContentView(R.layout.productlist);
         AnhXa();
 
+        actionNavigationBottom();
     }
 
 
@@ -49,5 +59,32 @@ public class productList extends AppCompatActivity {
 
     }
 
+    public void actionNavigationBottom() {
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.list);
+
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                if (id == R.id.list) {
+                    return true;
+                } else if (id == R.id.cart) {
+                    startActivity(new Intent(getApplicationContext(), cart.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.home) {
+                    startActivity(new Intent(getApplicationContext(), Home.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.account) {
+                    startActivity(new Intent(getApplicationContext(), Account.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
 }

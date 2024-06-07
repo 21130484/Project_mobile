@@ -7,7 +7,7 @@
     android:gravity="center"
     android:layout_marginBottom="50dp"
     android:orientation="vertical"
-    tools:context=".login">
+    tools:context=".login.SignUp">
 
     <ImageView
         android:layout_width="150dp"
@@ -22,53 +22,53 @@
         android:textSize="30dp" />
 
     <EditText
-        android:id="@+id/edittextHVT"
+        android:id="@+id/fullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:paddingLeft="20dp"
         android:inputType="text"
         android:hint="Họ Và Tên" />
     <EditText
-        android:id="@+id/edittextSDT"
+        android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:paddingLeft="20dp"
-        android:inputType="phone"
-        android:hint="Số Điện Thoại" />
+        android:inputType="textEmailAddress"
+        android:hint="Email" />
     <EditText
-        android:id="@+id/edittextpassword"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:paddingLeft="20dp"
         android:inputType="textPassword"
         android:hint="Nhập Mật Khẩu" />
 
     <EditText
-        android:id="@+id/edittextpasswordAgain"
+        android:id="@+id/passwordRepeat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:paddingLeft="20dp"
         android:inputType="textPassword"
         android:hint="Xác Nhận Mật Khẩu" />
 
     <Button
-        android:id="@+id/btnlogin"
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="@color/blue"
         android:textSize="20dp"
@@ -77,7 +77,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:orientation="horizontal">
         <TextView
@@ -87,7 +87,7 @@
             android:text="Bạn Đã Có Tài Khoản"
             android:textColor="@color/gray" />
         <TextView
-            android:id="@+id/textviewDK"
+            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
