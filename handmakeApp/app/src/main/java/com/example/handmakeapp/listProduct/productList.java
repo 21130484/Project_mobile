@@ -28,8 +28,11 @@ public class productList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.productlist);
         AnhXa();
+
         actionNavigationBottom();
     }
+
+
 
     private void AnhXa() {
         listProduct1 = (ListView) findViewById(R.id.listProduct);
@@ -55,6 +58,7 @@ public class productList extends AppCompatActivity {
 //        });
 
     }
+
     public void actionNavigationBottom() {
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setSelectedItemId(R.id.list);
@@ -82,4 +86,5 @@ public class productList extends AppCompatActivity {
             }
         });
     }
+
 }

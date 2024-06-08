@@ -93,6 +93,7 @@ public class ProductMapping {
                     int id = jsonObject.getInt("id");
                     String name = jsonObject.getString("name");
                     String path = jsonObject.getString("path");
+
                     images.add(new Image(id, name, CallAPI.getAbsoluteURL() + path, productId));
                 }
             } catch (Exception e) {
