@@ -21,6 +21,7 @@
             android:exported="false" />
         <activity
             android:name=".login.SplashActivity"
+<<<<<<< HEAD
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,11 +29,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+=======
+            tools:targetApi="31"/>
+
+>>>>>>> 099a93a83b7080e514e02c0212479329921c79db
 
         <!--DETAIL PRODUCT START-->
+        <activity android:name=".orderHistoryActivity"
+
+
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+        </activity>
 
         <activity
-            android:name=".detail_product.DetailActivity"
+            android:name=".detail_product.OrderDetailActitvity"
             android:exported="false">
 
         </activity>
@@ -40,9 +57,17 @@
         <!--DETAIL PRODUCT END-->
 
         <activity
+<<<<<<< HEAD
             android:name=".cartActivity"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" >
+=======
+
+            android:name=".cartActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar" >
+
+>>>>>>> 099a93a83b7080e514e02c0212479329921c79db
         </activity>
         <activity
             android:name=".login.SignUp"
@@ -64,12 +89,20 @@
             android:name=".login.Login"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
+<<<<<<< HEAD
 <!-- DETAIL PRODUCT START -->
         <activity
             android:name=".home.Home"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" >
         </activity>
+=======
+<!--        <activity-->
+<!--            android:name=".home_products.Home"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.HandmakeApp.NoActionBar" >-->
+<!--        </activity>-->
+>>>>>>> 099a93a83b7080e514e02c0212479329921c79db
         <activity
             android:name=".listProduct.productList"
             android:exported="false"

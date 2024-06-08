@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.cart;
-import com.example.handmakeapp.home.Home;
+import com.example.handmakeapp.home_products.Home;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class productList extends AppCompatActivity {
@@ -28,8 +28,11 @@ public class productList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.productlist);
         AnhXa();
+
         actionNavigationBottom();
     }
+
+
 
     private void AnhXa() {
         listProduct1 = (ListView) findViewById(R.id.listProduct);
@@ -55,6 +58,7 @@ public class productList extends AppCompatActivity {
 //        });
 
     }
+
     public void actionNavigationBottom() {
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setSelectedItemId(R.id.list);
@@ -82,4 +86,6 @@ public class productList extends AppCompatActivity {
             }
         });
     }
+
 }
+

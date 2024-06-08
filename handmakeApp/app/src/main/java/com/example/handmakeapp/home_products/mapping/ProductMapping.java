@@ -1,7 +1,6 @@
-package com.example.handmakeapp.home.mapping;
+package com.example.handmakeapp.home_products.mapping;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.callAPI.CallAPI;
@@ -19,8 +18,6 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class ProductMapping {
     private static ProductMapping instance;
@@ -57,18 +54,28 @@ public class ProductMapping {
 
     public List<Product> getAllProduct() {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getAllProduct").build();
+        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getAllProducts").build();
         List<Product> products = new ArrayList<>();
         mappingProductObject(client, request, products);
         return products;
     }
+
     public List<Product> getTopSoldoutProduct() {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getTopSoldoutProduct").build();
+        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getTopSoldoutProducts").build();
         List<Product> products = new ArrayList<>();
         mappingProductObject(client, request, products);
         return products;
     }
+
+    public List<Product> getDiscountProducts() {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getDiscountProducts").build();
+        List<Product> products = new ArrayList<>();
+        mappingProductObject(client, request, products);
+        return products;
+    }
+
     public List<Image> getImageByIdProduct(int productId) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getImageByProductId&productId=" + productId).build();
@@ -86,7 +93,8 @@ public class ProductMapping {
                     int id = jsonObject.getInt("id");
                     String name = jsonObject.getString("name");
                     String path = jsonObject.getString("path");
-                    images.add(new Image(id, name, path, productId));
+
+                    images.add(new Image(id, name, CallAPI.getAbsoluteURL() + path, productId));
                 }
             } catch (Exception e) {
                 Log.e("get image error", e.toString());

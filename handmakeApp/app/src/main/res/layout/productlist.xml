@@ -57,9 +57,7 @@
         <Spinner
             android:id="@+id/filterProductList"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
-        </Spinner>
+            android:layout_height="wrap_content"></Spinner>
     </LinearLayout>
 
     <LinearLayout
@@ -81,8 +79,8 @@
             android:layout_weight="1"
             android:layout_height="match_parent">
         </ListView>
-
     </LinearLayout>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -93,3 +91,4 @@
         app:itemIconTint="@color/color_navigation_bottom"
         app:menu="@menu/bottom_navigation_menu"/>
 </RelativeLayout>
+

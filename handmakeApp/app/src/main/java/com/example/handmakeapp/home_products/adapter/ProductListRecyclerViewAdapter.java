@@ -1,7 +1,6 @@
-package com.example.handmakeapp.home.adapter;
+package com.example.handmakeapp.home_products.adapter;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.handmakeapp.R;
-import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.home.mapping.ProductMapping;
+import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
 import com.squareup.picasso.Picasso;
@@ -43,7 +41,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Product product = products.get(position);
         if (productImage != null && !productImage.isEmpty() && productImage.get(product.getId()) != null) {
-            String imageUrl = CallAPI.getAbsoluteURL() + "/" + productImage.get(product.getId()).get(0).getPath();
+            String imageUrl = productImage.get(product.getId()).get(0).getPath();
             Picasso.get().load(imageUrl).into(holder.imgItem);
         }
         holder.txtName.setText(product.getName());

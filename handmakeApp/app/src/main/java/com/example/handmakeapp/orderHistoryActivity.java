@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.model.CartItemDTO;
+import com.example.handmakeapp.detail_product.OrderDetailActitvity;
 import com.example.handmakeapp.model.Order;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class orderHistoryActivity extends AppCompatActivity {
                     List<Order> orders = response.body();
                     Log.e("myOrder from API : ", orders.size() + " order");
                     for (int i = 0 ; i < orders.size(); i++){
-                        Order order = new Order(orders.get(i).getId(), orders.get(i).getTotalPrice(),orders.get(i).getStatus(),orders.get(i).getItemList());
+                        Order order = new Order(orders.get(i).getId(), orders.get(i).getTotalPrice(),orders.get(i).getStatus(),orders.get(i).getConsigneeName(),orders.get(i).getConsigneePhoneNumber(),orders.get(i).getAddress(),orders.get(i).getItemList());
                         arrOrder.add(order);
                     }
                     customAdapterOrderHistory.notifyDataSetChanged();
@@ -55,11 +57,27 @@ public class orderHistoryActivity extends AppCompatActivity {
                 Toast.makeText(orderHistoryActivity.this, "Call error",Toast.LENGTH_SHORT).show();
             }
         });
+
+        addClickView();
     }
     private void Anhxa() {
         listView = findViewById(R.id.lv);
         arrOrder = new ArrayList<>();
         customAdapterOrderHistory = new CustomAdapterOrderHistory(orderHistoryActivity.this, arrOrder);
         listView.setAdapter(customAdapterOrderHistory);
+    }
+
+    private void addClickView() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Order order = (Order) parent.getItemAtPosition(position);
+                Intent intent = new Intent(view.getContext(), OrderDetailActitvity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("order", order);
+                intent.putExtras(bundle);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 }
