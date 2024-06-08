@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -54,6 +55,8 @@ public class Products extends AppCompatActivity {
     List<Product> allProducts;
     ProductListArrayAdapter gridViewAdapter;
     BottomNavigationView bottomNavigation;
+
+    ImageButton btn_toCart;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,17 @@ public class Products extends AppCompatActivity {
         sv.clearFocus();
         // Execute network task to fetch data
         new NetworkTask().execute();
+
+        btn_toCart = findViewById(R.id.btn_toCart);
+
+        btn_toCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Products.this, cartActivity.class);
+                startActivity(intent);
+            }
+        });
+
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -115,6 +129,7 @@ public class Products extends AppCompatActivity {
                 getProductById(idt);
             }
         });
+        actionNavigationBottom();
     }
 
     private void filterCategory(List<Product> filterList) {
