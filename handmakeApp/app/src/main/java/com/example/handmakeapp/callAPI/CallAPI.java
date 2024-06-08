@@ -61,7 +61,7 @@ public interface CallAPI {
     @GET("api-product")
     Call<ProductDetail> getPDById(@Query("action") String action, @Query("productId") int id);
 
-<<<<<<< HEAD
+
     // INSERT CART
     @FormUrlEncoded
     @POST("api-product")
@@ -72,10 +72,6 @@ public interface CallAPI {
         @Field("quantity") int quantity
         );
 
-
-
-=======
->>>>>>> origin
     @GET("cart")
     Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
 

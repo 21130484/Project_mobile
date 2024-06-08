@@ -16,74 +16,83 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HandmakeApp"
         tools:targetApi="31" >
+
+
+<!--        ĐĂNG KÝ, ĐĂNG NHÂP, QUÊN MẬT KHẨU     -->
+
         <activity
             android:name=".account.ManagerAccount"
             android:exported="false" />
-        <activity
-            android:name=".login.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-
-
-
-
-        <activity
-            android:name=".detail_product.OrderDetailActitvity"
-            android:exported="false">
-
-        </activity>
-
-        <!--DETAIL PRODUCT END-->
-
-        <activity
-            android:name=".cartActivity"
-            android:exported="true"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".login.SignUp"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" >
         </activity>
+
         <activity
             android:name=".login.VerifyOTP"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
+
         <activity
             android:name=".login.Login"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-<!-- DETAIL PRODUCT START -->
-
-        <activity
-            android:name=".home_products.Products"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-    </activity>
+        </activity>
+
+
+
         <activity
-            android:name=".account.Account"
+            android:name=".login.SplashActivity"
+            android:exported="false">
+
+        </activity>
+
+<!--        TRANG CHỦ           -->
+
+        <activity
+            android:name=".home_products.Home"
             android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"></activity>
+
+        <activity android:name=".home_products.Products"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"></activity>
+
+
+<!--        CHI TIẾT SẢN PHẨM   -->
+
+        <activity android:name=".detail_product.DetailActivity"
+            android:exported="false">
+        </activity>
+
+
+<!--        GIỎ HÀNG - ĐƠN HÀNG - THANH TOÁN -->
+
+        <activity
+            android:name=".cartActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
+        </activity>
+
         <activity
             android:name=".orderActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
+
+
+        <activity
+            android:name=".detail_product.OrderDetailActitvity"
+            android:exported="false">
+        </activity>
+
+
 
     </application>
 

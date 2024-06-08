@@ -16,7 +16,6 @@ import com.example.handmakeapp.AndroidToast;
 import com.example.handmakeapp.R;
 
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.home.Home;
 import com.example.handmakeapp.model.Cart;
 
 import com.example.handmakeapp.service.*;
