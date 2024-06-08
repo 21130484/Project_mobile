@@ -93,11 +93,8 @@ public class ProductMapping {
                     int id = jsonObject.getInt("id");
                     String name = jsonObject.getString("name");
                     String path = jsonObject.getString("path");
-<<<<<<< HEAD:handmakeApp/app/src/main/java/com/example/handmakeapp/home/mapping/ProductMapping.java
-//                    images.add(new Image(id, name, path, productId));
-=======
+
                     images.add(new Image(id, name, CallAPI.getAbsoluteURL() + path, productId));
->>>>>>> 106ba69a225dd3cef03074114398195bdae8de74:handmakeApp/app/src/main/java/com/example/handmakeapp/home_products/mapping/ProductMapping.java
                 }
             } catch (Exception e) {
                 Log.e("get image error", e.toString());

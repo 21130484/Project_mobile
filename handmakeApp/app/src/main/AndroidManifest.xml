@@ -44,7 +44,6 @@
 
         <!--DETAIL PRODUCT END-->
 
-
         <activity
 
             android:name=".cartActivity"
@@ -72,11 +71,11 @@
             android:name=".login.Login"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-        <activity
-            android:name=".home_products.Home"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" >
-        </activity>
+<!--        <activity-->
+<!--            android:name=".home_products.Home"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.HandmakeApp.NoActionBar" >-->
+<!--        </activity>-->
         <activity
             android:name=".listProduct.productList"
             android:exported="false"

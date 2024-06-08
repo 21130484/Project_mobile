@@ -25,7 +25,7 @@ public interface CallAPI {
     /**
      * kin : 10.0.250.163
      */
-    public final static String SERVER_IP = "10.0.239.36";//ipconfig
+    public final static String SERVER_IP = "192.168.88.238";//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
@@ -54,7 +54,7 @@ public interface CallAPI {
     @GET("api-product?action=getImageByProductId")
     Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);
 
-    @GET("product")
+    @GET("api-product")
     Call<ProductDetail> getPDById(@Query("action") String action, @Query("productId") int id);
 
 

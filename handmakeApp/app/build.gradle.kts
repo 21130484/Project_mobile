@@ -61,7 +61,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("com.squareup.retrofit2:retrofit:2.1.0")
     implementation("com.squareup.retrofit2:converter-gson:2.1.0")
-
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
 
 
 //    phung - picasso: tải, hiển thị hình ảnh bằng url
@@ -72,6 +72,8 @@ dependencies {
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+
 
     implementation(files("libs/activation.jar"))
     implementation(files("libs/additionnal.jar"))

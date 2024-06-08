@@ -55,6 +55,19 @@ public class ProductDAO {
                         .stream().toList());
         return products;
     }
+
+    /*
+   Lấy product detail từ id.
+    */
+    public static Product getPDetailsById(int productID) {
+        Product p = JDBIConnection.me().connect().withHandle(
+                handle -> handle.createQuery("SELECT id, name, description, sellingPrice, quantity - soldout as stock, categoryId, isSale" +
+                                " from product where id = :productID")
+                        .bind("productID", productID)
+                        .mapToBean(Product.class).findFirst().orElse(null)
+        );
+        return p;
+    }
     public static void main(String[] args) {
         System.out.println(getAll());
     }

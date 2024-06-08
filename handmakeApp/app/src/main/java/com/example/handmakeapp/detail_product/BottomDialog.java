@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,15 +16,25 @@ import androidx.annotation.Nullable;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.ProductDetail;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class BottomDialog extends BottomSheetDialogFragment {
     private ProductDetail p;
+
+    FirebaseAuth auth;
+    FirebaseFirestore fileStore;
 
     public void setP(ProductDetail p) {
         this.p = p;
@@ -46,6 +57,9 @@ public class BottomDialog extends BottomSheetDialogFragment {
         TextView valueQuantity = view.findViewById(R.id.quantityValue);
         ImageView plus = view.findViewById(R.id.plusQuantity);
         TextView total = view.findViewById(R.id.totalValue);
+
+        fileStore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         format.setMaximumFractionDigits(0);
@@ -95,10 +109,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DetailActivity.class);
-//                intent.putExtra("data", e.getText().toString());
-
-                startActivity(intent);
+              addToCart();
             }
         });
         return view;
@@ -108,6 +119,28 @@ public class BottomDialog extends BottomSheetDialogFragment {
     public static int convertVNDtoInt(String priceVND) {
         String numerics = priceVND.replaceAll("[^\\d]", "");
         return Integer.parseInt(numerics);
+    }
+
+    private void addToCart(){
+
+
+        final HashMap<String, Object> cartMap = new HashMap<>();
+        cartMap.put("productName", p.getName());
+        cartMap.put("productPrice", p.getSellingPrice() + "");
+        cartMap.put("productStock", p.getStock());
+        cartMap.put("productQuantity", p.getStock());
+        cartMap.put("totalPrice", p.getSellingPrice());
+
+        fileStore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+//                        Toast.makeText(BottomDialog.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+//                        finish();
+                    }
+                });
+
+
     }
 
 

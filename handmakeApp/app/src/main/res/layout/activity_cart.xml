@@ -6,95 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".cartActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00BCD4"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Giỏ hàng của tôi"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_below="@id/textView">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Giỏ hàng của tôi"
-            android:textSize="20dp"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:background="#00BCD4"
-            android:gravity="center"/>
+            android:orientation="vertical"
 
-        <ListView
+            android:padding="16dp"
+            >
 
-            android:id="@+id/lv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_below="@id/textView"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cartView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                />
 
-<!--        Dung custome layout de hien thi item trong listView nhu sau : -->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="vertical">-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal"></LinearLayout>-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal"></LinearLayout>-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal"></LinearLayout>-->
-<!--        </LinearLayout>-->
+
+        </LinearLayout>
+    </ScrollView>
     <LinearLayout
         android:id="@+id/thanhToan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/listView">
+        android:layout_above="@id/bottom_navigation"
+        >
+        <!--        android:layout_below="@+id/listView"-->
+
 
         <CheckBox
             android:id="@+id/fillAll"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Tất cả"
-            android:textSize="20dp"
-            android:gravity="center"/>
+            android:textSize="20dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:layout_marginEnd="10dp">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tổng thanh toán"/>
+                android:text="Tổng thanh toán" />
+
             <TextView
                 android:id="@+id/totalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0đ"
-                android:textSize="18dp"
                 android:textColor="#D82518"
-                android:textStyle="bold"/>
+                android:textSize="18dp"
+                android:textStyle="bold" />
         </LinearLayout>
+
         <Button
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:backgroundTint="#00BCD4"
-            android:text="Mua hàng (0)"/>
+            android:text="Mua hàng (0)" />
     </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -15,7 +15,7 @@ public class JDBIConnection {
     }
 
     private void create(){
-        String url = "jdbc:mysql://localhost:3306/handmadestore";
+        String url = "jdbc:mysql://localhost:3306/handmadestore1";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {

@@ -83,10 +83,7 @@
         </ListView>
     </LinearLayout>
 
-<<<<<<< HEAD
 
-</LinearLayout>
-=======
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -96,4 +93,4 @@
         app:itemIconTint="@color/color_navigation_bottom"
         app:menu="@menu/bottom_navigation_menu"/>
 </RelativeLayout>
->>>>>>> 106ba69a225dd3cef03074114398195bdae8de74
+
