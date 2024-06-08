@@ -1,7 +1,6 @@
 package com.example.handmakeapp;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Order;
 
 import java.util.ArrayList;
@@ -38,6 +35,9 @@ public class CustomAdapterOrder extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
+
+
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

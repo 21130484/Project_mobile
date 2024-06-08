@@ -21,12 +21,23 @@
             android:exported="false" />
         <activity
             android:name=".login.SplashActivity"
-        tools:targetApi="31"/>
+            tools:targetApi="31"/>
+
 
         <!--DETAIL PRODUCT START-->
+        <activity android:name=".orderHistoryActivity"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+        </activity>
 
         <activity
-            android:name=".detail_product.DetailActivity"
+            android:name=".detail_product.OrderDetailActitvity"
             android:exported="false">
 
         </activity>
@@ -34,14 +45,11 @@
         <!--DETAIL PRODUCT END-->
 
         <activity
-            android:name=".cartActivity"
-            android:exported="true"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".cartActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar" >
+
         </activity>
         <activity
             android:name=".login.SignUp"
@@ -63,15 +71,11 @@
             android:name=".login.Login"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-<!-- DETAIL PRODUCT START -->
-        <activity
-            android:name=".detail_product.DetailActivity"
-            android:exported="false" /> <!-- DETAIL PRODUCT END -->
-        <activity
-            android:name=".home_products.Home"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" >
-        </activity>
+        <!--        <activity-->
+        <!--            android:name=".home_products.Home"-->
+        <!--            android:exported="false"-->
+        <!--            android:theme="@style/Theme.HandmakeApp.NoActionBar" >-->
+        <!--        </activity>-->
         <activity
             android:name=".listProduct.productList"
             android:exported="false"
