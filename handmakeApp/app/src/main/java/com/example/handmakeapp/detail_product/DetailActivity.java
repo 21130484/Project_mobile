@@ -25,6 +25,7 @@ import com.example.handmakeapp.cartActivity;
 import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Category;
+
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;

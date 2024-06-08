@@ -10,13 +10,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.home_products.Home;
 import com.example.handmakeapp.home_products.Products;
+
 import com.example.handmakeapp.model.CartItemDTO;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,22 +32,21 @@ import retrofit2.Response;
 
 public class cartActivity extends AppCompatActivity {
 
-    CheckBox fillAll;
     Button next;
+    ImageButton removeItem;
     TextView totalPrice;
     ListView lv;
     CustomAdapterCart customAdapterCart;
     ArrayList<CartItemDTO> arrCartItems;
-
     BottomNavigationView bottomNavigation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Anhxa();
-        Intent intent = getIntent();
-//        int orderId = intent.getIntExtra("id");
+        actionNavigationBottom();
 
         CallAPI.api.getAllCartItem(4).enqueue(new Callback<List<CartItemDTO>>() {
             @Override
@@ -55,11 +57,12 @@ public class cartActivity extends AppCompatActivity {
                     double total = 1;
                     for (int i = 0 ; i < cartItems.size(); i++){
                         total += cartItems.get(i).getSellingPrice();
-                        CartItemDTO item = new CartItemDTO(cartItems.get(i).getId(),cartItems.get(i).getCartId(),cartItems.get(i).getName(), cartItems.get(i).getDescription(),cartItems.get(i).getSellingPrice(),cartItems.get(i).getPath(),cartItems.get(i).getQuantity());
+                        CartItemDTO item = new CartItemDTO(cartItems.get(i).getId(),cartItems.get(i).getCartId(),cartItems.get(i).getName(), cartItems.get(i).getDescription(),cartItems.get(i).getSellingPrice(),CallAPI.getAbsoluteURL()+cartItems.get(i).getPath(),cartItems.get(i).getQuantity());
                         arrCartItems.add(item);
                     }
                     next.setText("Mua hàng ("+cartItems.size()+")");
-                    totalPrice.setText(total+"");
+                    updateTotalPrice();
+//                    totalPrice.setText(total+"");
                     customAdapterCart.notifyDataSetChanged();
                     Toast.makeText(cartActivity.this, "Call ok", Toast.LENGTH_SHORT).show();
                 } else {
@@ -79,20 +82,31 @@ public class cartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(cartActivity.this,orderActivity.class);
-                intent1.putExtra("totalPrice",totalPrice.toString());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cartItems", arrCartItems);
+                intent1.putExtras(bundle);
+                intent1.putExtra("totalPrice", totalPrice.getText().toString());
                 startActivity(intent1);
             }
         });
 //        Toast.makeText(order.this, "oke", Toast.LENGTH_SHORT).show();
     }
 
+    private void updateTotalPrice() {
+        double total = 0;
+        for (CartItemDTO item : arrCartItems) {
+            total += item.getSellingPrice() * item.getQuantity();
+        }
+        totalPrice.setText(String.valueOf(total));
+    }
+
     private void Anhxa() {
-//        fillAll = findViewById(R.id.fillAll);
-//        next = findViewById(R.id.next);
+        next = findViewById(R.id.next);
+        removeItem = findViewById(R.id.removeItem);
         totalPrice = findViewById(R.id.totalPrice);
         lv = findViewById(R.id.lv);
         arrCartItems = new ArrayList<>();
-        customAdapterCart = new CustomAdapterCart(cartActivity.this, arrCartItems);
+        customAdapterCart = new CustomAdapterCart(cartActivity.this, arrCartItems,totalPrice);
         lv.setAdapter(customAdapterCart);
     }
     public void actionNavigationBottom() {

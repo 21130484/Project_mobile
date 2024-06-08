@@ -3,6 +3,7 @@ package DAO;
 import DBConnection.JDBIConnection;
 import model.Order;
 import model.OrderItem;
+import model.Receiver;
 
 import java.util.List;
 
@@ -25,6 +26,21 @@ public class OrderDAO {
                     .bind(0,orderId)
                     .mapToBean(OrderItem.class)
                     .list();
+        });
+    }
+
+    public Order insertOrder(Receiver receiver, double shippingfee, String note, double totalPrice, String address) {
+        String sql = "insert into `order` (totalPrice,status,consigneeName,consigneePhoneNumber, address, shippingFee, userId, note) values (?,?,?,?,?,?,?,?)";
+        return JDBIConnection.me().connect().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind(0,totalPrice)
+                    .bind(1,"Đang giao")
+                    .bind(2,receiver.getName())
+                    .bind(3,receiver.getPhoneNumber())
+                    .bind(4,address)
+                    .bind(5,shippingfee)
+                    .bind(6,receiver.getId())
+                    .bind(7,note).executeAndReturnGeneratedKeys("id").mapToBean(Order.class).first();
         });
     }
 }

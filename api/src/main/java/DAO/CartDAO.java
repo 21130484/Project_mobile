@@ -37,8 +37,9 @@ public class CartDAO {
                     .execute() > 0;
         });
     }
-
-
+//
+//<<<<<<< HEAD
+//
     /**
      * INSERT DB INTO CART.
      * @param userId
@@ -72,6 +73,23 @@ public class CartDAO {
         insertCartItem(p, quantity, cartId);
 
     }
+//
+//
+//=======
+    public boolean deleteCartItem(int cartItemId, int cartId) {
+        String sql = "delete from cart_details where id = ? and cartId = ?";
+        return JDBIConnection.me().connect().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind(0,cartItemId)
+                    .bind(1,cartId)
+                    .execute() > 0;
+        });
+    }
 
+    public int createCart(String userId) {
+        String sql = "Insert into cart(userId) values(?)";
+        return JDBIConnection.me().connect().withHandle(handle ->
+                handle.createUpdate(sql).bind(0, userId).execute());
+    }
 
 }

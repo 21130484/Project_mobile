@@ -70,9 +70,6 @@ public class Login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             goToHome();
-
-                            Log.d("Email", user.getEmail());
-                            Log.d("UID", user.getUid());
                             finishAffinity();
                         } else {
                             AndroidToast.showToast(Login.this, "Authentication failed.");
