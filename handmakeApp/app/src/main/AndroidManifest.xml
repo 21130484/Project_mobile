@@ -31,7 +31,7 @@
         <!--DETAIL PRODUCT END-->
 
         <activity
-            android:name=".cartActivity"
+            android:name=".orderHistoryActivity"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
             <intent-filter>
@@ -43,7 +43,7 @@
             android:name=".orderActivity"
             android:exported="false" />
         <activity
-            android:name=".orderHistoryActivity"
+            android:name=".cartActivity"
             android:exported="false" />
     </application>
 

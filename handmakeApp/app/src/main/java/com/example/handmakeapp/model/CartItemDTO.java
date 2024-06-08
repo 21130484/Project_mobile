@@ -1,6 +1,8 @@
 package com.example.handmakeapp.model;
 
-public class CartItemDTO {
+import java.io.Serializable;
+
+public class CartItemDTO implements Serializable {
     private int id;
     private int cartId;
     private String name;
@@ -17,6 +19,9 @@ public class CartItemDTO {
         this.sellingPrice = sellingPrice;
         this.path = path;
         this.quantity = quantity;
+    }
+
+    public CartItemDTO() {
     }
 
     public int getId() {

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +25,8 @@ import retrofit2.Response;
 
 public class cartActivity extends AppCompatActivity {
 
-    CheckBox fillAll;
     Button next;
+    ImageButton removeItem;
     TextView totalPrice;
     ListView lv;
     CustomAdapterCart customAdapterCart;
@@ -52,7 +53,8 @@ public class cartActivity extends AppCompatActivity {
                         arrCartItems.add(item);
                     }
                     next.setText("Mua hàng ("+cartItems.size()+")");
-                    totalPrice.setText(total+"");
+                    updateTotalPrice();
+//                    totalPrice.setText(total+"");
                     customAdapterCart.notifyDataSetChanged();
                     Toast.makeText(cartActivity.this, "Call ok", Toast.LENGTH_SHORT).show();
                 } else {
@@ -72,20 +74,30 @@ public class cartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(cartActivity.this,orderActivity.class);
-                intent1.putExtra("totalPrice",totalPrice.toString());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cartItems", arrCartItems);
+                intent1.putExtras(bundle);
+                intent1.putExtra("totalPrice", totalPrice.getText().toString());
                 startActivity(intent1);
             }
         });
 //        Toast.makeText(order.this, "oke", Toast.LENGTH_SHORT).show();
     }
+    private void updateTotalPrice() {
+        double total = 0;
+        for (CartItemDTO item : arrCartItems) {
+            total += item.getSellingPrice() * item.getQuantity();
+        }
+        totalPrice.setText(String.valueOf(total));
+    }
 
     private void Anhxa() {
-        fillAll = findViewById(R.id.fillAll);
         next = findViewById(R.id.next);
+        removeItem = findViewById(R.id.removeItem);
         totalPrice = findViewById(R.id.totalPrice);
         lv = findViewById(R.id.lv);
         arrCartItems = new ArrayList<>();
-        customAdapterCart = new CustomAdapterCart(cartActivity.this, arrCartItems);
+        customAdapterCart = new CustomAdapterCart(cartActivity.this, arrCartItems,totalPrice);
         lv.setAdapter(customAdapterCart);
     }
 }

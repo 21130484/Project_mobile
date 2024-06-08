@@ -40,4 +40,16 @@ public class CartController extends HttpServlet {
 
         objectMapper.writeValue(resp.getOutputStream(), isUpdated);
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        int cartItemId = Integer.parseInt(req.getParameter("cartItemId"));
+        int cartId = Integer.parseInt(req.getParameter("cartId"));
+        boolean isUpdated = cartDAO.deleteCartItem(cartItemId,cartId);
+
+        objectMapper.writeValue(resp.getOutputStream(), isUpdated);
+    }
 }

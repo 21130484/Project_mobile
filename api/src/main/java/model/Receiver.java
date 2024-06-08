@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class Receiver {
     private int id;
-    private int userId;
+    private String name;
+    private String phoneNumber;
 }
