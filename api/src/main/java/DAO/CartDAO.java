@@ -36,4 +36,11 @@ public class CartDAO {
                     .execute() > 0;
         });
     }
+
+    public int createCart(String userId) {
+        String sql = "Insert into cart(userId) values(?)";
+        return JDBIConnection.me().connect().withHandle(handle ->
+                handle.createUpdate(sql).bind(0, userId).execute());
+    }
+
 }

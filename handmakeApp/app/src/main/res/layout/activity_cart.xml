@@ -61,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_below="@+id/lv">
         android:layout_above="@+id/bottom_navigation">
 
 
@@ -104,7 +105,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:backgroundTint="#00BCD4"
-            android:text="Mua hàng (0)" />
+            android:text="Mua hàng (0)"/>
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

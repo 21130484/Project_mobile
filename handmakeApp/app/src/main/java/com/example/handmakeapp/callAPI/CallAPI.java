@@ -1,5 +1,6 @@
 package com.example.handmakeapp.callAPI;
 
+import com.example.handmakeapp.model.Cart;
 import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
@@ -23,7 +24,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface CallAPI {
-    public final static String SERVER_IP = "192.168.88.246".trim();//ipconfig
+    public final static String SERVER_IP = "192.168.88.251".trim();//ipconfig
 
     public final static String SERVER_PORT = "8080";
 
@@ -67,6 +68,11 @@ public interface CallAPI {
             @Field("cartId") int cartId,
             @Field("cartItemId") int cartItemId
     );
+
+
+    @FormUrlEncoded
+    @POST("addCart")
+    Call<Cart> createCart(@Field("userId") String userId);
 
     @POST("updateOrder")
     Call<Order> updateStatusOrder(

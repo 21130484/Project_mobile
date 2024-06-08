@@ -26,7 +26,10 @@ public class ManagerAccount extends AppCompatActivity {
         setContentView(R.layout.activity_manager_account);
         anhXa();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        etEmail.setText(user.getEmail());
+        if (user != null) {
+            etEmail.setText(user.getEmail());
+            etFullname.setText(user.getDisplayName());
+        }
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
