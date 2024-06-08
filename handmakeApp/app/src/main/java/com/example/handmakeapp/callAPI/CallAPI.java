@@ -1,10 +1,11 @@
 package com.example.handmakeapp.callAPI;
 
 import android.widget.TextView;
-
+import com.example.handmakeapp.model.Cart;
 import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
+import com.example.handmakeapp.model.OrderItem;
 import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.gson.Gson;
@@ -17,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.DELETE;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -25,6 +27,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CallAPI {
+
     public final static String SERVER_IP = "10.0.2.2".trim();//ipconfig
     public final static String SERVER_PORT = "8080";
 
@@ -80,4 +83,14 @@ public interface CallAPI {
             @Field("note") String note,
             @Field("productList") List<String> productList,
             @Field("totalPrice") String totalPrice);
+
+    @FormUrlEncoded
+    @POST("addCart")
+    Call<Cart> createCart(@Field("userId") String userId);
+
+    @POST("updateOrder")
+    Call<Order> updateStatusOrder(
+              @Body Order order
+    );
+
 }

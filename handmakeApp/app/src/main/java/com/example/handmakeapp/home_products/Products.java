@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.handmakeapp.R;
+import com.example.handmakeapp.cart;
 import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.home_products.adapter.ProductListArrayAdapter;
 import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
