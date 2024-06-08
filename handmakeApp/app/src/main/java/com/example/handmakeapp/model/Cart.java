@@ -1,11 +1,8 @@
-package model;
+package com.example.handmakeapp.model;
 
 public class Cart {
     private int id;
     private String userId;
-
-    public Cart() {
-    }
 
     public Cart(int id, String userId) {
         this.id = id;
