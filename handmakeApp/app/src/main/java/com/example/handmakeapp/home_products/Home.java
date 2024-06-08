@@ -1,9 +1,12 @@
 package com.example.handmakeapp.home_products;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.handmakeapp.R;
+import com.example.handmakeapp.cartActivity;
 import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
 import com.example.handmakeapp.home_products.adapter.SlideAdapter;
 import com.example.handmakeapp.home_products.mapping.BannerMapping;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.BannerItem;
 import com.example.handmakeapp.model.Product;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +37,7 @@ public class Home extends AppCompatActivity {
 
     ViewPager2 viewPager2;
     List<BannerItem> bannerItems = new ArrayList<>();
-
+    BottomNavigationView bottomNavigation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,5 +80,32 @@ public class Home extends AppCompatActivity {
             SlideAdapter slideAdapter = new SlideAdapter(bannerItems, viewPager2);
             viewPager2.setAdapter(slideAdapter);
         }
+    }
+    public void actionNavigationBottom() {
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.home);
+
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                if (id == R.id.account) {
+                    return true;
+                } else if (id == R.id.home) {
+                    startActivity(new Intent(getApplicationContext(), Home.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.list) {
+                    startActivity(new Intent(getApplicationContext(), Products.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.cart) {
+                    startActivity(new Intent(getApplicationContext(), cartActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }

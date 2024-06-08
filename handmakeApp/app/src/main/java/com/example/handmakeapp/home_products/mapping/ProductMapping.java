@@ -57,6 +57,7 @@ public class ProductMapping {
         Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getAllProducts").build();
         List<Product> products = new ArrayList<>();
         mappingProductObject(client, request, products);
+        Log.e("url", CallAPI.getAbsoluteURL() + "/api-product?action=getAllProducts => "+products.size());
         return products;
     }
 

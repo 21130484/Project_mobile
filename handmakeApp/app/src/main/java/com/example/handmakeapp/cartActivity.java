@@ -1,10 +1,12 @@
 package com.example.handmakeapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,7 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.handmakeapp.callAPI.CallAPI;
+import com.example.handmakeapp.home_products.Home;
+import com.example.handmakeapp.home_products.Products;
 import com.example.handmakeapp.model.CartItemDTO;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +35,8 @@ public class cartActivity extends AppCompatActivity {
     ListView lv;
     CustomAdapterCart customAdapterCart;
     ArrayList<CartItemDTO> arrCartItems;
+
+    BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,5 +94,32 @@ public class cartActivity extends AppCompatActivity {
         arrCartItems = new ArrayList<>();
         customAdapterCart = new CustomAdapterCart(cartActivity.this, arrCartItems);
         lv.setAdapter(customAdapterCart);
+    }
+    public void actionNavigationBottom() {
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.home);
+
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                if (id == R.id.account) {
+                    return true;
+                } else if (id == R.id.home) {
+                    startActivity(new Intent(getApplicationContext(), Home.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.list) {
+                    startActivity(new Intent(getApplicationContext(), Products.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.cart) {
+                    startActivity(new Intent(getApplicationContext(), cartActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }

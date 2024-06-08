@@ -3,6 +3,7 @@ package DAO;
 import DBConnection.JDBIConnection;
 import model.Cart;
 import model.CartItem;
+import model.Product;
 
 import java.util.List;
 
@@ -36,4 +37,41 @@ public class CartDAO {
                     .execute() > 0;
         });
     }
+
+
+    /**
+     * INSERT DB INTO CART.
+     * @param userId
+     * @return
+     */
+    public static int  insertCart(int userId){
+        String sql = "Insert into cart (userId) values(:userId)";
+   return JDBIConnection.me().connect().withHandle(handle ->
+            handle.createUpdate(sql)
+                    .bind("userId", userId)
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(int.class)
+                    .one()
+            );
+    }
+
+    public static void insertCartItem(int p , int quantity, int cartId){
+        String sql = "Insert into cart_details (productId, quantity, cartId)" +
+                "values(:productId, :quantity, :cartId)" ;
+
+        JDBIConnection.me().connect().useHandle(handle ->
+                handle.createUpdate(sql).bind("productId", p)
+                        .bind("quantity", quantity)
+                        .bind("cartId", cartId)
+                        .execute()
+        );
+    }
+
+    public static void addCartWithItem(int userId, int p, int quantity) {
+        int cartId = insertCart(userId);
+        insertCartItem(p, quantity, cartId);
+
+    }
+
+
 }

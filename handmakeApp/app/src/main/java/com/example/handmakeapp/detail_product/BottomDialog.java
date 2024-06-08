@@ -15,12 +15,14 @@ import androidx.annotation.Nullable;
 
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
+import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -30,11 +32,15 @@ import java.util.Currency;
 import java.util.HashMap;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class BottomDialog extends BottomSheetDialogFragment {
     private ProductDetail p;
 
-    FirebaseAuth auth;
-    FirebaseFirestore fileStore;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser user = auth.getCurrentUser();
 
     public void setP(ProductDetail p) {
         this.p = p;
@@ -58,8 +64,6 @@ public class BottomDialog extends BottomSheetDialogFragment {
         ImageView plus = view.findViewById(R.id.plusQuantity);
         TextView total = view.findViewById(R.id.totalValue);
 
-        fileStore = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
 
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         format.setMaximumFractionDigits(0);
@@ -109,7 +113,8 @@ public class BottomDialog extends BottomSheetDialogFragment {
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              addToCart();
+
+                addToCart(Integer.parseInt(valueQuantity.getText().toString()));
             }
         });
         return view;
@@ -121,24 +126,34 @@ public class BottomDialog extends BottomSheetDialogFragment {
         return Integer.parseInt(numerics);
     }
 
-    private void addToCart(){
+    private void addToCart(int valueQ){
+//        int userId =
+        String userId = user.getUid();
+        int productId = p.getId();
+        int quantity = valueQ;
+
+      Call<CartItemDTO> call=  CallAPI.api.addCartWithItems("addCartWithItems",userId, productId, quantity);
+        call.enqueue(new Callback<CartItemDTO>() {
+            @Override
+            public void onResponse(Call<CartItemDTO> call, Response<CartItemDTO> response) {
+                if(response.isSuccessful()){
+                    CartItemDTO cartItemDTO = response.body();
+                    Toast.makeText(getContext(), "Đã cập nhật số lượng sản phẩm trong giỏ hàng!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), DetailActivity.class);
+                    startActivity(intent);
 
 
-        final HashMap<String, Object> cartMap = new HashMap<>();
-        cartMap.put("productName", p.getName());
-        cartMap.put("productPrice", p.getSellingPrice() + "");
-        cartMap.put("productStock", p.getStock());
-        cartMap.put("productQuantity", p.getStock());
-        cartMap.put("totalPrice", p.getSellingPrice());
+                }
+                else {
+                    Toast.makeText(getContext(), "Có lỗi xảy ra khi cập nhật số lượng", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        fileStore.collection("AddToCart").document(auth.getCurrentUser().getUid())
-                .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-//                        Toast.makeText(BottomDialog.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-//                        finish();
-                    }
-                });
+            @Override
+            public void onFailure(Call<CartItemDTO> call, Throwable t) {
+                Toast.makeText(getContext(), "Không thể kết nối", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
