@@ -69,7 +69,7 @@ public class Products extends AppCompatActivity {
         // Execute network task to fetch data
         new NetworkTask().execute();
 
-        btn_toCart = findViewById(R.id.btn_toCart);
+//        btn_toCart = findViewById(R.id.btn_toCart);
 
         btn_toCart.setOnClickListener(new View.OnClickListener() {
             @Override

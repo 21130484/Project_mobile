@@ -39,19 +39,19 @@
             android:name=".login.Login"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
 
 
         <activity
             android:name=".login.SplashActivity"
-            android:exported="false">
-
+            android:exported="true">
         </activity>
 
 <!--        TRANG CHỦ           -->
@@ -59,18 +59,48 @@
         <activity
             android:name=".home_products.Home"
             android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar"></activity>
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
+
+        </activity>
+
+
+
 
         <activity android:name=".home_products.Products"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar"></activity>
+            android:exported="true"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
+
+        </activity>
 
 
 <!--        CHI TIẾT SẢN PHẨM   -->
 
+        <activity android:name=".detail_product.RateDialog"
+
+            android:windowSoftInputMode="adjustResize"
+
+        >
+
+             </activity>
+
+
+        <activity
+            android:name=".detail_product.Test_Activity"
+            android:exported="true"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
+
         <activity android:name=".detail_product.DetailActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false">
         </activity>
+
 
 
 <!--        GIỎ HÀNG - ĐƠN HÀNG - THANH TOÁN -->
