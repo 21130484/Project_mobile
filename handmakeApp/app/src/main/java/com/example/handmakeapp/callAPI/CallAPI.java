@@ -6,6 +6,7 @@ import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
 import com.example.handmakeapp.model.Product;
+import com.example.handmakeapp.model.ProductDetail;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -42,8 +43,18 @@ public interface CallAPI {
             .build()
             .create(CallAPI.class);
 
+
     @GET("order")
     Call<List<Order>> getAllOrder(@Query("userId") int userId);
+
+    @GET("api-product?action=getAllProduct")
+    Call<List<Product>> getAllProduct();
+
+    @GET("api-product?action=getImageByProductId")
+    Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);
+
+    @GET("api-product")
+    Call<ProductDetail> getPDById(@Query("action") String action, @Query("productId") int id);
 
     @GET("cart")
     Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
