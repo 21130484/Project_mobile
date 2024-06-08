@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.R;
-import com.example.handmakeapp.cart;
+import com.example.handmakeapp.cartActivity;
 import com.example.handmakeapp.home_products.Home;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -70,7 +70,7 @@ public class productList extends AppCompatActivity {
                 if (id == R.id.list) {
                     return true;
                 } else if (id == R.id.cart) {
-                    startActivity(new Intent(getApplicationContext(), cart.class));
+                    startActivity(new Intent(getApplicationContext(), cartActivity.class));
                     overridePendingTransition(0,0);
                     return true;
                 } else if (id == R.id.home) {

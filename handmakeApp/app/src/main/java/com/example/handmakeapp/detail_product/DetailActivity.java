@@ -17,7 +17,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.cart;
+import com.example.handmakeapp.cartActivity;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.ProductDetail;
 import com.example.handmakeapp.model.Rate;
@@ -27,11 +27,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Locale;
-import java.util.Random;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -65,7 +60,7 @@ public class DetailActivity extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DetailActivity.this, cart.class);
+                Intent i = new Intent(DetailActivity.this, cartActivity.class);
                 startActivity(i);
             }
         });

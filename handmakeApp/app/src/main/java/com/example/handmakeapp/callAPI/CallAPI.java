@@ -78,5 +78,6 @@ public interface CallAPI {
             @Field("address") String address,
             @Field("shippingFee") int shippingFee,
             @Field("note") String note,
+            @Field("productList") List<String> productList,
             @Field("totalPrice") String totalPrice);
 }

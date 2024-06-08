@@ -26,13 +26,7 @@
 
 <!--DETAIL PRODUCT START-->
         <activity android:name=".detail_product.Test_Activity"
-            android:exported="true"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+            android:exported="true">
 
         </activity>
 
@@ -45,7 +39,7 @@
         <!--DETAIL PRODUCT END-->
 
         <activity
-            android:name=".orderHistoryActivity"
+            android:name=".cartActivity"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
             <intent-filter>
@@ -80,7 +74,7 @@
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
         <activity
-            android:name=".cart"
+            android:name=".orderActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
     </application>

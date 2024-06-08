@@ -5,6 +5,8 @@ import DAO.OrderDAO;
 import DAO.UserDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.CartItem;
+import model.Order;
+import model.Product;
 import model.Receiver;
 
 import javax.servlet.ServletException;
@@ -30,9 +32,11 @@ public class CheckoutController extends HttpServlet {
         double shippingFee = Double.parseDouble(req.getParameter("shippingFee"));
         String note = req.getParameter("note");
         double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
+        String products = req.getParameter("productList");
         Receiver receiver = userDAO.getUserById(userId);
-        boolean isUpdated = orderDAO.insertOrder(receiver, shippingFee, note, totalPrice, address);
+        Order isInsertedOrder = orderDAO.insertOrder(receiver, shippingFee, note, totalPrice, address);
+//        boolean isInsertedOrderDetails = orderDAO.insertOrder(receiver, shippingFee, note, totalPrice, address);
 
-        objectMapper.writeValue(resp.getOutputStream(), isUpdated);
+        objectMapper.writeValue(resp.getOutputStream(), isInsertedOrder);
     }
 }

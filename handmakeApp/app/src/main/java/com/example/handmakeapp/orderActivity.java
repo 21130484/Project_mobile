@@ -30,6 +30,7 @@ import retrofit2.Response;
 public class orderActivity extends AppCompatActivity {
     TextView price, totalPrice, address, note, feeShip;
     ArrayList<CartItemDTO> cartItems;
+    ArrayList<String> arrProductId;
     Button back, btnChange, btnOrder;
     ListView listView;
     CustomAdapterOrder customAdapterOrder;
@@ -50,6 +51,7 @@ public class orderActivity extends AppCompatActivity {
         }
         for (int i = 0; i < data.size(); i++){
             cartItems.add(data.get(i));
+            arrProductId.add(String.valueOf(data.get(i).getId())); // id of cartItem
         }
         Log.e("cartItems : ", cartItems.size() + "");
         customAdapterOrder.notifyDataSetChanged();
@@ -70,7 +72,7 @@ public class orderActivity extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CallAPI.api.checkout(4, address.getText().toString(), 10000, note.getText().toString(), totalPrice.getText().toString().substring(0, totalPrice.getText().toString().length() - 3)).enqueue(new Callback<Void>() {
+                CallAPI.api.checkout(4, address.getText().toString(), 10000, note.getText().toString(), arrProductId, totalPrice.getText().toString().substring(0, totalPrice.getText().toString().length() - 3)).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         customAdapterOrder.notifyDataSetChanged();

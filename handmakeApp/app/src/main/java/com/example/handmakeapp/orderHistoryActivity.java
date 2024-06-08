@@ -29,7 +29,7 @@ public class orderHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         Anhxa();
-        Intent intent = getIntent();
+//        Intent intent = getIntent();
 //        int orderId = intent.getIntExtra("id");
         CallAPI.api.getAllOrder(4).enqueue(new Callback<List<Order>>() {
             @Override
