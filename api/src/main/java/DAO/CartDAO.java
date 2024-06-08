@@ -37,6 +37,16 @@ public class CartDAO {
         });
     }
 
+    public boolean deleteCartItem(int cartItemId, int cartId) {
+        String sql = "delete from cart_details where id = ? and cartId = ?";
+        return JDBIConnection.me().connect().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind(0,cartItemId)
+                    .bind(1,cartId)
+                    .execute() > 0;
+        });
+    }
+
     public int createCart(String userId) {
         String sql = "Insert into cart(userId) values(?)";
         return JDBIConnection.me().connect().withHandle(handle ->

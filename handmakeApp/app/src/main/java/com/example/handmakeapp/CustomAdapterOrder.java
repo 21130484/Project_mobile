@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Order;
 
@@ -15,9 +16,9 @@ import java.util.ArrayList;
 
 public class CustomAdapterOrder extends BaseAdapter {
     Context context;
-    ArrayList<Order> arrayList;
+    ArrayList<CartItemDTO> arrayList;
 
-    public CustomAdapterOrder(Context context, ArrayList<Order> arrayList) {
+    public CustomAdapterOrder(Context context, ArrayList<CartItemDTO> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -45,25 +46,21 @@ public class CustomAdapterOrder extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.pro_of_order,null);
 
-        Order order = arrayList.get(position);
-        TextView idItem = convertView.findViewById(R.id.textViewId);
+        CartItemDTO cartItemDTO = arrayList.get(position);
         TextView nameProduct = convertView.findViewById(R.id.textViewName);
         TextView typeProduct = convertView.findViewById(R.id.textViewType);
         TextView priceProduct = convertView.findViewById(R.id.price);
-        TextView xQuantityProduct = convertView.findViewById(R.id.xquantity);
         TextView quantityProduct = convertView.findViewById(R.id.quantity);
         ImageView imgProduct = convertView.findViewById(R.id.imageView);
 
 //        chuyen du lieu vao customeLayout
-//        idItem.setText("#"+order.getId());
-//        nameProduct.setText(order.getName());
-//        typeProduct.setText(order.getDescription());
-//        priceProduct.setText(order.getSellingPrice()+"");
-//        quantityProduct.setText(order.getQuantity() + "");
-//        xQuantityProduct.setText("x"+order.getQuantity());
-//        // Sử dụng Glide để tải ảnh
-//        Uri imageUri = Uri.parse(order.getPath()+"");
-//        Glide.with(convertView).load(imageUri).into(imgProduct);
+        nameProduct.setText(cartItemDTO.getName());
+        typeProduct.setText(cartItemDTO.getDescription());
+        priceProduct.setText(cartItemDTO.getSellingPrice()+"");
+        quantityProduct.setText(cartItemDTO.getQuantity() + "");
+        // Sử dụng Glide để tải ảnh
+        Uri imageUri = Uri.parse(cartItemDTO.getPath()+"");
+        Glide.with(convertView).load(imageUri).into(imgProduct);
 
         return convertView;
     }

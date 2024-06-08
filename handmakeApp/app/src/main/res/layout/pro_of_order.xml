@@ -12,7 +12,7 @@
         tools:layout_editor_absoluteY="1dp">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="10dp"
@@ -26,16 +26,17 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Giày Nam - giày thể thao tăng chiều cao SIÊU HOT 2024"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textViewType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxHeight="30dp"
                 android:text="Kích thước : 42 - Màu sắc : Xanh đen"
                 android:textSize="12sp" />
 
@@ -55,7 +56,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/quanlity"
+                    android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

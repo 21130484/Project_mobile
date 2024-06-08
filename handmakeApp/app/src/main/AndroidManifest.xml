@@ -33,10 +33,7 @@
 
         <!--DETAIL PRODUCT START-->
         <activity android:name=".orderHistoryActivity"
-
-
-            android:exported="true"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -54,23 +51,18 @@
         <!--DETAIL PRODUCT END-->
 
         <activity
-
             android:name=".cartActivity"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" >
-
+            android:exported="true"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".login.SignUp"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" >
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".login.VerifyOTP"
@@ -95,7 +87,7 @@
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
         <activity
-            android:name=".cart"
+            android:name=".orderActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
     </application>

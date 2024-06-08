@@ -2,6 +2,7 @@ package model;
 
 public class Cart {
     private int id;
+
     private String userId;
 
     public Cart() {
@@ -35,4 +36,5 @@ public class Cart {
                 ", userId='" + userId + '\'' +
                 '}';
     }
+
 }
