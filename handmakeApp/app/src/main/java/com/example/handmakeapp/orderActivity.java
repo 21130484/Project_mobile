@@ -17,10 +17,7 @@ import android.widget.Toast;
 import com.example.handmakeapp.callAPI.CallAPI;
 
 import com.example.handmakeapp.model.CartItemDTO;
-import com.example.handmakeapp.listProduct.productList;
 
-import com.example.handmakeapp.model.Order;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;

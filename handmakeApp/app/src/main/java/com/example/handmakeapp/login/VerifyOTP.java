@@ -16,7 +16,6 @@ import com.example.handmakeapp.AndroidToast;
 import com.example.handmakeapp.R;
 
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.home.Home;
 import com.example.handmakeapp.model.Cart;
 
 import com.example.handmakeapp.service.*;
@@ -104,6 +103,7 @@ public class VerifyOTP extends AppCompatActivity {
                                 public void onResponse(Call<Cart> call, Response<Cart> response) {
                                     if(response.isSuccessful()) {
                                         response.body();
+                                        Log.e("KIEN", response.code() + "");
                                         goToLogin();
                                     }
                                 }

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmakeapp.AndroidToast;
 import com.example.handmakeapp.R;
+import com.example.handmakeapp.detail_product.Test_Activity;
 import com.example.handmakeapp.home_products.Home;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -86,7 +87,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void goToHome() {
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Test_Activity.class);
         startActivity(intent);
     }
 
