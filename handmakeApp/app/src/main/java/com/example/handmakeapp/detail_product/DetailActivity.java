@@ -2,7 +2,9 @@ package com.example.handmakeapp.detail_product;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -18,7 +22,12 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.cartActivity;
+import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
+import com.example.handmakeapp.home_products.mapping.ProductMapping;
+import com.example.handmakeapp.model.Category;
+
 import com.example.handmakeapp.model.Image;
+import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.example.handmakeapp.model.Rate;
 
@@ -26,6 +35,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.List;
 import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
@@ -33,15 +43,16 @@ public class DetailActivity extends AppCompatActivity {
     /**
      * checkText = id TextView3 => process when no rate.
      */
-    private TextView titleTxt, priceTxt, descriptionTxt, rateAvgTxt, rateCountTxt, checkText ;
+    private TextView titleTxt, priceTxt, descriptionTxt, rateAvgTxt, rateCountTxt, checkText;
     private Button buyBtn;
     TextView txtshow;
     ImageView btnBack;
     ImageView btnCart;
-//    Rating & Review.
+    //    Rating & Review.
+    RecyclerView rv;
 
     private TextView ratingAvgTxt, ratingCountTxt;
-    private  TextView ratio1, ratio2, ratio3, ratio4, ratio5;
+    private TextView ratio1, ratio2, ratio3, ratio4, ratio5;
     private ProgressBar pb1, pb2, pb3, pb4, pb5;
 
     @Override
@@ -50,6 +61,11 @@ public class DetailActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detail);
         btnBack = findViewById(R.id.imageLArrow);
+        rv = findViewById(R.id.rv);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rv.setLayoutManager(layoutManager);
+
+        new NetworkTask().execute();
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +91,7 @@ public class DetailActivity extends AppCompatActivity {
         ProductDetail p = getIntent().getParcelableExtra("productDetail");
 
 
-        if(p != null) {
+        if (p != null) {
             NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
             format.setMaximumFractionDigits(0);
             format.setCurrency(Currency.getInstance("VND"));
@@ -93,11 +109,11 @@ public class DetailActivity extends AppCompatActivity {
             descriptionTxt.setText(p.getDescription());
 
 //            Rating & Review declare START.
-            double rate1 =0;
-            double rate2 =0;
-            double rate3 =0;
-            double rate4 =0;
-            double rate5 =0;
+            double rate1 = 0;
+            double rate2 = 0;
+            double rate3 = 0;
+            double rate4 = 0;
+            double rate5 = 0;
 
             ratingAvgTxt = findViewById(R.id.ratingNumber);
             ratingCountTxt = findViewById(R.id.ratingCount);
@@ -113,8 +129,7 @@ public class DetailActivity extends AppCompatActivity {
             ratio5 = findViewById(R.id.ratio5);
 
 
-
-            for(Rate r : p.getRateList()) {
+            for (Rate r : p.getRateList()) {
                 sum += r.getStarRatings();
                 switch (r.getStarRatings()) {
                     case 5:
@@ -136,9 +151,9 @@ public class DetailActivity extends AppCompatActivity {
                         break;
                 }
 
-                count ++;
+                count++;
             }
-            sum = sum/count;
+            sum = sum / count;
             int result5 = caculatorPecentage(rate5, count);
             int result4 = caculatorPecentage(rate4, count);
             int result3 = caculatorPecentage(rate3, count);
@@ -161,7 +176,7 @@ public class DetailActivity extends AppCompatActivity {
             pb1.setProgress(result1);
             ratio1.setText(result1 + "%");
 
-            if(count == 0) {
+            if (count == 0) {
                 pb1.setProgress(0);
                 ratio1.setText(0 + "%");
                 ratingAvgTxt.setText("0");
@@ -170,8 +185,7 @@ public class DetailActivity extends AppCompatActivity {
                 checkText.setText("đánh giá");
                 ratingCountTxt.setText("Chưa đánh giá");
 
-            }
-            else {
+            } else {
                 rateAvgTxt.setText(df.format(sum));
                 ratingAvgTxt.setText(df.format(sum));
             }
@@ -182,7 +196,7 @@ public class DetailActivity extends AppCompatActivity {
              */
 
             ArrayList<SlideModel> imageList = new ArrayList<>();
-            for(Image i : p.getImageList()) {
+            for (Image i : p.getImageList()) {
                 String imageUrl = CallAPI.getAbsoluteURL() + "/" + i.getPath();
                 imageList.add(new SlideModel(imageUrl, ScaleTypes.FIT));
             }
@@ -192,20 +206,36 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            BottomDialog bottomDialog = new BottomDialog();
-            bottomDialog.setP(p);
-//            bottomDialog.setP(p);
-            bottomDialog.show(getSupportFragmentManager(), "TAG");
+                BottomDialog bottomDialog = new BottomDialog();
+                bottomDialog.setP(p);
+                bottomDialog.show(getSupportFragmentManager(), "TAG");
             }
         });
+    }
+
+    public static int caculatorPecentage(double a, double b) {
+        return (int) (a * 100 / b);
+    }
+
+    public static int restValue(int a, int b, int c, int d) {
+        return 100 - a - b - c - d;
+    }
+
+    private class NetworkTask extends AsyncTask<Void, Void, List<Product>> {
+        @Override
+        protected List<Product> doInBackground(Void... voids) {
+            List<Product> recommentProducts = ProductMapping.getInstance().getAllProduct();
+            List<Category> t = ProductMapping.getInstance().getCategories();
+            Log.e("huhu", recommentProducts.size()+"");
+            Log.e("haha", t.size()+"");
+            return recommentProducts;
         }
-    public static int caculatorPecentage(double a, double b){
-        return (int) (a*100/b);
-    }
-    public static int restValue(int a, int b, int c, int d){
-        return 100-a-b-c-d;
-    }
 
-
+        @Override
+        protected void onPostExecute(List<Product> products) {
+            ProductListRecyclerViewAdapter adapter = new ProductListRecyclerViewAdapter(products);
+            rv.setAdapter(adapter);
+        }
     }
+}
 

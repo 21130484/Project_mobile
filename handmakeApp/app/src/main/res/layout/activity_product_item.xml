@@ -12,14 +12,16 @@
         android:orientation="vertical"
         android:padding="5dp"
         android:layout_margin="10dp"
-        android:background="@drawable/product_border">
+        android:background="@drawable/product_border"
+
+        >
 
         <ImageView
             android:id="@+id/img_item"
             android:layout_width="120dp"
             android:layout_height="100dp"
             android:scaleType="fitCenter"
-            android:background="@color/background"
+            android:background="@drawable/card_background"
             app:srcCompat="@drawable/load" />
 
         <LinearLayout
@@ -42,7 +44,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="99.000 đ"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:textColor="@color/pink"
+                android:textStyle="bold"
+
+                />
         </LinearLayout>
 
         <TextView
@@ -51,8 +57,9 @@
             android:layout_height="100dp"
             android:text="Áo chống nắng"
             android:textAlignment="center"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textSize="16dp"
+            android:fontFamily="@font/bahnschrift"
+            />
     </LinearLayout>
 
 </LinearLayout>

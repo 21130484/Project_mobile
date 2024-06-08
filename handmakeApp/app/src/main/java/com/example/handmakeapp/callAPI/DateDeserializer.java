@@ -29,9 +29,4 @@ public class DateDeserializer extends TypeAdapter<Date> {
     }
 
 
-//
-//    @Override
-//    public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-//        return new Date(json.getAsJsonPrimitive().getAsLong());
-//    }
 }

@@ -56,9 +56,26 @@ public interface CallAPI {
     @GET("api-product?action=getImageByProductId")
     Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);
 
+
+
     @GET("api-product")
     Call<ProductDetail> getPDById(@Query("action") String action, @Query("productId") int id);
 
+<<<<<<< HEAD
+    // INSERT CART
+    @FormUrlEncoded
+    @POST("api-product")
+    Call<CartItemDTO> addCartWithItems(
+        @Field("action") String action,
+        @Field("userId") String userId,
+        @Field("productId") int productId,
+        @Field("quantity") int quantity
+        );
+
+
+
+=======
+>>>>>>> origin
     @GET("cart")
     Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
 

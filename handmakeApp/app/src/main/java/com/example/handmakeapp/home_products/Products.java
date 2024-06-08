@@ -2,9 +2,12 @@ package com.example.handmakeapp.home_products;
 
 import static android.widget.Toast.LENGTH_LONG;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,23 +16,32 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.handmakeapp.R;
-import com.example.handmakeapp.cart;
+import com.example.handmakeapp.callAPI.CallAPI;
+import com.example.handmakeapp.cartActivity;
+import com.example.handmakeapp.detail_product.DetailActivity;
+import com.example.handmakeapp.detail_product.Test_Activity;
+
 import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.home_products.adapter.ProductListArrayAdapter;
-import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Product;
+import com.example.handmakeapp.model.ProductDetail;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Products extends AppCompatActivity {
     SearchView sv;
@@ -41,7 +53,7 @@ public class Products extends AppCompatActivity {
 
     List<Product> allProducts;
     ProductListArrayAdapter gridViewAdapter;
-
+    BottomNavigationView bottomNavigation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +105,16 @@ public class Products extends AppCompatActivity {
 
             }
         });
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                int idt = allProducts.get(position).getId();
+
+                getProductById(idt);
+            }
+        });
     }
 
     private void filterCategory(List<Product> filterList) {
@@ -140,5 +162,58 @@ public class Products extends AppCompatActivity {
             adapterFilter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             filterProduct.setAdapter(adapterFilter);
         }
+    }
+    public void actionNavigationBottom() {
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.home);
+
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                if (id == R.id.account) {
+                    return true;
+                } else if (id == R.id.home) {
+                    startActivity(new Intent(getApplicationContext(), Home.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.list) {
+                    startActivity(new Intent(getApplicationContext(), Products.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                } else if (id == R.id.cart) {
+                    startActivity(new Intent(getApplicationContext(), cartActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+    private void getProductById(int id) {
+        CallAPI.api.getPDById("getProductDetailsById", id).enqueue(new Callback<ProductDetail>() {
+            @Override
+            public void onResponse(Call<ProductDetail> call, Response<ProductDetail> response) {
+                Log.e("Kien", "onSuccess");
+                ProductDetail p = response.body();
+                if(p != null) {
+                    Log.e("Kien", p.toString());
+
+                    //Chuyển sang DetailActivity truyền ProductDetail.
+                    Intent intent = new Intent(Products.this, DetailActivity.class);
+                    intent.putExtra("productDetail", p);
+                    startActivity(intent);
+
+                }
+
+                else {
+                    Log.e("Kien", response.code()+ "");
+                }
+            }
+            @Override
+            public void onFailure(Call<ProductDetail> call, Throwable t) {
+                Log.e("Kien", "Failure" + t.getMessage(), t);
+            }
+        });
     }
 }

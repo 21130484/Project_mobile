@@ -3,6 +3,7 @@ package DAO;
 import DBConnection.JDBIConnection;
 import model.Category;
 import model.Product;
+import model.ProductDetail;
 
 import java.util.Collections;
 import java.util.List;
@@ -59,12 +60,12 @@ public class ProductDAO {
     /*
    Lấy product detail từ id.
     */
-    public static Product getPDetailsById(int productID) {
-        Product p = JDBIConnection.me().connect().withHandle(
+    public static ProductDetail getPDetailsById(int productID) {
+        ProductDetail p = JDBIConnection.me().connect().withHandle(
                 handle -> handle.createQuery("SELECT id, name, description, sellingPrice, quantity - soldout as stock, categoryId, isSale" +
                                 " from product where id = :productID")
                         .bind("productID", productID)
-                        .mapToBean(Product.class).findFirst().orElse(null)
+                        .mapToBean(ProductDetail.class).findFirst().orElse(null)
         );
         return p;
     }

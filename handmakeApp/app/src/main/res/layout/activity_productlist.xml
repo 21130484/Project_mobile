@@ -76,10 +76,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2" />
-
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-    <!--        android:id="@+id/bottom_navigation"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:menu="@menu/bottom_navigation_menu" />-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemTextColor="@color/color_navigation_bottom"
+        app:itemIconTint="@color/color_navigation_bottom"
+        app:menu="@menu/bottom_navigation_menu"/>
 </LinearLayout>

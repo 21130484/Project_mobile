@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.cartActivity;
 import com.example.handmakeapp.home_products.Home;
-import com.example.handmakeapp.listProduct.productList;
+import com.example.handmakeapp.home_products.Products;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,7 +50,7 @@ public class Account extends AppCompatActivity {
                     overridePendingTransition(0,0);
                     return true;
                 } else if (id == R.id.list) {
-                    startActivity(new Intent(getApplicationContext(), productList.class));
+                    startActivity(new Intent(getApplicationContext(), Products.class));
                     overridePendingTransition(0,0);
                     return true;
                 } else if (id == R.id.cart) {
