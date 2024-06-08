@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.handmakeapp.CurrencyFormatter;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Image;
@@ -58,7 +59,7 @@ public class ProductListArrayAdapter extends ArrayAdapter<Product> {
             Picasso.get().load(imageUrl).into(imgItem);
         }
         txtName.setText(item.getName());
-        txtPrice.setText(item.getSellingPrice() + "");
+        txtPrice.setText(CurrencyFormatter.formatCurrency(item.getSellingPrice()));
 
         return convertView;
     }
