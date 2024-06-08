@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/addCart")
-public class addCartController extends HttpServlet {
+@WebServlet("/cartItem")
+public class CartItemController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+        doPost(req,resp);
     }
 
     @Override
@@ -24,10 +24,15 @@ public class addCartController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         String userId = req.getParameter("userId");
-         if (userId != null) {
+
+        int productId = Integer.parseInt(req.getParameter("productId"));
+        int quantity = Integer.parseInt(req.getParameter("quantity"));
+        if (userId != null) {
             CartDAO cartDAO = new CartDAO();
-            cartDAO.createCart(userId);
+            cartDAO.addCartWithItem(userId,productId,quantity);
             objectMapper.writeValue(resp.getOutputStream(), null);
         }
+
+
     }
 }

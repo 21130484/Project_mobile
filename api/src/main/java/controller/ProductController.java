@@ -94,12 +94,14 @@ public class ProductController extends HttpServlet {
                     objectMapper.writeValue(resp.getOutputStream(), isUpdated);
                 } else if (action.equals("addCartWithItems")) {
 
-                    int userId = Integer.parseInt(req.getParameter("userId"));
+                    String userId = req.getParameter("userId");
+
                     int productId = Integer.parseInt(req.getParameter("productId"));
                     int quantity = Integer.parseInt(req.getParameter("quantity"));
-                    cartDAO.addCartWithItem(userId,productId,quantity);
-                    resp.setStatus(HttpServletResponse.SC_CREATED);
-                    objectMapper.writeValue(resp.getOutputStream(), "Loi the d nao dc");
+                    if(userId != null) {
+                        cartDAO.addCartWithItem(userId, productId, quantity);
+                        objectMapper.writeValue(resp.getOutputStream(), null);
+                    }
                 }
 
             }

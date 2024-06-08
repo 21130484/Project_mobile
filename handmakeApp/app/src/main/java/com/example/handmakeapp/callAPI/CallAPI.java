@@ -64,9 +64,8 @@ public interface CallAPI {
 
     // INSERT CART
     @FormUrlEncoded
-    @POST("api-product")
-    Call<CartItemDTO> addCartWithItems(
-        @Field("action") String action,
+    @POST("cartItem")
+    Call<Void> addCartWithItems(
         @Field("userId") String userId,
         @Field("productId") int productId,
         @Field("quantity") int quantity

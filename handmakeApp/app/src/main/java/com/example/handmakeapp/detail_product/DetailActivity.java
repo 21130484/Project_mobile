@@ -51,13 +51,16 @@ public class DetailActivity extends AppCompatActivity {
     ImageView btnBack;
     ImageView btnCart;
     //    Rating & Review.
-    RecyclerView rv;
 
     private TextView ratingAvgTxt, ratingCountTxt;
     private TextView ratio1, ratio2, ratio3, ratio4, ratio5;
     private ProgressBar pb1, pb2, pb3, pb4, pb5;
 
     private AppCompatButton ratingWriteBtn;
+
+
+//   Sản phẩm topp
+    RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
