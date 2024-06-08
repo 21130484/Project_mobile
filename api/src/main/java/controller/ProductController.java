@@ -29,7 +29,7 @@ public class ProductController extends HttpServlet {
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("application/json");
 
-            if (action.equals("getAllProduct")) {
+            if (action.equals("getAllProducts")) {
                 List<Product> products = productDAO.getAll();
                 objectMapper.writeValue(resp.getOutputStream(), products);
             } else if (action.equals("getImageByProductId")) {
@@ -44,7 +44,7 @@ public class ProductController extends HttpServlet {
                     Product products = productDAO.getProductById(productId);
                     objectMapper.writeValue(resp.getOutputStream(), products);
                 }
-            } else if (action.equals("getTopSoldoutProduct")) {
+            } else if (action.equals("getTopSoldoutProducts")) {
                 List<Product> products = productDAO.getTopSoldoutProduct(15);
                 objectMapper.writeValue(resp.getOutputStream(), products);
             } else if (action.equals("getCategories")) {

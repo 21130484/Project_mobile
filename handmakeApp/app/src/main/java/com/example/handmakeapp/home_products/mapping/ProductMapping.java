@@ -54,7 +54,7 @@ public class ProductMapping {
 
     public List<Product> getAllProduct() {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getAllProduct").build();
+        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getAllProducts").build();
         List<Product> products = new ArrayList<>();
         mappingProductObject(client, request, products);
         return products;
