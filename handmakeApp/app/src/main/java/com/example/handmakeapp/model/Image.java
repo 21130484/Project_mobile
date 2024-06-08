@@ -1,15 +1,27 @@
 package com.example.handmakeapp.model;
 
-public class Image {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private int id;
-    private String name;
-    private String path;
-    private int productId;
+import androidx.annotation.NonNull;
 
-    public Image() {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    }
+public class Image implements Parcelable {
+
+  private int id;
+
+
+
+   @Expose(deserialize = false)
+  private String name;
+  private String path;
+
+
+    @Expose(deserialize = false)
+  private int productId;
+
 
     public Image(int id, String name, String path, int productId) {
         this.id = id;
@@ -18,6 +30,12 @@ public class Image {
         this.productId = productId;
     }
 
+    protected Image(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        path = in.readString();
+        productId = in.readInt();
+    }
 
     public int getId() {
         return id;
@@ -25,14 +43,6 @@ public class Image {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPath() {
@@ -43,23 +53,40 @@ public class Image {
         this.path = path;
     }
 
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-
-        this.productId = productId;
-    }
 
     @Override
     public String toString() {
         return "Image{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", path='" + path + '\'' +
-                ", productId='" + productId + '\'' +
-
+                ", productId=" + productId +
                 '}';
+    }
+
+    public static final Creator<Image> CREATOR = new Creator<Image>() {
+        @Override
+        public Image createFromParcel(Parcel source) {
+            return new Image(source);
+        }
+
+        @Override
+        public Image[] newArray(int size) {
+            return new Image[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+      dest.writeInt(id);
+      dest.writeString(name);
+      dest.writeString(path);
+      dest.writeInt(productId);
+
     }
 }

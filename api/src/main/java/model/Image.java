@@ -18,6 +18,16 @@ public class Image {
         this.productId = productId;
     }
 
+    /**
+     * Sử dụng cho lấy product Detail.
+     * @param id
+     * @param path
+     */
+    public Image(int id, String path) {
+        this.id = id;
+        this.path = path;
+    }
+
 
     public int getId() {
         return id;

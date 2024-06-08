@@ -6,6 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Category;
 import model.Image;
 import model.Product;
+import model.Rate;
+import service.ImageService;
+import service.ProductService;
+import service.RateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +21,10 @@ import java.util.List;
 
 @WebServlet("/api-product")
 public class ProductController extends HttpServlet {
+
+    private ProductService p = new ProductService();
+    private RateService r = new RateService();
+    private ImageService i = new ImageService();
     ProductDAO productDAO = new ProductDAO();
     ImageDAO imageDAO = new ImageDAO();
 
@@ -29,7 +37,7 @@ public class ProductController extends HttpServlet {
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("application/json");
 
-            if (action.equals("getAllProduct")) {
+            if (action.equals("getAllProducts")) {
                 List<Product> products = productDAO.getAll();
                 objectMapper.writeValue(resp.getOutputStream(), products);
             } else if (action.equals("getImageByProductId")) {
@@ -44,7 +52,7 @@ public class ProductController extends HttpServlet {
                     Product products = productDAO.getProductById(productId);
                     objectMapper.writeValue(resp.getOutputStream(), products);
                 }
-            } else if (action.equals("getTopSoldoutProduct")) {
+            } else if (action.equals("getTopSoldoutProducts")) {
                 List<Product> products = productDAO.getTopSoldoutProduct(15);
                 objectMapper.writeValue(resp.getOutputStream(), products);
             } else if (action.equals("getCategories")) {
@@ -53,6 +61,19 @@ public class ProductController extends HttpServlet {
             } else if (action.equals("getDiscountProducts")) {
                 List<Product> products = productDAO.getDiscountProducts();
                 objectMapper.writeValue(resp.getOutputStream(), products);
+            } else if (action.equals("getProductDetailsById")) {
+
+                String pid = req.getParameter("productId");
+
+                int id = Integer.parseInt(pid);
+                List<Image> imageList = i.getImageForPDetails(id);
+                List<Rate> rateList = r.getRateByProduct(id);
+                Product product = p.getPDetailsById(id);
+                product.setImageList(imageList);
+                product.setRateList(rateList);
+                resp.setCharacterEncoding("UTF-8");
+                resp.setContentType("application/json");
+                objectMapper.writeValue(resp.getOutputStream(), product);
             }
         }
     }

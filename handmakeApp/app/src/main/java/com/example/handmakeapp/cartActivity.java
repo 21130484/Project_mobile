@@ -80,8 +80,8 @@ public class cartActivity extends AppCompatActivity {
     }
 
     private void Anhxa() {
-        fillAll = findViewById(R.id.fillAll);
-        next = findViewById(R.id.next);
+//        fillAll = findViewById(R.id.fillAll);
+//        next = findViewById(R.id.next);
         totalPrice = findViewById(R.id.totalPrice);
         lv = findViewById(R.id.lv);
         arrCartItems = new ArrayList<>();
