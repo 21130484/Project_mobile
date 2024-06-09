@@ -16,7 +16,6 @@ import com.example.handmakeapp.AndroidToast;
 import com.example.handmakeapp.R;
 
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.home.Home;
 import com.example.handmakeapp.model.Cart;
 
 import com.example.handmakeapp.service.*;
@@ -45,7 +44,6 @@ public class VerifyOTP extends AppCompatActivity {
 
     MailService mailService;
 
-    boolean isCreateCart = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,10 +154,5 @@ public class VerifyOTP extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    private boolean createCart(String userId) {
-
-        return true;
     }
 }

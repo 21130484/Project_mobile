@@ -48,6 +48,13 @@ public class Login extends AppCompatActivity {
                 goToRegister();
             }
         });
+
+        etPasswordForget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToForgotPassword();
+            }
+        });
     }
 
     private void Anhxa() {
@@ -92,6 +99,11 @@ public class Login extends AppCompatActivity {
 
     private void goToRegister() {
         Intent intent = new Intent(this, SignUp.class);
+        startActivity(intent);
+    }
+
+    private void goToForgotPassword() {
+        Intent intent = new Intent(this, ForgotPassword.class);
         startActivity(intent);
     }
 }

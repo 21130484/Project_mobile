@@ -1,2 +1,4 @@
-package controller;public class OrderDetail {
+package controller;
+public class OrderDetailController {
+
 }

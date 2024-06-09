@@ -1,11 +1,9 @@
 package com.example.handmakeapp.callAPI;
 
-import android.widget.TextView;
 import com.example.handmakeapp.model.Cart;
 import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
-import com.example.handmakeapp.model.OrderItem;
 import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.gson.Gson;
@@ -23,12 +21,11 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CallAPI {
 
-    public final static String SERVER_IP = "10.0.2.2".trim();//ipconfig
+    public final static String SERVER_IP = "192.168.1.3".trim();//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
@@ -61,7 +58,6 @@ public interface CallAPI {
     @GET("api-product")
     Call<ProductDetail> getPDById(@Query("action") String action, @Query("productId") int id);
 
-<<<<<<< HEAD
     // INSERT CART
     @FormUrlEncoded
     @POST("api-product")
@@ -72,10 +68,6 @@ public interface CallAPI {
         @Field("quantity") int quantity
         );
 
-
-
-=======
->>>>>>> origin
     @GET("cart")
     Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
 
@@ -94,12 +86,13 @@ public interface CallAPI {
     @FormUrlEncoded
     @POST("checkout")
     Call<Void> checkout(
-            @Field("userId") int userId,
+            @Field("userId") String userId,
             @Field("address") String address,
             @Field("shippingFee") int shippingFee,
             @Field("note") String note,
-            @Field("productList") List<String> productList,
-            @Field("totalPrice") String totalPrice);
+            @Field("productList") String productList,
+            @Field("totalPrice") String totalPrice,
+            @Field("consigneeName") String consigneeName);
 
     @FormUrlEncoded
     @POST("addCart")
