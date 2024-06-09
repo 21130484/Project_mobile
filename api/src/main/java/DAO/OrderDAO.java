@@ -27,4 +27,13 @@ public class OrderDAO {
                     .list();
         });
     }
+    public boolean UpdateStatusOrder(String id){
+        String sql = "Update `order` SET status = ? WHERE id = ? ";
+       return JDBIConnection.me().connect().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind(0,"Đã hủy")
+                    .bind(1,id)
+                    .execute() > 0;
+        });
+    }
 }

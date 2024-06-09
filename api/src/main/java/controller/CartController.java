@@ -36,8 +36,6 @@ public class CartController extends HttpServlet {
         int newQuantity = Integer.parseInt(req.getParameter("newQuantity"));
         int cartItemId = Integer.parseInt(req.getParameter("cartItemId"));
         int cartId = Integer.parseInt(req.getParameter("cartId"));
-        boolean isUpdated = cartDAO.updateQuantity(newQuantity,cartItemId,cartId);
-
-        objectMapper.writeValue(resp.getOutputStream(), isUpdated);
+        cartDAO.updateQuantity(newQuantity,cartItemId,cartId);
     }
 }
