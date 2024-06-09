@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.handmakeapp.CurrencyFormatter;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Image;
@@ -45,7 +46,7 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
             Picasso.get().load(imageUrl).into(holder.imgItem);
         }
         holder.txtName.setText(product.getName());
-        holder.txtPrice.setText(product.getSellingPrice() + "");
+        holder.txtPrice.setText(CurrencyFormatter.formatCurrency(product.getSellingPrice()));
     }
 
     @Override

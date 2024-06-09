@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmakeapp.AndroidToast;
 import com.example.handmakeapp.R;
+import com.example.handmakeapp.detail_product.Test_Activity;
 import com.example.handmakeapp.home_products.Home;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,9 +71,6 @@ public class Login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             goToHome();
-
-                            Log.d("Email", user.getEmail());
-                            Log.d("UID", user.getUid());
                             finishAffinity();
                         } else {
                             AndroidToast.showToast(Login.this, "Authentication failed.");

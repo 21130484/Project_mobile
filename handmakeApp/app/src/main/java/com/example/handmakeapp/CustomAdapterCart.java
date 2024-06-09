@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +25,12 @@ import retrofit2.Response;
 public class CustomAdapterCart extends BaseAdapter {
     Context context;
     ArrayList<CartItemDTO> arrayList;
+    TextView totalPriceTextView;
 
-    public CustomAdapterCart(Context context, ArrayList<CartItemDTO> arrayList) {
+    public CustomAdapterCart(Context context, ArrayList<CartItemDTO> arrayList, TextView totalPriceTextView) {
         this.context = context;
         this.arrayList = arrayList;
+        this.totalPriceTextView = totalPriceTextView;
     }
 
     @Override
@@ -60,16 +63,17 @@ public class CustomAdapterCart extends BaseAdapter {
         ImageView imgProduct = convertView.findViewById(R.id.imageView);
         Button increase = convertView.findViewById(R.id.increase);
         Button decrease = convertView.findViewById(R.id.decrease);
+        ImageButton removeItem = convertView.findViewById(R.id.removeItem);
 
 //        chuyen du lieu vao customeLayout
-        idItem.setText("#"+cartItems.getId());
+        idItem.setText("#" + cartItems.getId());
         nameProduct.setText(cartItems.getName());
         typeProduct.setText(cartItems.getDescription());
-        priceProduct.setText(cartItems.getSellingPrice()+"");
+        priceProduct.setText(cartItems.getSellingPrice() + "");
         quantityProduct.setText(cartItems.getQuantity() + "");
-        xQuantityProduct.setText("x"+cartItems.getQuantity());
+        xQuantityProduct.setText("x" + cartItems.getQuantity());
         // Sử dụng Glide để tải ảnh
-        Uri imageUri = Uri.parse(cartItems.getPath()+"");
+        Uri imageUri = Uri.parse(cartItems.getPath() + "");
         Glide.with(convertView).load(imageUri).into(imgProduct);
 
         increase.setOnClickListener(new View.OnClickListener() {
@@ -80,12 +84,13 @@ public class CustomAdapterCart extends BaseAdapter {
                 cartItems.setQuantity(currentQuantity);
                 quantityProduct.setText(String.valueOf(currentQuantity));
                 xQuantityProduct.setText("x" + currentQuantity);
+                updateTotalPrice();
                 notifyDataSetChanged(); // Cập nhật lại ListView
                 CallAPI.api.updateQuantity(currentQuantity, cartItems.getCartId(), cartItems.getId()).enqueue(new Callback<CartItemDTO>() {
                     @Override
                     public void onResponse(Call<CartItemDTO> call, Response<CartItemDTO> response) {
                         boolean isUpdated = response.isSuccessful();
-                        if(isUpdated){
+                        if (isUpdated) {
                             Toast.makeText(context, "Update success", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -101,11 +106,12 @@ public class CustomAdapterCart extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 int currentQuantity = cartItems.getQuantity();
-                if (currentQuantity > 0) {
+                if (currentQuantity > 1) {
                     currentQuantity--;
                     cartItems.setQuantity(currentQuantity);
                     quantityProduct.setText(String.valueOf(currentQuantity));
                     xQuantityProduct.setText("x" + currentQuantity);
+                    updateTotalPrice();
                     notifyDataSetChanged(); // Cập nhật lại ListView
                     CallAPI.api.updateQuantity(currentQuantity, cartItems.getCartId(), cartItems.getId()).enqueue(new Callback<CartItemDTO>() {
                         @Override
@@ -121,7 +127,36 @@ public class CustomAdapterCart extends BaseAdapter {
                 }
             }
         });
+        removeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int positionToRemove = position; // Lưu lại vị trí cần xóa
+                CartItemDTO itemToRemove = arrayList.get(positionToRemove);
+                // Xóa mục khỏi danh sách
+                arrayList.remove(positionToRemove);
+                updateTotalPrice();
+                // Cập nhật lại ListView
+                notifyDataSetChanged();
+                CallAPI.api.deleteItem(itemToRemove.getCartId(), itemToRemove.getId()).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(context, "Remove success", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(context, "Remove error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
         return convertView;
+    }
+    private void updateTotalPrice() {
+        double total = 0;
+        for (CartItemDTO item : arrayList) {
+            total += item.getSellingPrice() * item.getQuantity();
+        }
+        totalPriceTextView.setText(String.valueOf(total));
     }
 }

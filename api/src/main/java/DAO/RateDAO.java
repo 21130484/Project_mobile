@@ -9,8 +9,8 @@ public class RateDAO {
 
     public static List<Rate> getRateByProduct(int id) {
         List<Rate> rateList = JDBIConnection.me().connect().withHandle(
-                handle -> handle.createQuery("Select u.name as userName , r.starRatings, r.comment, r.createDate " +
-                                "from rate r join user u on r.userId = u.id where productId = :productID"
+                handle -> handle.createQuery("Select  fullName , starRatings, comment, createDate " +
+                                "from rate where productId = :productID"
                         ).bind("productID", id)
                         .mapToBean(Rate.class)
                         .stream()

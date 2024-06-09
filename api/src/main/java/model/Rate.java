@@ -10,7 +10,7 @@ import java.sql.Timestamp;
     @Setter
     @ToString
     public class Rate {
-        private String userName;
+        private String fullName;
         private int starRatings;
         private String comment;
         //    @JsonSerialize(using = JsonDateSerializer.class)

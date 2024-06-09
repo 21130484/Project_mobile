@@ -2,6 +2,7 @@ package service;
 
 import DAO.ProductDAO;
 import model.Product;
+import model.ProductDetail;
 
 public class ProductService {
     public static ProductService instance;
@@ -10,7 +11,7 @@ public class ProductService {
         return instance;
     }
 
-    public Product getPDetailsById(int id) {
+    public ProductDetail getPDetailsById(int id) {
         return ProductDAO.getPDetailsById(id);
     }
 }
