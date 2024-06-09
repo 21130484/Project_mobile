@@ -21,12 +21,19 @@
 <!--        ĐĂNG KÝ, ĐĂNG NHÂP, QUÊN MẬT KHẨU     -->
 
         <activity
+            android:name=".login.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
+
+        </activity>
+
+        <activity
             android:name=".account.ManagerAccount"
             android:exported="false" />
 
         <activity
             android:name=".login.SignUp"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" >
         </activity>
 
@@ -37,21 +44,19 @@
 
         <activity
             android:name=".login.Login"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
 
 
         <activity
-            android:name=".login.SplashActivity"
+            android:name=".orderHistoryActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 <!--        TRANG CHỦ           -->
@@ -67,7 +72,7 @@
 
 
         <activity android:name=".home_products.Products"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
 
         </activity>
@@ -88,11 +93,11 @@
             android:name=".detail_product.Test_Activity"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
