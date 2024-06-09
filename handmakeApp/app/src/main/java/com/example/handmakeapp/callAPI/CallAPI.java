@@ -25,7 +25,7 @@ import retrofit2.http.Query;
 
 public interface CallAPI {
 
-    public final static String SERVER_IP = "192.168.88.253".trim();//ipconfig
+    public final static String SERVER_IP = "192.168.88.104".trim();//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
@@ -45,7 +45,7 @@ public interface CallAPI {
 
 
     @GET("order")
-    Call<List<Order>> getAllOrder(@Query("userId") int userId);
+    Call<List<Order>> getAllOrder(@Query("userId") String userId);
 
     @GET("api-product?action=getAllProducts")
     Call<List<Product>> getAllProduct();

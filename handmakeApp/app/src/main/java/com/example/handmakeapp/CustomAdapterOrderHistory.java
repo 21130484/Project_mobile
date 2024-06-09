@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.Order;
 import com.example.handmakeapp.model.OrderItem;
 
@@ -67,7 +68,7 @@ public class CustomAdapterOrderHistory extends BaseAdapter {
         quantityOrder.setText(order.getItemList().size() + " sản phẩm");
         priceOrder.setText("Thành tiền :"+order.getTotalPrice());
         // Sử dụng Glide để tải ảnh
-        Uri imageUri = Uri.parse(orderItem.getPath()+"");
+        Uri imageUri = Uri.parse(CallAPI.getAbsoluteURL() + orderItem.getPath()+"");
         Glide.with(convertView).load(imageUri).into(imgProduct);
 
         return convertView;

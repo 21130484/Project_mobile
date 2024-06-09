@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CartDAO {
 
-    public List<CartItem> getAllCartItem(int userId){
+    public List<CartItem> getAllCartItem(String userId){
         String sql = "select cd.id, c.id as cartId, p.name, p.description, p.sellingPrice, temp.PATH, cd.quantity from cart c JOIN cart_details cd ON c.id = cd.cartId join product p on cd.productId = p.id JOIN (SELECT productId, PATH FROM image i JOIN product p ON i.productId = p.id GROUP BY productId) as temp ON temp.productId = p.id WHERE userId = ?";
         return JDBIConnection.me().connect().withHandle(handle -> {
             return handle.createQuery(sql)

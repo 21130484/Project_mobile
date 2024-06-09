@@ -102,7 +102,7 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@drawable/ava" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -144,7 +144,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            tools:srcCompat="@tools:sample/avatars" />
+                            tools:srcCompat="@drawable/cxn" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -167,7 +167,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            tools:srcCompat="@tools:sample/avatars" />
+                            tools:srcCompat="@drawable/xacnhantc" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -190,7 +190,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            tools:srcCompat="@tools:sample/avatars" />
+                            tools:srcCompat="@drawable/xe" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -213,7 +213,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            tools:srcCompat="@tools:sample/avatars" />
+                            tools:srcCompat="@drawable/choxntc" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -244,7 +244,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    tools:srcCompat="@drawable/vidiem" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -446,7 +446,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    tools:srcCompat="@drawable/datlaimk" />
 
                 <LinearLayout
                     android:layout_width="0dp"

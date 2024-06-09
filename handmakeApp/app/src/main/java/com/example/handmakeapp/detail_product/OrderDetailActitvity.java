@@ -29,16 +29,22 @@ public class OrderDetailActitvity extends AppCompatActivity {
 
     TextView statusOrder,location,feeShip,totalPrice;
     ListView lvProduct;
-    Button btn_huyDon;
+    Button btn_huyDon,backDetail;
     boolean updateStatus = false;
-//    CustomAdapterOrderDetail customAdapterOrderDetail;
+    CustomAdapterOrderDetail customAdapterOrderDetail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail2);
         AnhXa();
-//        customAdapterOrderDetail.notifyDataSetChanged();
+        customAdapterOrderDetail.notifyDataSetChanged();
+        backDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void AnhXa() {
@@ -48,6 +54,7 @@ public class OrderDetailActitvity extends AppCompatActivity {
         feeShip = findViewById(R.id.feeShip);
         totalPrice = findViewById(R.id.totalPrice);
         btn_huyDon = findViewById(R.id.btn_huyDon);
+        backDetail = findViewById(R.id.backDetail);
         Intent intent = getIntent();
         Order order = (Order) intent.getSerializableExtra("order");
 //        Sửa trạng thái đơn hàng
@@ -74,8 +81,8 @@ public class OrderDetailActitvity extends AppCompatActivity {
         String location_content = name + "\n" + sdt + "\n" + address;
         location.setText(location_content);
 //        List product
-//        customAdapterOrderDetail = new CustomAdapterOrderDetail(OrderDetailActitvity.this, (ArrayList<OrderItem>) order.getItemList());
-//        lvProduct.setAdapter(customAdapterOrderDetail);
+        customAdapterOrderDetail = new CustomAdapterOrderDetail(OrderDetailActitvity.this, (ArrayList<OrderItem>) order.getItemList());
+        lvProduct.setAdapter(customAdapterOrderDetail);
 //        Sửa tổng tiền đơn hàng
         double fee = 30000;
         String feeS = String.valueOf(fee);

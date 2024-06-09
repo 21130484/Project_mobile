@@ -34,12 +34,19 @@
 <!--        ĐĂNG KÝ, ĐĂNG NHÂP, QUÊN MẬT KHẨU     -->
 
         <activity
+            android:name=".login.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
+
+        </activity>
+
+        <activity
             android:name=".account.ManagerAccount"
             android:exported="false" />
 
         <activity
             android:name=".login.SignUp"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar" >
         </activity>
 
@@ -52,8 +59,6 @@
             android:name=".login.Login"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-
-
         </activity>
 
 
@@ -85,7 +90,7 @@
 
 
         <activity android:name=".home_products.Products"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
 
         </activity>
@@ -127,8 +132,9 @@
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
