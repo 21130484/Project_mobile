@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.handmakeapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SignUp extends AppCompatActivity {
     EditText fullName, etEmail, password, passwordRepeat;
     Button btnRegister;
@@ -58,6 +61,13 @@ public class SignUp extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    public boolean isPhoneValid(String phone) {
+        String regex = "^0[0-9]{9}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(phone);
+        return matcher.matches();
     }
 
 

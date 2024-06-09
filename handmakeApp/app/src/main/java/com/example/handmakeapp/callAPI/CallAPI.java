@@ -25,7 +25,7 @@ import retrofit2.http.Query;
 
 public interface CallAPI {
 
-    public final static String SERVER_IP = "192.168.88.253".trim();//ipconfig
+    public final static String SERVER_IP = "192.168.88.245".trim();//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
@@ -45,7 +45,7 @@ public interface CallAPI {
 
 
     @GET("order")
-    Call<List<Order>> getAllOrder(@Query("userId") int userId);
+    Call<List<Order>> getAllOrder(@Query("userId") String userId);
 
     @GET("api-product?action=getAllProducts")
     Call<List<Product>> getAllProduct();
@@ -68,7 +68,7 @@ public interface CallAPI {
         );
 
     @GET("cart")
-    Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
+    Call<List<CartItemDTO>> getAllCartItem(@Query("userId") String userId);
 
     @FormUrlEncoded
     @POST("cart")
@@ -91,7 +91,8 @@ public interface CallAPI {
             @Field("note") String note,
             @Field("productList") String productList,
             @Field("totalPrice") String totalPrice,
-            @Field("consigneeName") String consigneeName);
+            @Field("consigneeName") String consigneeName,
+            @Field("phoneNumber") String phoneNumber);
 
     @FormUrlEncoded
     @POST("addCart")

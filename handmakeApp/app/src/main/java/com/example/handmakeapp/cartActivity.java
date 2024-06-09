@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +22,8 @@ import com.example.handmakeapp.home_products.Products;
 
 import com.example.handmakeapp.model.CartItemDTO;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +36,13 @@ public class cartActivity extends AppCompatActivity {
 
     Button next;
     ImageButton removeItem;
-    TextView totalPrice;
+    TextView totalPrice, textNotify;
     ListView lv;
     CustomAdapterCart customAdapterCart;
     ArrayList<CartItemDTO> arrCartItems;
     BottomNavigationView bottomNavigation;
+    LinearLayout thanhToan;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     @Override
@@ -48,35 +52,38 @@ public class cartActivity extends AppCompatActivity {
         Anhxa();
         actionNavigationBottom();
 
-        CallAPI.api.getAllCartItem(4).enqueue(new Callback<List<CartItemDTO>>() {
-            @Override
-            public void onResponse(Call<List<CartItemDTO>> call, Response<List<CartItemDTO>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<CartItemDTO> cartItems = response.body();
-                    Log.e("myCart from API : ", cartItems.size() + " cartItem");
-                    double total = 1;
-                    for (int i = 0 ; i < cartItems.size(); i++){
-                        total += cartItems.get(i).getSellingPrice();
-                        CartItemDTO item = new CartItemDTO(cartItems.get(i).getId(),cartItems.get(i).getCartId(),cartItems.get(i).getName(), cartItems.get(i).getDescription(),cartItems.get(i).getSellingPrice(),CallAPI.getAbsoluteURL()+cartItems.get(i).getPath(),cartItems.get(i).getQuantity());
-                        arrCartItems.add(item);
-                    }
-                    next.setText("Mua hàng ("+cartItems.size()+")");
-                    updateTotalPrice();
-//                    totalPrice.setText(total+"");
-                    customAdapterCart.notifyDataSetChanged();
-                    Toast.makeText(cartActivity.this, "Call ok", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.e("API Error", "Response code: " + response.code() + ", message: " + response.message());
-                    Toast.makeText(cartActivity.this, "Call error", Toast.LENGTH_SHORT).show();
+        if (user != null) {
+            CallAPI.api.getAllCartItem(user.getUid()).enqueue(new Callback<List<CartItemDTO>>() {
+                @Override
+                public void onResponse(Call<List<CartItemDTO>> call, Response<List<CartItemDTO>> response) {
+                        List<CartItemDTO> cartItems = response.body();
+                        if (cartItems.size() !=0) {
+                            double total = 1;
+                            for (int i = 0 ; i < cartItems.size(); i++){
+                                total += cartItems.get(i).getSellingPrice();
+                                CartItemDTO item = new CartItemDTO(cartItems.get(i).getId(),cartItems.get(i).getCartId(),cartItems.get(i).getName(), cartItems.get(i).getDescription(),cartItems.get(i).getSellingPrice(),CallAPI.getAbsoluteURL()+cartItems.get(i).getPath(),cartItems.get(i).getQuantity());
+                                arrCartItems.add(item);
+                            }
+                            next.setText("Mua hàng ("+cartItems.size()+")");
+                            updateTotalPrice();
+                            customAdapterCart.notifyDataSetChanged();
+                        } else {
+                            thanhToan.setVisibility(View.GONE);
+                            textNotify.setVisibility(View.VISIBLE);
+                            textNotify.setText("Giỏ hàng đang trống");
+                        }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<CartItemDTO>> call, Throwable t) {
-                Log.e("API Error", t.getMessage(), t);
-                Toast.makeText(cartActivity.this, "Call error",Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<List<CartItemDTO>> call, Throwable t) {
+                    Log.e("API Error", t.getMessage(), t);
+                    Toast.makeText(cartActivity.this, "Call error",Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            thanhToan.setVisibility(View.GONE);
+            textNotify.setVisibility(View.VISIBLE);
+        }
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,16 +115,18 @@ public class cartActivity extends AppCompatActivity {
         arrCartItems = new ArrayList<>();
         customAdapterCart = new CustomAdapterCart(cartActivity.this, arrCartItems,totalPrice);
         lv.setAdapter(customAdapterCart);
+        thanhToan = findViewById(R.id.thanhToan);
+        textNotify = findViewById(R.id.textNotify);
     }
     public void actionNavigationBottom() {
         bottomNavigation = findViewById(R.id.bottom_navigation);
-        bottomNavigation.setSelectedItemId(R.id.home);
+        bottomNavigation.setSelectedItemId(R.id.cart);
 
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if (id == R.id.account) {
+                if (id == R.id.cart) {
                     return true;
                 } else if (id == R.id.home) {
                     startActivity(new Intent(getApplicationContext(), Home.class));
@@ -127,8 +136,8 @@ public class cartActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Products.class));
                     overridePendingTransition(0,0);
                     return true;
-                } else if (id == R.id.cart) {
-                    startActivity(new Intent(getApplicationContext(), cartActivity.class));
+                } else if (id == R.id.account) {
+                    startActivity(new Intent(getApplicationContext(), Account.class));
                     overridePendingTransition(0,0);
                     return true;
                 }

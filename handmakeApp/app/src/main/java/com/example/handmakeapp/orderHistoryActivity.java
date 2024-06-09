@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.detail_product.OrderDetailActitvity;
 import com.example.handmakeapp.model.Order;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +27,15 @@ public class orderHistoryActivity extends AppCompatActivity {
     ListView listView;
     CustomAdapterOrderHistory customAdapterOrderHistory;
     ArrayList<Order> arrOrder;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         Anhxa();
-//        Intent intent = getIntent();
-//        int orderId = intent.getIntExtra("id");
-        CallAPI.api.getAllOrder(4).enqueue(new Callback<List<Order>>() {
+
+        CallAPI.api.getAllOrder(user.getUid()).enqueue(new Callback<List<Order>>() {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 if (response.isSuccessful() && response.body() != null) {

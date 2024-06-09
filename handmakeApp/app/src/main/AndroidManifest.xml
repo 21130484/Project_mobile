@@ -28,14 +28,9 @@
             android:name=".account.ManagerAccount"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
-        tools:targetApi="31" >
 
 
 <!--        ĐĂNG KÝ, ĐĂNG NHÂP, QUÊN MẬT KHẨU     -->
-
-        <activity
-            android:name=".account.ManagerAccount"
-            android:exported="false" />
 
         <activity
             android:name=".login.SignUp"
@@ -52,11 +47,7 @@
             android:name=".login.Login"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-
-
         </activity>
-
-
 
         <activity
             android:name=".login.SplashActivity"
@@ -78,11 +69,7 @@
             android:name=".home_products.Home"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-
         </activity>
-
-
-
 
         <activity android:name=".home_products.Products"
             android:exported="true"
@@ -94,47 +81,19 @@
 <!--        CHI TIẾT SẢN PHẨM   -->
 
         <activity android:name=".detail_product.RateDialog"
-
-            android:windowSoftInputMode="adjustResize"
-
-        >
-
-             </activity>
-
+            android:windowSoftInputMode="adjustResize">
+        </activity>
 
         <activity
             android:name=".detail_product.Test_Activity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-        </activity>
-        <activity
-            android:name=".login.SignUp"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-        <activity
-            android:name=".login.VerifyOTP"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-        <activity
-            android:name=".login.Login"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" /> <!-- DETAIL PRODUCT START -->
-        <activity
-            android:name=".home_products.Products"
-            android:exported="true"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar">
-        </activity>
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-
         </activity>
 
         <activity android:name=".detail_product.DetailActivity"
             android:windowSoftInputMode="adjustResize"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 
 
@@ -151,26 +110,14 @@
             android:name=".orderActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
-        <activity
-            android:name=".home_products.Home"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
         <activity
             android:name=".orderHistoryActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-
-
         <activity
-            android:name=".detail_product.OrderDetailActitvity"
-            android:exported="false">
-        </activity>
-
+            android:name=".account.Account"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
     </application>
 </manifest>

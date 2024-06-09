@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CartDAO {
 
-    public List<CartItem> getAllCartItem(int userId){
+    public List<CartItem> getAllCartItem(String userId){
         String sql = "select cd.id, c.id as cartId, p.name, p.description, p.sellingPrice, temp.PATH, cd.quantity from cart c JOIN cart_details cd ON c.id = cd.cartId join product p on cd.productId = p.id JOIN (SELECT productId, PATH FROM image i JOIN product p ON i.productId = p.id GROUP BY productId) as temp ON temp.productId = p.id WHERE userId = ?";
         return JDBIConnection.me().connect().withHandle(handle -> {
             return handle.createQuery(sql)
@@ -102,10 +102,25 @@ public class CartDAO {
         String sql = "delete from cart_details where id = ? and cartId = ?";
         return JDBIConnection.me().connect().withHandle(handle -> {
             return handle.createUpdate(sql)
-                    .bind(0,cartItemId)
+                    .bind(0, cartItemId)
                     .bind(1,cartId)
                     .execute() > 0;
         });
+    }
+
+    public boolean deleteCartDetail(String userId) {
+        String sqlSelectCartId = "Select id from cart where userId = ?";
+        String cartId = JDBIConnection.me().connect().withHandle(handle ->
+             handle.createQuery(sqlSelectCartId).bind(0, userId).mapTo(String.class).findOne().orElse(""));
+        if (!cartId.isEmpty()) {
+            String sql = "delete from cart_details where cartId = ?";
+            return JDBIConnection.me().connect().withHandle(handle -> {
+                return handle.createUpdate(sql)
+                        .bind(0,cartId)
+                        .execute() > 0;
+            });
+        }
+        return false;
     }
 
     public int createCart(String userId) {
@@ -113,14 +128,4 @@ public class CartDAO {
         return JDBIConnection.me().connect().withHandle(handle ->
                 handle.createUpdate(sql).bind(0, userId).execute());
     }
-
-    public static void main(String[] args) {
-        addCartWithItem("kobi1", 38, 2);
-    }
-
-
-
-
-
-
 }

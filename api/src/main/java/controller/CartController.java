@@ -21,10 +21,9 @@ public class CartController extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        int userId = Integer.parseInt(req.getParameter("userId"));
+        String userId = req.getParameter("userId");
 //        int cartId = cartDAO.getCartByUserId(userId).getId();
         List<CartItem> cartItems = cartDAO.getAllCartItem(userId);
-
         objectMapper.writeValue(resp.getOutputStream(), cartItems);
     }
 

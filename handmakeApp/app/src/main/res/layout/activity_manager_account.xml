@@ -44,11 +44,12 @@
             android:text="Email:"
             android:textSize="18sp"
             android:layout_marginRight="10dp" />
-        <EditText
+        <TextView
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="toanphuoc26112003@gmail.com"
+            android:inputType="textEmailAddress"
+            android:text=""
             android:textSize="16dp"/>
     </LinearLayout>
     <LinearLayout

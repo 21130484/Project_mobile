@@ -1,5 +1,4 @@
 package controller;
-public class OrderDetailController {
 
 import DAO.OrderDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;

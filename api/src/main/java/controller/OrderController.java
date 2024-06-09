@@ -22,11 +22,11 @@ public class OrderController extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        int userId = Integer.parseInt(req.getParameter("userId"));
+        String userId = req.getParameter("userId");
         List<Order> orders = orderDAO.getAllOrder(userId);
         for (int i = 0 ; i < orders.size(); i++){
-//            List<OrderItem> order1Items = orderDAO.getItemForOrder(orders.get(i).getId());
-//            orders.get(i).setItemList(orderItems);
+            List<OrderItem> orderItems = orderDAO.getItemForOrder(orders.get(i).getId());
+            orders.get(i).setItemList(orderItems);
         }
         objectMapper.writeValue(resp.getOutputStream(), orders);
     }
