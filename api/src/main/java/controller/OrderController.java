@@ -25,8 +25,8 @@ public class OrderController extends HttpServlet {
         int userId = Integer.parseInt(req.getParameter("userId"));
         List<Order> orders = orderDAO.getAllOrder(userId);
         for (int i = 0 ; i < orders.size(); i++){
-//            List<OrderItem> order1Items = orderDAO.getItemForOrder(orders.get(i).getId());
-//            orders.get(i).setItemList(orderItems);
+            List<OrderItem> order1Items = orderDAO.getItemForOrder(orders.get(i).getId());
+            orders.get(i).setItemList(order1Items);
         }
         objectMapper.writeValue(resp.getOutputStream(), orders);
     }

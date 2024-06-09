@@ -31,11 +31,12 @@ public class OrderDAO {
     public boolean UpdateStatusOrder(String id){
         String sql = "Update `order` SET status = ? WHERE id = ? ";
        return JDBIConnection.me().connect().withHandle(handle -> {
-            return handle.createUpdate(sql)
-                    .bind(0,"Đã hủy")
-                    .bind(1,id)
-                    .execute() > 0;
-
+           return handle.createUpdate(sql)
+                   .bind(0, "Đã hủy")
+                   .bind(1, id)
+                   .execute() > 0;
+       });
+    }
     public Order insertOrder(Receiver receiver, double shippingfee, String note, double totalPrice, String address) {
         String sql = "insert into `order` (totalPrice,status,consigneeName,consigneePhoneNumber, address, shippingFee, userId, note) values (?,?,?,?,?,?,?,?)";
         return JDBIConnection.me().connect().withHandle(handle -> {
