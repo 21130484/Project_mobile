@@ -22,9 +22,12 @@
 
         <activity
             android:name=".login.SplashActivity"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-
+<!--        <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--        </intent-filter>-->
         </activity>
 
         <activity
@@ -93,12 +96,6 @@
             android:name=".detail_product.Test_Activity"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
         <activity android:name=".detail_product.DetailActivity"
@@ -112,7 +109,7 @@
 
         <activity
             android:name=".cartActivity"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 

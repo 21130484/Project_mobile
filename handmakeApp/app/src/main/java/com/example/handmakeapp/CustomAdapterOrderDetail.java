@@ -58,7 +58,7 @@ public class CustomAdapterOrderDetail extends BaseAdapter {
 //        chuyen du lieu vao customeLayout
         nameProduct.setText(cartItemDTO.getName());
         typeProduct.setText(cartItemDTO.getDescription());
-        priceProduct.setText(cartItemDTO.getSellingPrice()+"");
+        priceProduct.setText(CurrencyFormatter.formatCurrency(cartItemDTO.getSellingPrice())+"");
         quantityProduct.setText(cartItemDTO.getQuantity() + "");
         // Sử dụng Glide để tải ảnh
         Uri imageUri = Uri.parse(CallAPI.getAbsoluteURL() + cartItemDTO.getPath()+"");

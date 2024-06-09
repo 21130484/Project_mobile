@@ -69,7 +69,7 @@ public class CustomAdapterCart extends BaseAdapter {
         idItem.setText("#" + cartItems.getId());
         nameProduct.setText(cartItems.getName());
         typeProduct.setText(cartItems.getDescription());
-        priceProduct.setText(cartItems.getSellingPrice() + "");
+        priceProduct.setText(CurrencyFormatter.formatCurrency(cartItems.getSellingPrice()) + "");
         quantityProduct.setText(cartItems.getQuantity() + "");
         xQuantityProduct.setText("x" + cartItems.getQuantity());
         // Sử dụng Glide để tải ảnh
