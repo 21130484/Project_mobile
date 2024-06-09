@@ -28,32 +28,23 @@ public class orderHistoryActivity extends AppCompatActivity {
     ListView listView;
     CustomAdapterOrderHistory customAdapterOrderHistory;
     ArrayList<Order> arrOrder;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         Anhxa();
-//        Intent intent = getIntent();
-//        int orderId = intent.getIntExtra("id");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
-            CallAPI.api.getAllOrder("4").enqueue(new Callback<List<Order>>() {
-                @Override
-                public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        List<Order> orders = response.body();
-                        Log.e("myOrder from API : ", orders.size() + " order");
-                        for (int i = 0 ; i < orders.size(); i++){
-                            Order order = new Order(orders.get(i).getId(), orders.get(i).getTotalPrice(),orders.get(i).getStatus(),orders.get(i).getConsigneeName(),orders.get(i).getConsigneePhoneNumber(),orders.get(i).getAddress(),orders.get(i).getItemList());
-                            arrOrder.add(order);
-                            Log.e("arrOrder",arrOrder + "");
-                        }
-                        customAdapterOrderHistory.notifyDataSetChanged();
-                        Toast.makeText(orderHistoryActivity.this, "Call ok", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.e("API Error", "Response code: " + response.code() + ", message: " + response.message());
-                        Toast.makeText(orderHistoryActivity.this, "Call error", Toast.LENGTH_SHORT).show();
+
+        CallAPI.api.getAllOrder(user.getUid()).enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Order> orders = response.body();
+                    Log.e("myOrder from API : ", orders.size() + " order");
+                    for (int i = 0 ; i < orders.size(); i++){
+                        Order order = new Order(orders.get(i).getId(), orders.get(i).getTotalPrice(),orders.get(i).getStatus(),orders.get(i).getConsigneeName(),orders.get(i).getConsigneePhoneNumber(),orders.get(i).getAddress(),orders.get(i).getItemList());
+                        arrOrder.add(order);
                     }
                 }
 

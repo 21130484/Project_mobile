@@ -79,7 +79,7 @@ public interface CallAPI {
     );
 
     @GET("cart")
-    Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
+    Call<List<CartItemDTO>> getAllCartItem(@Query("userId") String userId);
 
     @FormUrlEncoded
     @POST("cart")
@@ -102,7 +102,8 @@ public interface CallAPI {
             @Field("note") String note,
             @Field("productList") String productList,
             @Field("totalPrice") String totalPrice,
-            @Field("consigneeName") String consigneeName);
+            @Field("consigneeName") String consigneeName,
+            @Field("phoneNumber") String phoneNumber);
 
     @FormUrlEncoded
     @POST("addCart")

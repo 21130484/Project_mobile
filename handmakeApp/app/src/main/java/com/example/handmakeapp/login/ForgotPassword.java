@@ -19,10 +19,11 @@ import com.example.handmakeapp.service.MailService;
 import java.util.Random;
 
 public class ForgotPassword extends AppCompatActivity {
-    EditText etCodeOTP, etEmail;
+    EditText etCodeOTP, etEmail, etPassword, password, passwordRepeat;
     Button btn_xacNhan;
     String codeOTP, emailRecord;
     MailService mailService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class ForgotPassword extends AppCompatActivity {
                     } else {
                         sendOTPForgotPassword(etEmail.getText().toString().trim());
                         etCodeOTP.setVisibility(View.VISIBLE);
+
                     }
                 } else if (etCodeOTP.getVisibility() == View.VISIBLE) {
                     String codeOTPEnter = etCodeOTP.getText().toString();
@@ -46,9 +48,13 @@ public class ForgotPassword extends AppCompatActivity {
                         AndroidToast.showToast(ForgotPassword.this, "Vui lòng nhập mã xác nhận");
                     } else {
                         if (codeOTPEnter.equals(codeOTP)) {
-                            Intent intent = new Intent(ForgotPassword.this, Login.class);
-                            startActivity(intent);
-                            finish();
+                            if (password.getText().toString().equals(passwordRepeat.getText().toString())) {
+                                Intent intent = new Intent(ForgotPassword.this, Login.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                AndroidToast.showToast(ForgotPassword.this, "Password không trùng khớp");
+                            }
                         } else {
                             AndroidToast.showToast(ForgotPassword.this, "Mã xác nhận không đúng");
                         }

@@ -25,7 +25,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -41,6 +45,7 @@ public class VerifyOTP extends AppCompatActivity {
     TextView sendOTPAgain;
     String codeOTP;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     MailService mailService;
 
@@ -102,7 +107,6 @@ public class VerifyOTP extends AppCompatActivity {
                                 public void onResponse(Call<Cart> call, Response<Cart> response) {
                                     if(response.isSuccessful()) {
                                         response.body();
-                                        Log.e("KIEN", response.code() + "");
                                         goToLogin();
                                     }
                                 }

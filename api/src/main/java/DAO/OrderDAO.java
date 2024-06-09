@@ -3,14 +3,16 @@ package DAO;
 import DBConnection.JDBIConnection;
 import model.Order;
 import model.OrderItem;
+import model.Product;
 import model.Receiver;
+import org.jdbi.v3.core.Jdbi;
 
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class OrderDAO {
 
-    public List<Order> getAllOrder(int userId){
+    public List<Order> getAllOrder(String userId){
         String sql = "select * from `order` where userId = ?";
         return JDBIConnection.me().connect().withHandle(handle -> {
             return handle.createQuery(sql)
@@ -38,14 +40,15 @@ public class OrderDAO {
                    .execute() > 0;
        });
     }
-    public String insertOrder(String userId, double shippingfee, String note, double totalPrice, String address, String consigneeName) {
+
+    public String insertOrder(String userId, double shippingfee, String note, double totalPrice, String address, String consigneeName, String phoneNumber) {
         String sql = "insert into `order` (totalPrice,status,consigneeName,consigneePhoneNumber, address, shippingFee, userId, note) values (?,?,?,?,?,?,?,?)";
         return JDBIConnection.me().connect().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bind(0,totalPrice)
                     .bind(1,"Đang giao")
                     .bind(2,consigneeName)
-                    .bind(3, "")
+                    .bind(3, phoneNumber)
                     .bind(4,address)
                     .bind(5,shippingfee)
                     .bind(6,userId)
@@ -58,17 +61,25 @@ public class OrderDAO {
         String productIds = productId.substring(1, productId.length() -1 );
         StringTokenizer stk = new StringTokenizer(productIds, ", ");
         int execute = 0;
+        Jdbi jdbi = JDBIConnection.me().connect();
         while (stk.hasMoreTokens()) {
             String id = stk.nextToken();
-            String sql = "insert into order_details(orderId, productId, quantity, sellingPrice, finalSellingPrice) " +
-                    "values(?,?,?,?,?)";
-            execute = JDBIConnection.me().connect().withHandle(handle ->
-                    handle.createUpdate(sql)
-                            .bind(0, orderId)
-                            .bind(1, id)
-                            .bind(2, 1)
-                            .bind(3, 1)
-                            .bind(4, 1).execute());
+            String sqlSelectProduct = "Select quantity, sellingPrice from product where id = ?";
+            Product product = jdbi.withHandle(handle ->
+                    handle.createQuery(sqlSelectProduct).bind(0, id).mapToBean(Product.class).findOne().orElse(null));
+
+            if (product != null) {
+                String sql = "insert into order_details(orderId, productId, quantity, sellingPrice, finalSellingPrice) " +
+                        "values(?,?,?,?,?)";
+                double sellingPrice = product.getSellingPrice();
+                execute = jdbi.withHandle(handle ->
+                        handle.createUpdate(sql)
+                                .bind(0, orderId)
+                                .bind(1, id)
+                                .bind(2, product.getQuantity())
+                                .bind(3, sellingPrice)
+                                .bind(4, sellingPrice * product.getQuantity()).execute());
+            }
         }
         return execute;
     }

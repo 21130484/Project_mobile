@@ -373,7 +373,7 @@
                             android:layout_height="16sp"
                             android:layout_marginStart="4dp"
                             android:src="@drawable/star"
-                            app:tint="@color/green" />
+                            app:tint="@color/green1" />
 
                         <ProgressBar
                             android:id="@+id/rating5"
@@ -385,7 +385,7 @@
                             android:layout_weight="1"
                             android:indeterminateOnly="false"
                             android:progress="76"
-                            android:progressTint="@color/green" />
+                            android:progressTint="@color/green1" />
 
                         <TextView
                             android:id="@+id/ratio5"
@@ -415,7 +415,7 @@
                             android:layout_height="16sp"
                             android:layout_marginStart="4dp"
                             android:src="@drawable/star"
-                            app:tint="@color/green" />
+                            app:tint="@color/green1" />
 
                         <ProgressBar
                             android:id="@+id/rating4"
@@ -427,7 +427,7 @@
                             android:layout_weight="1"
                             android:indeterminateOnly="false"
                             android:progress="76"
-                            android:progressTint="@color/green" />
+                            android:progressTint="@color/green1" />
 
                         <TextView
                             android:id="@+id/ratio4"
@@ -457,7 +457,7 @@
                             android:layout_height="16sp"
                             android:layout_marginStart="4dp"
                             android:src="@drawable/star"
-                            app:tint="@color/green" />
+                            app:tint="@color/green1" />
 
                         <ProgressBar
                             android:id="@+id/rating3"
@@ -469,7 +469,7 @@
                             android:layout_weight="1"
                             android:indeterminateOnly="false"
                             android:progress="76"
-                            android:progressTint="@color/green" />
+                            android:progressTint="@color/green1" />
 
                         <TextView
                             android:id="@+id/ratio3"

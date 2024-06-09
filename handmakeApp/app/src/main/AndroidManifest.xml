@@ -62,8 +62,6 @@
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 
-
-
         <activity
             android:name=".login.SplashActivity"
             android:exported="true"
@@ -84,11 +82,7 @@
             android:name=".home_products.Home"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-
         </activity>
-
-
-
 
         <activity android:name=".home_products.Products"
             android:exported="false"
@@ -100,23 +94,19 @@
 <!--        CHI TIẾT SẢN PHẨM   -->
 
         <activity android:name=".detail_product.RateDialog"
-
-            android:windowSoftInputMode="adjustResize"
-
-        >
-
-             </activity>
-
+            android:windowSoftInputMode="adjustResize">
+        </activity>
 
         <activity
             android:name=".detail_product.Test_Activity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 
         <activity android:name=".detail_product.DetailActivity"
             android:windowSoftInputMode="adjustResize"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 
 
@@ -133,26 +123,14 @@
             android:name=".orderActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
-        <activity
-            android:name=".home_products.Home"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
         <activity
             android:name=".orderHistoryActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-
-
         <activity
-            android:name=".detail_product.OrderDetailActitvity"
-            android:exported="false">
-        </activity>
-
+            android:name=".account.Account"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
     </application>
 </manifest>

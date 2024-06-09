@@ -102,10 +102,25 @@ public class CartDAO {
         String sql = "delete from cart_details where id = ? and cartId = ?";
         return JDBIConnection.me().connect().withHandle(handle -> {
             return handle.createUpdate(sql)
-                    .bind(0,cartItemId)
+                    .bind(0, cartItemId)
                     .bind(1,cartId)
                     .execute() > 0;
         });
+    }
+
+    public boolean deleteCartDetail(String userId) {
+        String sqlSelectCartId = "Select id from cart where userId = ?";
+        String cartId = JDBIConnection.me().connect().withHandle(handle ->
+             handle.createQuery(sqlSelectCartId).bind(0, userId).mapTo(String.class).findOne().orElse(""));
+        if (!cartId.isEmpty()) {
+            String sql = "delete from cart_details where cartId = ?";
+            return JDBIConnection.me().connect().withHandle(handle -> {
+                return handle.createUpdate(sql)
+                        .bind(0,cartId)
+                        .execute() > 0;
+            });
+        }
+        return false;
     }
 
     public int createCart(String userId) {
@@ -113,14 +128,4 @@ public class CartDAO {
         return JDBIConnection.me().connect().withHandle(handle ->
                 handle.createUpdate(sql).bind(0, userId).execute());
     }
-
-    public static void main(String[] args) {
-        addCartWithItem("kobi1", 38, 2);
-    }
-
-
-
-
-
-
 }

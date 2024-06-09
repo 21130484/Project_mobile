@@ -28,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class orderActivity extends AppCompatActivity {
-    TextView price, totalPrice, address, note, feeShip;
+    TextView price, totalPrice, address, note, feeShip, phoneNumber, name;
     ArrayList<CartItemDTO> cartItems;
     List<String> arrProductId = new ArrayList<>();
     Button back, btnChange, btnOrder;
@@ -55,9 +55,6 @@ public class orderActivity extends AppCompatActivity {
             cartItems.add(data.get(i));
             arrProductId.add(String.valueOf(data.get(i).getId())); // id of cartItem
         }
-        arrProductId.add("1");
-        arrProductId.add("4");
-        arrProductId.add("14");
         Log.e("cartItems : ", cartItems.size() + "");
         customAdapterOrder.notifyDataSetChanged();
         Toast.makeText(orderActivity.this, "Ok", Toast.LENGTH_SHORT).show();
@@ -75,7 +72,7 @@ public class orderActivity extends AppCompatActivity {
                     CallAPI.api.checkout(user.getUid(), address.getText().toString(),
                             10000, note.getText().toString(), arrProductId.toString(),
                             totalPrice.getText().toString(),
-                            user.getDisplayName()).enqueue(new Callback<Void>() {
+                            name.getText().toString(), phoneNumber.getText().toString()).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             customAdapterOrder.notifyDataSetChanged();
@@ -114,5 +111,7 @@ public class orderActivity extends AppCompatActivity {
         cartItems = new ArrayList<>();
         customAdapterOrder = new CustomAdapterOrder(orderActivity.this, cartItems);
         listView.setAdapter(customAdapterOrder);
+        phoneNumber = findViewById(R.id.phoneNumber);
+        name = findViewById(R.id.name);
     }
 }
