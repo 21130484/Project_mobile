@@ -28,16 +28,17 @@
             android:name=".account.ManagerAccount"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
-        tools:targetApi="31" >
-
 
 <!--        ĐĂNG KÝ, ĐĂNG NHÂP, QUÊN MẬT KHẨU     -->
 
         <activity
             android:name=".login.SplashActivity"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-
+<!--        <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--        </intent-filter>-->
         </activity>
 
         <activity
@@ -112,31 +113,6 @@
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
-        <activity
-            android:name=".login.SignUp"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-        <activity
-            android:name=".login.VerifyOTP"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" />
-        <activity
-            android:name=".login.Login"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar" /> <!-- DETAIL PRODUCT START -->
-        <activity
-            android:name=".home_products.Products"
-            android:exported="true"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar">
-        </activity>
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
 
         <activity android:name=".detail_product.DetailActivity"
             android:windowSoftInputMode="adjustResize"
@@ -149,7 +125,7 @@
 
         <activity
             android:name=".cartActivity"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 

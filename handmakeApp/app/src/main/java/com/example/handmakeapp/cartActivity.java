@@ -97,7 +97,7 @@ public class cartActivity extends AppCompatActivity {
         for (CartItemDTO item : arrCartItems) {
             total += item.getSellingPrice() * item.getQuantity();
         }
-        totalPrice.setText(String.valueOf(total));
+        totalPrice.setText(CurrencyFormatter.formatCurrency(total));
     }
 
     private void Anhxa() {

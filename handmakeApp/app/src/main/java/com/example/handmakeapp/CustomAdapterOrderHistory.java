@@ -63,10 +63,10 @@ public class CustomAdapterOrderHistory extends BaseAdapter {
         orderStatus.setText(order.getStatus());
         nameProduct.setText(orderItem.getName());
         typeProduct.setText(orderItem.getDescription());
-        priceProduct.setText(orderItem.getSellingPrice()+"");
+        priceProduct.setText(CurrencyFormatter.formatCurrency(orderItem.getSellingPrice())+"");
         quantityProduct.setText("x"+order.getItemList().size());
         quantityOrder.setText(order.getItemList().size() + " sản phẩm");
-        priceOrder.setText("Thành tiền :"+order.getTotalPrice());
+        priceOrder.setText("Thành tiền :"+CurrencyFormatter.formatCurrency(order.getTotalPrice()));
         // Sử dụng Glide để tải ảnh
         Uri imageUri = Uri.parse(CallAPI.getAbsoluteURL() + orderItem.getPath()+"");
         Glide.with(convertView).load(imageUri).into(imgProduct);

@@ -94,7 +94,7 @@
             <!--Danh Sách Sản Phẩm-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="218dp"
+                android:layout_height="167dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/white"
                 android:orientation="vertical"
@@ -123,7 +123,7 @@
                 <ListView
                     android:id="@+id/lvProduct"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="133dp" />
             </LinearLayout>
             <!-- Phương thức thanh toán-->
             <LinearLayout

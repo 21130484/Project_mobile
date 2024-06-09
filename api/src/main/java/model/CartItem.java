@@ -10,4 +10,6 @@ import lombok.*;
 @ToString
 public class CartItem {
   private int id, productId, quantity, cartId;
+  private String name, description, PATH;
+  private double sellingPrice;
 }
