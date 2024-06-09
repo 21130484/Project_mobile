@@ -63,13 +63,14 @@ public class Products extends AppCompatActivity {
         setContentView(R.layout.activity_productlist);
         gv = findViewById(R.id.gv);
         sv = findViewById(R.id.searchview);
+        btn_toCart = findViewById(R.id.btn_toCart);
         filterProduct = findViewById(R.id.filterProductList);
         options.add("Tất cả sản phẩm");
         sv.clearFocus();
         // Execute network task to fetch data
         new NetworkTask().execute();
 
-        btn_toCart = findViewById(R.id.btn_toCart);
+//        btn_toCart = findViewById(R.id.btn_toCart);
 
         btn_toCart.setOnClickListener(new View.OnClickListener() {
             @Override

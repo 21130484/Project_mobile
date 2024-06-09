@@ -2,6 +2,7 @@ package com.example.handmakeapp.detail_product;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,11 +51,16 @@ public class DetailActivity extends AppCompatActivity {
     ImageView btnBack;
     ImageView btnCart;
     //    Rating & Review.
-    RecyclerView rv;
 
     private TextView ratingAvgTxt, ratingCountTxt;
     private TextView ratio1, ratio2, ratio3, ratio4, ratio5;
     private ProgressBar pb1, pb2, pb3, pb4, pb5;
+
+    private AppCompatButton ratingWriteBtn;
+
+
+//   Sản phẩm topp
+    RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detail);
         btnBack = findViewById(R.id.imageLArrow);
+        ratingWriteBtn = findViewById(R.id.ratingWrite);
         rv = findViewById(R.id.rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(layoutManager);
@@ -79,7 +87,11 @@ public class DetailActivity extends AppCompatActivity {
                 Intent i = new Intent(DetailActivity.this, cartActivity.class);
                 startActivity(i);
             }
-        });
+        })
+
+
+
+        ;
 
 
         buyBtn = findViewById(R.id.buyBtn);
@@ -211,6 +223,21 @@ public class DetailActivity extends AppCompatActivity {
                 bottomDialog.show(getSupportFragmentManager(), "TAG");
             }
         });
+
+        ratingWriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RateDialog rateDialog = new RateDialog(DetailActivity.this);
+                rateDialog.setCancelable(false);
+                rateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
+                rateDialog.show();
+            }
+        });
+
+
+
+
+
     }
 
     public static int caculatorPecentage(double a, double b) {

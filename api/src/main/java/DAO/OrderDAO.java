@@ -29,6 +29,13 @@ public class OrderDAO {
                     .list();
         });
     }
+    public boolean UpdateStatusOrder(String id){
+        String sql = "Update `order` SET status = ? WHERE id = ? ";
+       return JDBIConnection.me().connect().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind(0,"Đã hủy")
+                    .bind(1,id)
+                    .execute() > 0;
 
     public String insertOrder(String userId, double shippingfee, String note, double totalPrice, String address, String consigneeName) {
         String sql = "insert into `order` (totalPrice,status,consigneeName,consigneePhoneNumber, address, shippingFee, userId, note) values (?,?,?,?,?,?,?,?)";

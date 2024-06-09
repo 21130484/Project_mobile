@@ -45,15 +45,26 @@ public class CartDAO {
      * @param userId
      * @return
      */
-    public static int  insertCart(int userId){
-        String sql = "Insert into cart (userId) values(:userId)";
-   return JDBIConnection.me().connect().withHandle(handle ->
-            handle.createUpdate(sql)
-                    .bind("userId", userId)
-                    .executeAndReturnGeneratedKeys("id")
+//    public static int  insertCart(String userId){
+//        String sql = "Insert into cart (userId) values(:userId)";
+//    return JDBIConnection.me().connect().withHandle(handle ->
+//            handle.createUpdate(sql)
+//                    .bind("userId", userId)
+//                    .executeAndReturnGeneratedKeys("id")
+//                    .mapTo(int.class)
+//                    .one()
+//            );
+//    }
+
+    public static int findCartByUserId(String userId){
+        String sql = "Select id from cart where userId = :userId";
+    return JDBIConnection.me().connect().withHandle(handle ->
+            handle.createQuery(sql).
+                    bind("userId", userId)
                     .mapTo(int.class)
                     .one()
             );
+
     }
 
     public static void insertCartItem(int p , int quantity, int cartId){
@@ -67,12 +78,23 @@ public class CartDAO {
                         .execute()
         );
     }
+    public static void addCartWithItem(String userId, int productId, int quantity) {
+        String sql = "INSERT INTO cart_details (productId, quantity, cartId) " +
+                "SELECT :productId, :quantity, cart.id " +
+                "FROM cart WHERE cart.userId = :userId";
 
-    public static void addCartWithItem(int userId, int p, int quantity) {
-        int cartId = insertCart(userId);
-        insertCartItem(p, quantity, cartId);
-
+        JDBIConnection.me().connect().useHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("productId", productId)
+                        .bind("quantity", quantity)
+                        .bind("userId", userId)
+                        .execute()
+        );
     }
+//    public  void addCartWithItem(String userId, int productId, int quantity) {
+//                int cartId = findCartByUserId(userId);
+//                insertCartItem(productId, quantity, cartId);
+//    }
 //
 //
 //=======
@@ -91,5 +113,14 @@ public class CartDAO {
         return JDBIConnection.me().connect().withHandle(handle ->
                 handle.createUpdate(sql).bind(0, userId).execute());
     }
+
+    public static void main(String[] args) {
+        addCartWithItem("kobi1", 38, 2);
+    }
+
+
+
+
+
 
 }
