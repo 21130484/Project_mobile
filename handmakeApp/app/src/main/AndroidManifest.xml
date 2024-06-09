@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -15,8 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HandmakeApp"
-        tools:targetApi="31" >
-
+        tools:targetApi="31">
+        <activity
+            android:name=".account.ChangePassword"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
+        <activity
+            android:name=".login.ForgotPassword"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
+        <activity
+            android:name=".account.ManagerAccount"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
 
 <!--        ĐĂNG KÝ, ĐĂNG NHÂP, QUÊN MẬT KHẨU     -->
 
@@ -54,13 +65,18 @@
 
 
         <activity
-            android:name=".orderHistoryActivity"
-            android:exported="true">
+            android:name=".login.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".detail_product.OrderDetailActitvity"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/> <!-- DETAIL PRODUCT END -->
 
 <!--        TRANG CHỦ           -->
 
@@ -116,6 +132,20 @@
         <activity
             android:name=".orderActivity"
             android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".home_products.Home"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
+        <activity
+            android:name=".orderHistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
             android:theme="@style/Theme.HandmakeApp.NoActionBar" />
 
 
@@ -124,8 +154,5 @@
             android:exported="false">
         </activity>
 
-
-
     </application>
-
 </manifest>

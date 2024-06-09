@@ -44,7 +44,6 @@ public class VerifyOTP extends AppCompatActivity {
 
     MailService mailService;
 
-    boolean isCreateCart = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,10 +155,5 @@ public class VerifyOTP extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    private boolean createCart(String userId) {
-
-        return true;
     }
 }
