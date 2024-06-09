@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Order;
 import com.example.handmakeapp.model.OrderItem;
@@ -47,7 +48,6 @@ public class CustomAdapterOrderDetail extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.pro_of_order,null);
-
         OrderItem cartItemDTO = arrayList.get(position);
         TextView nameProduct = convertView.findViewById(R.id.textViewName);
         TextView typeProduct = convertView.findViewById(R.id.textViewType);
@@ -58,10 +58,10 @@ public class CustomAdapterOrderDetail extends BaseAdapter {
 //        chuyen du lieu vao customeLayout
         nameProduct.setText(cartItemDTO.getName());
         typeProduct.setText(cartItemDTO.getDescription());
-        priceProduct.setText(cartItemDTO.getSellingPrice()+"");
+        priceProduct.setText(CurrencyFormatter.formatCurrency(cartItemDTO.getSellingPrice())+"");
         quantityProduct.setText(cartItemDTO.getQuantity() + "");
         // Sử dụng Glide để tải ảnh
-        Uri imageUri = Uri.parse(cartItemDTO.getPath()+"");
+        Uri imageUri = Uri.parse(CallAPI.getAbsoluteURL() + cartItemDTO.getPath()+"");
         Glide.with(convertView).load(imageUri).into(imgProduct);
 
         return convertView;

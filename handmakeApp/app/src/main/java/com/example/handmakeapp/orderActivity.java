@@ -45,9 +45,10 @@ public class orderActivity extends AppCompatActivity {
         List<CartItemDTO> data = new ArrayList<>();
         if (bundle != null) {
             String total = getIntent().getStringExtra("totalPrice");
-            price.setText(total + "đ");
+            Double currentTotal = Double.parseDouble(total);
+            price.setText(CurrencyFormatter.formatCurrency(currentTotal));
             feeShip.setText("10.000đ");
-//            totalPrice.setText(total + "đ");
+            totalPrice.setText(CurrencyFormatter.formatCurrency(currentTotal+10));
             data = (ArrayList<CartItemDTO>) bundle.getSerializable("cartItems");
         }
         for (int i = 0; i < data.size(); i++){

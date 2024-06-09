@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.detail_product.OrderDetailActitvity;
 import com.example.handmakeapp.model.Order;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -45,21 +46,15 @@ public class orderHistoryActivity extends AppCompatActivity {
                         Order order = new Order(orders.get(i).getId(), orders.get(i).getTotalPrice(),orders.get(i).getStatus(),orders.get(i).getConsigneeName(),orders.get(i).getConsigneePhoneNumber(),orders.get(i).getAddress(),orders.get(i).getItemList());
                         arrOrder.add(order);
                     }
-                    customAdapterOrderHistory.notifyDataSetChanged();
-                    Toast.makeText(orderHistoryActivity.this, "Call ok", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.e("API Error", "Response code: " + response.code() + ", message: " + response.message());
-                    Toast.makeText(orderHistoryActivity.this, "Call error", Toast.LENGTH_SHORT).show();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.e("API Error", t.getMessage(), t);
-                Toast.makeText(orderHistoryActivity.this, "Call error",Toast.LENGTH_SHORT).show();
-            }
-        });
-
+                @Override
+                public void onFailure(Call<List<Order>> call, Throwable t) {
+                    Log.e("API Error", t.getMessage(), t);
+                    Toast.makeText(orderHistoryActivity.this, "Call error",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         addClickView();
     }
     private void Anhxa() {
