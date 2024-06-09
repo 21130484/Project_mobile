@@ -22,7 +22,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmakeapp.R;
-import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.cartActivity;
 import com.example.handmakeapp.detail_product.DetailActivity;
@@ -182,20 +181,20 @@ public class Products extends AppCompatActivity {
     }
     public void actionNavigationBottom() {
         bottomNavigation = findViewById(R.id.bottom_navigation);
-        bottomNavigation.setSelectedItemId(R.id.list);
+        bottomNavigation.setSelectedItemId(R.id.home);
 
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if (id == R.id.list) {
+                if (id == R.id.account) {
                     return true;
                 } else if (id == R.id.home) {
                     startActivity(new Intent(getApplicationContext(), Home.class));
                     overridePendingTransition(0,0);
                     return true;
-                } else if (id == R.id.account) {
-                    startActivity(new Intent(getApplicationContext(), Account.class));
+                } else if (id == R.id.list) {
+                    startActivity(new Intent(getApplicationContext(), Products.class));
                     overridePendingTransition(0,0);
                     return true;
                 } else if (id == R.id.cart) {

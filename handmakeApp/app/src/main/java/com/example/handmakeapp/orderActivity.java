@@ -1,12 +1,15 @@
 package com.example.handmakeapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.view.LayoutInflater;
 import android.view.View;
 
 import android.widget.Button;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.example.handmakeapp.callAPI.CallAPI;
 
 import com.example.handmakeapp.model.CartItemDTO;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -96,6 +100,60 @@ public class orderActivity extends AppCompatActivity {
 //            }
 //        });
 //        Toast.makeText(order.this, "oke", Toast.LENGTH_SHORT).show();
+        btnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View view1 = LayoutInflater.from(orderActivity.this).inflate(R.layout.dialog_layout, null);
+                TextInputEditText editName = view1.findViewById(R.id.editName);
+                TextInputEditText editPhoneNumber = view1.findViewById(R.id.editPhoneNumber);
+                TextInputEditText editAddress = view1.findViewById(R.id.editAddress);
+                editName.setText(name.getText());
+                editPhoneNumber.setText(phoneNumber.getText());
+                editAddress.setText(address.getText());
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(orderActivity.this);
+                builder.setTitle("Thay đổi thông tin")
+                        .setView(view1)
+                        .setPositiveButton("Hoàn tất", null)
+                        .setNegativeButton("Hủy", null);
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+                Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+
+                // Set màu và kiểu chữ cho nút "Hoàn tất"
+                positiveButton.setTextColor(Color.GREEN);
+                positiveButton.setTextSize(18);
+
+
+                // Set màu và kiểu chữ cho nút "Hủy"
+                negativeButton.setTextColor(Color.GRAY);
+                negativeButton.setTextSize(18);
+
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String newName = editName.getText().toString();
+                        String newPhoneNumber = editPhoneNumber.getText().toString();
+                        String newAddress = editAddress.getText().toString();
+                        name.setText(newName);
+                        phoneNumber.setText(newPhoneNumber);
+                        address.setText(newAddress);
+
+                        alertDialog.dismiss();
+                    }
+                });
+
+                negativeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
     }
 
     private void Anhxa() {
