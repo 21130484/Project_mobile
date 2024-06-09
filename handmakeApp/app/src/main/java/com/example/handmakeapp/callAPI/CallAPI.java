@@ -71,6 +71,17 @@ public interface CallAPI {
         @Field("quantity") int quantity
         );
 
+    //Insert new Rate.
+    @FormUrlEncoded
+    @POST("addRate")
+    Call<Void> addRatings(
+            @Field("productId") int productId,
+            @Field("userId") String userId,
+            @Field("starRatings") int starRatings,
+            @Field("comment") String comment,
+            @Field("fullName") String fullName
+    );
+
     @GET("cart")
     Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
 

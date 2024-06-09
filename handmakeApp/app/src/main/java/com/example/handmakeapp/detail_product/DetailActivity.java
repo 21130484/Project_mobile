@@ -51,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
     ImageView btnBack;
     ImageView btnCart;
     //    Rating & Review.
-
+    
     private TextView ratingAvgTxt, ratingCountTxt;
     private TextView ratio1, ratio2, ratio3, ratio4, ratio5;
     private ProgressBar pb1, pb2, pb3, pb4, pb5;
@@ -228,6 +228,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RateDialog rateDialog = new RateDialog(DetailActivity.this);
+                rateDialog.setP(p);
                 rateDialog.setCancelable(false);
                 rateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
                 rateDialog.show();
