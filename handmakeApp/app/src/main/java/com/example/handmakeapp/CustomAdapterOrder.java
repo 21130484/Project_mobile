@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Order;
 
 import java.util.ArrayList;
