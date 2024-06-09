@@ -8,6 +8,7 @@ import com.example.handmakeapp.model.Order;
 import com.example.handmakeapp.model.OrderItem;
 import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
+import com.example.handmakeapp.model.Rate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -81,6 +82,7 @@ public interface CallAPI {
             @Field("comment") String comment,
             @Field("fullName") String fullName
     );
+
 
     @GET("cart")
     Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);

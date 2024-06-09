@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,12 +52,19 @@ public class DetailActivity extends AppCompatActivity {
     ImageView btnBack;
     ImageView btnCart;
     //    Rating & Review.
-    
+
     private TextView ratingAvgTxt, ratingCountTxt;
     private TextView ratio1, ratio2, ratio3, ratio4, ratio5;
     private ProgressBar pb1, pb2, pb3, pb4, pb5;
 
+    //Button. (Review & Xem chi tiết)
+
     private AppCompatButton ratingWriteBtn;
+
+    private AppCompatButton ratingSeeBtn;
+
+
+
 
 
 //   Sản phẩm topp
@@ -69,6 +77,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         btnBack = findViewById(R.id.imageLArrow);
         ratingWriteBtn = findViewById(R.id.ratingWrite);
+        ratingSeeBtn = findViewById(R.id.ratingSee);
         rv = findViewById(R.id.rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(layoutManager);
@@ -119,6 +128,8 @@ public class DetailActivity extends AppCompatActivity {
             titleTxt.setText(p.getName());
             priceTxt.setText(String.valueOf(format.format(p.getSellingPrice())));
             descriptionTxt.setText(p.getDescription());
+
+
 
 //            Rating & Review declare START.
             double rate1 = 0;
@@ -232,6 +243,17 @@ public class DetailActivity extends AppCompatActivity {
                 rateDialog.setCancelable(false);
                 rateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
                 rateDialog.show();
+            }
+        });
+
+        ratingSeeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(DetailActivity.this, ReviewActivity.class);
+                intent.putExtra("ProductDetail", p);
+                Toast.makeText(DetailActivity.this,"Ok "+p.getName(),Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
 

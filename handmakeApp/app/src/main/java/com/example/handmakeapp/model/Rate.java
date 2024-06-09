@@ -11,24 +11,24 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Rate implements Parcelable {
-    private String userName;
+    private String fullName;
     private int starRatings;
     private String comment;
     private long createDate;
 
-    public Rate(String userName, int starRatings, String comment, long createDate) {
-        this.userName = userName;
+    public Rate(String fullName, int starRatings, String comment, long createDate) {
+        this.fullName = fullName;
         this.starRatings = starRatings;
         this.comment = comment;
         this.createDate = createDate;
     }
 
     public String getUserName() {
-        return userName;
+        return fullName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.fullName = userName;
     }
 
     public int getStarRatings() {
@@ -58,7 +58,7 @@ public class Rate implements Parcelable {
     @Override
     public String toString() {
         return "Rate{" +
-                "userName='" + userName + '\'' +
+                "userName='" + fullName + '\'' +
                 ", starRatings=" + starRatings +
                 ", comment='" + comment + '\'' +
                 ", createDate=" + createDate +
@@ -72,13 +72,13 @@ public class Rate implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(userName);
+        dest.writeString(fullName);
         dest.writeInt(starRatings);
         dest.writeString(comment);
         dest.writeLong(createDate);
     }
     protected Rate(Parcel in){
-        userName = in.readString();
+        fullName = in.readString();
         starRatings = in.readInt();
         comment = in.readString();
         createDate = in.readLong();

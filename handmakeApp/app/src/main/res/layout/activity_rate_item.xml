@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="start"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/product_border"
+
+        >
+
+        <ImageView
+            android:id="@+id/img_item"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            android:background="@drawable/icon_background"
+            android:src="@drawable/user"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+>
+            <TextView
+                android:id="@+id/rateUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Anonymous"
+                android:textAlignment="textStart"
+                android:layout_marginRight="5dp"
+                android:textSize="10dp" />
+
+
+
+                <TextView
+                    android:id="@+id/rateDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Anonymous"
+                    android:textAlignment="textEnd"
+                    android:textSize="10dp"
+                    android:textStyle="italic"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/rateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="5"
+                android:textSize="15dp"
+                android:textColor="@color/pink"
+                android:textStyle="bold"
+
+                />
+
+                <ImageView
+                    android:layout_marginStart="5dp"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_gravity="center"
+                    />
+
+
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/rateComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="San pham nay tuyet voi qua ban oi!"
+                android:textSize="12dp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

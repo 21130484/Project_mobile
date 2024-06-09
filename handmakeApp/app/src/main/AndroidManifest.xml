@@ -102,6 +102,11 @@
             android:exported="false">
         </activity>
 
+        <activity android:name=".detail_product.ReviewActivity"
+            android:exported="false">
+
+        </activity>
+
 
 
 <!--        GIỎ HÀNG - ĐƠN HÀNG - THANH TOÁN -->
