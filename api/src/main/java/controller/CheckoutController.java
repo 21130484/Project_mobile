@@ -27,16 +27,18 @@ public class CheckoutController extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        int userId = Integer.parseInt(req.getParameter("userId"));
+        String userId = req.getParameter("userId");
         String address = req.getParameter("address");
+        String products = req.getParameter("productList");
         double shippingFee = Double.parseDouble(req.getParameter("shippingFee"));
         String note = req.getParameter("note");
         double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
-        String products = req.getParameter("productList");
-        Receiver receiver = userDAO.getUserById(userId);
-        Order isInsertedOrder = orderDAO.insertOrder(receiver, shippingFee, note, totalPrice, address);
-//        boolean isInsertedOrderDetails = orderDAO.insertOrder(receiver, shippingFee, note, totalPrice, address);
+        String consigneeName = req.getParameter("consigneeName");
+        String idOrder = orderDAO.insertOrder(userId, shippingFee, note, totalPrice, address, consigneeName);
+        if (!idOrder.isEmpty()) {
+            int execute = orderDAO.insertOrderDetail(idOrder, products);
+        }
 
-        objectMapper.writeValue(resp.getOutputStream(), isInsertedOrder);
+        objectMapper.writeValue(resp.getOutputStream(), idOrder);
     }
 }

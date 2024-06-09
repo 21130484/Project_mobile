@@ -1,11 +1,9 @@
 package com.example.handmakeapp.callAPI;
 
-import android.widget.TextView;
 import com.example.handmakeapp.model.Cart;
 import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
-import com.example.handmakeapp.model.OrderItem;
 import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.gson.Gson;
@@ -23,7 +21,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CallAPI {
@@ -61,7 +58,6 @@ public interface CallAPI {
     @GET("api-product")
     Call<ProductDetail> getPDById(@Query("action") String action, @Query("productId") int id);
 
-
     // INSERT CART
     @FormUrlEncoded
     @POST("cartItem")
@@ -70,6 +66,17 @@ public interface CallAPI {
         @Field("productId") int productId,
         @Field("quantity") int quantity
         );
+
+    //Insert new Rate.
+    @FormUrlEncoded
+    @POST("addRate")
+    Call<Void> addRatings(
+            @Field("productId") int productId,
+            @Field("userId") String userId,
+            @Field("starRatings") int starRatings,
+            @Field("comment") String comment,
+            @Field("fullName") String fullName
+    );
 
     @GET("cart")
     Call<List<CartItemDTO>> getAllCartItem(@Query("userId") int userId);
@@ -89,12 +96,13 @@ public interface CallAPI {
     @FormUrlEncoded
     @POST("checkout")
     Call<Void> checkout(
-            @Field("userId") int userId,
+            @Field("userId") String userId,
             @Field("address") String address,
             @Field("shippingFee") int shippingFee,
             @Field("note") String note,
-            @Field("productList") List<String> productList,
-            @Field("totalPrice") String totalPrice);
+            @Field("productList") String productList,
+            @Field("totalPrice") String totalPrice,
+            @Field("consigneeName") String consigneeName);
 
     @FormUrlEncoded
     @POST("addCart")
