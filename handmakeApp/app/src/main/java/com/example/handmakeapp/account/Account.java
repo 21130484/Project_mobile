@@ -19,17 +19,25 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Account extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
-    LinearLayout thongTin;
+    LinearLayout thongTin, datLaiMatKhau;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         actionNavigationBottom();
         thongTin = findViewById(R.id.thongTin);
+        datLaiMatKhau = findViewById(R.id.datLaiMatKhau);
         thongTin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Account.this, ManagerAccount.class);
+                startActivity(intent);
+            }
+        });
+        datLaiMatKhau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Account.this, ChangePassword.class);
                 startActivity(intent);
             }
         });

@@ -2,6 +2,7 @@ package com.example.handmakeapp.home_products.adapter;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,23 +46,34 @@ public class ProductListArrayAdapter extends ArrayAdapter<Product> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        convertView = inflater.inflate(layoutId, null);
-        Product item = mylist.get(position);
+        if (position < mylist.size()) {
+            if (convertView == null) {
+                LayoutInflater inflater = context.getLayoutInflater();
+                convertView = inflater.inflate(layoutId, null);
+            }
 
-        ImageView imgItem = convertView.findViewById(R.id.img_item);
-        TextView txtName = convertView.findViewById(R.id.txt_name);
-        TextView txtPrice = convertView.findViewById(R.id.txt_price);
+            Product item = mylist.get(position);
+            ImageView imgItem = convertView.findViewById(R.id.img_item);
+            TextView txtName = convertView.findViewById(R.id.txt_name);
+            TextView txtPrice = convertView.findViewById(R.id.txt_price);
 
+            if (productImage != null && !productImage.isEmpty() && productImage.get(item.getId()) != null) {
+                String imageUrl = productImage.get(item.getId()).get(0).getPath();
+                Picasso.get().load(imageUrl).into(imgItem);
+            }
+            txtName.setText(item.getName());
+            txtPrice.setText(CurrencyFormatter.formatCurrency(item.getSellingPrice()));
 
-        if (productImage != null && !productImage.isEmpty() && productImage.get(item.getId()) != null) {
-            String imageUrl = productImage.get(item.getId()).get(0).getPath();
-            Picasso.get().load(imageUrl).into(imgItem);
+            convertView.setVisibility(View.VISIBLE); // Ensure the view is visible
+            return convertView;
+        } else {
+            if (convertView == null) {
+                LayoutInflater inflater = context.getLayoutInflater();
+                convertView = inflater.inflate(layoutId, null);
+            }
+            convertView.setVisibility(View.GONE); // Hide the view
+            return convertView;
         }
-        txtName.setText(item.getName());
-        txtPrice.setText(CurrencyFormatter.formatCurrency(item.getSellingPrice()));
-
-        return convertView;
     }
 
     private class LoadImageTask extends AsyncTask<Integer, Void, HashMap<Integer, List<Image>>> {

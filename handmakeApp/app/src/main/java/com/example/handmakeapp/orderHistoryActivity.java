@@ -42,19 +42,19 @@ public class orderHistoryActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Order> orders = response.body();
                     Log.e("myOrder from API : ", orders.size() + " order");
-                    for (int i = 0 ; i < orders.size(); i++){
-                        Order order = new Order(orders.get(i).getId(), orders.get(i).getTotalPrice(),orders.get(i).getStatus(),orders.get(i).getConsigneeName(),orders.get(i).getConsigneePhoneNumber(),orders.get(i).getAddress(),orders.get(i).getItemList());
+                    for (int i = 0; i < orders.size(); i++) {
+                        Order order = new Order(orders.get(i).getId(), orders.get(i).getTotalPrice(), orders.get(i).getStatus(), orders.get(i).getConsigneeName(), orders.get(i).getConsigneePhoneNumber(), orders.get(i).getAddress(), orders.get(i).getItemList());
                         arrOrder.add(order);
                     }
                 }
+            }
 
                 @Override
                 public void onFailure(Call<List<Order>> call, Throwable t) {
                     Log.e("API Error", t.getMessage(), t);
                     Toast.makeText(orderHistoryActivity.this, "Call error",Toast.LENGTH_SHORT).show();
                 }
-            });
-        }
+        });
         addClickView();
     }
     private void Anhxa() {
