@@ -1,5 +1,6 @@
 package com.example.handmakeapp.home_products.adapter;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;

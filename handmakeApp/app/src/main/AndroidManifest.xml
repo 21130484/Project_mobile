@@ -35,10 +35,10 @@
             android:name=".login.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
-<!--        <intent-filter>-->
-<!--            <action android:name="android.intent.action.MAIN" />-->
-<!--            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--        </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -80,7 +80,10 @@
             </intent-filter>
         </activity>
 
-
+        <activity
+            android:name=".orderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
 <!--        CHI TIẾT SẢN PHẨM   -->
 
         <activity android:name=".detail_product.RateDialog"
@@ -99,6 +102,11 @@
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 
+        <activity android:name=".detail_product.ReviewActivity"
+            android:exported="false">
+
+        </activity>
+
 
 
 <!--        GIỎ HÀNG - ĐƠN HÀNG - THANH TOÁN -->
@@ -109,11 +117,6 @@
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 
-        <activity
-            android:name=".orderActivity"
-            android:exported="false"
-            android:theme="@style/Theme.HandmakeApp.NoActionBar">
-        </activity>
         <activity
             android:name=".orderHistoryActivity"
             android:exported="false"

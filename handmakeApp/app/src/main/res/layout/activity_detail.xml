@@ -335,9 +335,6 @@
                         android:layout_height="25dp"
                         android:background="@drawable/red_button_background"
                         android:gravity="center"
-
-
-
                         android:text="Xem chi tiết"
                         android:textColor="@color/white"
                         android:textSize="10sp"
@@ -593,7 +590,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="30dp"
                 />
         </LinearLayout>
     </ScrollView>
