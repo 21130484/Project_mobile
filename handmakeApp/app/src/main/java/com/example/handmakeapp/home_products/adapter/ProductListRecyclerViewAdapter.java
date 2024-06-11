@@ -15,21 +15,18 @@ import com.example.handmakeapp.CurrencyFormatter;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Image;
-import com.example.handmakeapp.model.Product;
+import com.example.handmakeapp.model.ProductDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<ProductListRecyclerViewAdapter.MyViewHolder> {
-    private List<Product> products;
+    private List<ProductDetail> products;
 
-    HashMap<Integer, List<Image>> productImage;
-
-    public ProductListRecyclerViewAdapter(List<Product> products) {
+    public ProductListRecyclerViewAdapter(List<ProductDetail> products) {
 
         this.products = products;
-        new LoadImageTask(products).execute();
     }
 
     @NonNull
@@ -41,9 +38,9 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Product product = products.get(position);
-        if (productImage != null && !productImage.isEmpty() && productImage.get(product.getId()) != null) {
-            String imageUrl = productImage.get(product.getId()).get(0).getPath();
+        ProductDetail product = products.get(position);
+        if (product != null) {
+            String imageUrl = product.getImageList().get(0).getPath();
             Picasso.get().load(imageUrl).into(holder.imgItem);
         }
         holder.txtName.setText(product.getName());
@@ -65,32 +62,6 @@ public class ProductListRecyclerViewAdapter extends RecyclerView.Adapter<Product
             imgItem = itemView.findViewById(R.id.img_item);
             txtName = itemView.findViewById(R.id.txt_name);
             txtPrice = itemView.findViewById(R.id.txt_price);
-        }
-    }
-
-    private class LoadImageTask extends AsyncTask<Integer, Void, HashMap<Integer, List<Image>>> {
-        List<Product> getIdList;
-
-        public LoadImageTask(List<Product> getIdList) {
-            this.getIdList = getIdList;
-        }
-
-        @Override
-        protected HashMap<Integer, List<Image>> doInBackground(Integer... params) {
-            productImage = new HashMap<>();
-            for (Product p : getIdList) {
-                int productId = p.getId();
-                List<Image> images = ProductMapping.getInstance().getImageByIdProduct(productId);
-                productImage.put(productId, images);
-            }
-            return productImage;
-        }
-
-        @Override
-        protected void onPostExecute(HashMap<Integer, List<Image>> map) {
-            if (map != null && !map.isEmpty()) {
-
-            }
         }
     }
 }

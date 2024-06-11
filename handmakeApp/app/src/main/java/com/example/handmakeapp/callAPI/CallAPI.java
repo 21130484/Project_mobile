@@ -4,7 +4,6 @@ import com.example.handmakeapp.model.Cart;
 import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
-import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.example.handmakeapp.model.Rate;
 import com.google.gson.Gson;
@@ -48,8 +47,6 @@ public interface CallAPI {
     @GET("order")
     Call<List<Order>> getAllOrder(@Query("userId") String userId);
 
-    @GET("api-product?action=getAllProducts")
-    Call<List<Product>> getAllProduct();
 
     @GET("api-product?action=getImageByProductId")
     Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);

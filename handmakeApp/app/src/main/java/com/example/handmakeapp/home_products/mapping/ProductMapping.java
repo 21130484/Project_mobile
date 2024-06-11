@@ -5,7 +5,8 @@ import android.util.Log;
 import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.Image;
-import com.example.handmakeapp.model.Product;
+import com.example.handmakeapp.model.ProductDetail;
+import com.example.handmakeapp.model.Rate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,7 @@ public class ProductMapping {
         return instance;
     }
 
-    public void mappingProductObject(OkHttpClient client, Request request, List<Product> result) {
+    public void mappingProductObject(OkHttpClient client, Request request, List<ProductDetail> result) {
         try {
             Response resp = client.newCall(request).execute();
             String data = resp.body().string();
@@ -38,72 +39,65 @@ public class ProductMapping {
                 int id = jsonObject.getInt("id");
                 String name = jsonObject.getString("name");
                 String description = jsonObject.getString("description");
-                double costPrice = jsonObject.getDouble("costPrice");
-                double sellingPrice = jsonObject.getDouble("sellingPrice");
-                int quantity = jsonObject.getInt("quantity");
-                int soldout = jsonObject.getInt("soldout");
+                int sellingPrice = jsonObject.getInt("sellingPrice");
+                int stock = jsonObject.getInt("stock");
                 int categoryId = jsonObject.getInt("categoryId");
                 int discountId = jsonObject.getInt("discountId");
                 int isSale = jsonObject.getInt("isSale");
-                result.add(new Product(id, name, description, costPrice, sellingPrice, quantity, soldout, categoryId, isSale));
+
+                // Mapping imageList
+                JSONArray imageArray = jsonObject.getJSONArray("imageList");
+                List<Image> imageList = new ArrayList<>();
+                for (int j = 0; j < imageArray.length(); j++) {
+                    JSONObject imageObject = imageArray.getJSONObject(j);
+                    int imageId = imageObject.getInt("id");
+                    String imageName = imageObject.getString("name");
+                    String imagePath = imageObject.getString("path");
+                    imageList.add(new Image(imageId, imageName, CallAPI.getAbsoluteURL() + imagePath, id)); // Assuming Image constructor
+                }
+
+                // Mapping rateList
+                JSONArray rateArray = jsonObject.getJSONArray("rateList");
+                List<Rate> rateList = new ArrayList<>();
+                for (int k = 0; k < rateArray.length(); k++) {
+                    JSONObject rateObject = rateArray.getJSONObject(k);
+                    String fullName = rateObject.getString("fullName");
+                    int starRatings = rateObject.getInt("starRatings");
+                    String comment = rateObject.getString("comment");
+                    long createDate = rateObject.getLong("createDate");
+                    rateList.add(new Rate(fullName, starRatings, comment, createDate)); // Assuming Rate constructor
+                }
+                result.add(new ProductDetail(id, name, description, sellingPrice, stock, categoryId, discountId, isSale, imageList, rateList)); // Assuming ProductDetail constructor
             }
         } catch (IOException | JSONException e) {
             Log.e("error", e.toString());
         }
     }
 
-    public List<Product> getAllProduct() {
+
+    public List<ProductDetail> getAllProduct() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getAllProducts").build();
-        List<Product> products = new ArrayList<>();
+        List<ProductDetail> products = new ArrayList<>();
         mappingProductObject(client, request, products);
-        Log.e("url", CallAPI.getAbsoluteURL() + "/api-product?action=getAllProducts => "+products.size());
+        Log.e("url", CallAPI.getAbsoluteURL() + "/api-product?action=getAllProducts => " + products.size());
         return products;
     }
 
-    public List<Product> getTopSoldoutProduct() {
+    public List<ProductDetail> getTopSoldoutProduct() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getTopSoldoutProducts").build();
-        List<Product> products = new ArrayList<>();
+        List<ProductDetail> products = new ArrayList<>();
         mappingProductObject(client, request, products);
         return products;
     }
 
-    public List<Product> getDiscountProducts() {
+    public List<ProductDetail> getDiscountProducts() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getDiscountProducts").build();
-        List<Product> products = new ArrayList<>();
+        List<ProductDetail> products = new ArrayList<>();
         mappingProductObject(client, request, products);
         return products;
-    }
-
-    public List<Image> getImageByIdProduct(int productId) {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(CallAPI.getAbsoluteURL() + "/api-product?action=getImageByProductId&productId=" + productId).build();
-        List<Image> images = new ArrayList<>();
-        try {
-            Response resp = client.newCall(request).execute();
-            String data = resp.body().string();
-            JSONArray jsonArray = new JSONArray(data);
-            try {
-                resp = client.newCall(request).execute();
-                data = resp.body().string();
-                jsonArray = new JSONArray(data);
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    int id = jsonObject.getInt("id");
-                    String name = jsonObject.getString("name");
-                    String path = jsonObject.getString("path");
-
-                    images.add(new Image(id, name, CallAPI.getAbsoluteURL() + path, productId));
-                }
-            } catch (Exception e) {
-                Log.e("get image error", e.toString());
-            }
-        } catch (IOException | JSONException e) {
-            Log.e("error", e.toString());
-        }
-        return images;
     }
 
     public List<Category> getCategories() {
