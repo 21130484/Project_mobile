@@ -29,7 +29,6 @@ import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Category;
 
 import com.example.handmakeapp.model.Image;
-import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.example.handmakeapp.model.Rate;
 
@@ -249,10 +248,10 @@ public class DetailActivity extends AppCompatActivity {
         return 100 - a - b - c - d;
     }
 
-    private class NetworkTask extends AsyncTask<Void, Void, List<Product>> {
+    private class NetworkTask extends AsyncTask<Void, Void, List<ProductDetail>> {
         @Override
-        protected List<Product> doInBackground(Void... voids) {
-            List<Product> recommentProducts = ProductMapping.getInstance().getAllProduct();
+        protected List<ProductDetail> doInBackground(Void... voids) {
+            List<ProductDetail> recommentProducts = ProductMapping.getInstance().getAllProduct();
             List<Category> t = ProductMapping.getInstance().getCategories();
             Log.e("huhu", recommentProducts.size()+"");
             Log.e("haha", t.size()+"");
@@ -260,7 +259,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Product> products) {
+        protected void onPostExecute(List<ProductDetail> products) {
             ProductListRecyclerViewAdapter adapter = new ProductListRecyclerViewAdapter(products);
             rv.setAdapter(adapter);
         }

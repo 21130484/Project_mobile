@@ -4,7 +4,6 @@ import com.example.handmakeapp.model.Cart;
 import com.example.handmakeapp.model.CartItemDTO;
 import com.example.handmakeapp.model.Image;
 import com.example.handmakeapp.model.Order;
-import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,7 +24,7 @@ import retrofit2.http.Query;
 
 public interface CallAPI {
 
-    public final static String SERVER_IP = "192.168.88.252".trim();//ipconfig
+    public final static String SERVER_IP = "192.168.1.8".trim();//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
@@ -47,8 +46,6 @@ public interface CallAPI {
     @GET("order")
     Call<List<Order>> getAllOrder(@Query("userId") String userId);
 
-    @GET("api-product?action=getAllProducts")
-    Call<List<Product>> getAllProduct();
 
     @GET("api-product?action=getImageByProductId")
     Call<List<Image>> getImageByIdProduct(@Query("productId") int productId);

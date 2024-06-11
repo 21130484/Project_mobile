@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +25,6 @@ import com.example.handmakeapp.home_products.adapter.SlideAdapter;
 import com.example.handmakeapp.home_products.mapping.BannerMapping;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.BannerItem;
-import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -41,8 +38,8 @@ import retrofit2.Response;
 public class Home extends AppCompatActivity {
     RecyclerView rv_1;
     RecyclerView rv_2;
-    List<Product> topSoldoutProducts;
-    List<Product> discountProducts;
+    List<ProductDetail> topSoldoutProducts;
+    List<ProductDetail> discountProducts;
 
     ImageButton btn_toCart;
     ProductListRecyclerViewAdapter adapter;
@@ -83,9 +80,9 @@ public class Home extends AppCompatActivity {
         actionNavigationBottom();
     }
 
-    private class NetworkTask extends AsyncTask<Void, Void, List<Product>> {
+    private class NetworkTask extends AsyncTask<Void, Void, List<ProductDetail>> {
         @Override
-        protected List<Product> doInBackground(Void... voids) {
+        protected List<ProductDetail> doInBackground(Void... voids) {
             bannerItems = BannerMapping.getInstance().getAll();
             topSoldoutProducts = ProductMapping.getInstance().getTopSoldoutProduct();
             discountProducts = ProductMapping.getInstance().getDiscountProducts();
@@ -93,7 +90,7 @@ public class Home extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Product> products) {
+        protected void onPostExecute(List<ProductDetail> products) {
             Log.e("banners", "Size of bannerItems: " + bannerItems.size());
 
             adapter = new ProductListRecyclerViewAdapter(topSoldoutProducts);
@@ -163,7 +160,7 @@ public class Home extends AppCompatActivity {
         });
     }
 
-    public void addListenerForRecyclerView(RecyclerView recyclerView, List<Product> mapProducts) {
+    public void addListenerForRecyclerView(RecyclerView recyclerView, List<ProductDetail> mapProducts) {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
