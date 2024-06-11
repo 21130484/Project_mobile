@@ -26,16 +26,13 @@ import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.cartActivity;
 import com.example.handmakeapp.detail_product.DetailActivity;
-import com.example.handmakeapp.detail_product.Test_Activity;
 
 import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.home_products.adapter.ProductListArrayAdapter;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
-import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +50,7 @@ public class Products extends AppCompatActivity {
     List<String> options = new ArrayList<>();
     HashMap<Integer, Integer> categoryIdMapping = new HashMap<>();//vị trí - categoryId
 
-    List<Product> allProducts;
+    List<ProductDetail> allProducts;
     ProductListArrayAdapter gridViewAdapter;
     BottomNavigationView bottomNavigation;
 
@@ -98,7 +95,7 @@ public class Products extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectOption = options.get(i);//tên danh mục
-                List<Product> filterList = null;
+                List<ProductDetail> filterList = null;
                 if (i == 0) {
                     filterList = allProducts;
                     filterCategory(filterList);
@@ -134,31 +131,33 @@ public class Products extends AppCompatActivity {
         actionNavigationBottom();
     }
 
-    private void filterCategory(List<Product> filterList) {
+    private void filterCategory(List<ProductDetail> filterList) {
         gridViewAdapter = new ProductListArrayAdapter(Products.this, R.layout.activity_product_item, filterList);
         gv.setAdapter(gridViewAdapter);
     }
 
     private void filterText(String newText) {
-        List<Product> filterList = new ArrayList<>();
+        List<ProductDetail> filterList = new ArrayList<>();
         if (allProducts != null) {
-            for (Product p : allProducts) {
+            for (ProductDetail p : allProducts) {
                 if (p.getName().toLowerCase().contains(newText.toLowerCase())) {
                     filterList.add(p);
                 }
             }
             if (filterList.isEmpty()) {
+                Log.e("filterList 1", filterList.size()+"");
                 gridViewAdapter.setFilterList(filterList);
-                Toast.makeText(this, "Không có data", LENGTH_LONG).show();
+                Toast.makeText(this, "Không có sản phẩm tương ứng", LENGTH_LONG).show();
             } else {
+                Log.e("filterList 2", filterList.size()+"");
                 gridViewAdapter.setFilterList(filterList);
             }
         }
     }
 
-    private class NetworkTask extends AsyncTask<Void, Void, List<Product>> {
+    private class NetworkTask extends AsyncTask<Void, Void, List<ProductDetail>> {
         @Override
-        protected List<Product> doInBackground(Void... voids) {
+        protected List<ProductDetail> doInBackground(Void... voids) {
             categories = ProductMapping.getInstance().getCategories();
             allProducts = ProductMapping.getInstance().getAllProduct();
             if (categories != null && !categories.isEmpty()) {
@@ -171,7 +170,7 @@ public class Products extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Product> products) {
+        protected void onPostExecute(List<ProductDetail> products) {
             gridViewAdapter = new ProductListArrayAdapter(Products.this, R.layout.activity_product_item, products);
             gv.setAdapter(gridViewAdapter);
 
