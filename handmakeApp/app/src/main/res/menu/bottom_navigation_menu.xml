@@ -13,10 +13,6 @@
         android:title="Sản phẩm"
         android:icon="@drawable/baseline_list_24"/>
     <item
-        android:id="@+id/notify"
-        android:title="Thông báo"
-        android:icon="@drawable/baseline_add_alert_24"/>
-    <item
         android:id="@+id/account"
         android:title="Tài khoản"
         android:icon="@drawable/baseline_person_24"/>

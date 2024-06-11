@@ -46,7 +46,7 @@ public class OrderDAO {
         return JDBIConnection.me().connect().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bind(0,totalPrice)
-                    .bind(1,"Đang giao")
+                    .bind(1,"Chờ xác nhận")
                     .bind(2,consigneeName)
                     .bind(3, phoneNumber)
                     .bind(4,address)

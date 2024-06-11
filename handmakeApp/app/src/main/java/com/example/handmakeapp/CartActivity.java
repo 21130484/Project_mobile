@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class cartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity {
 
     Button next;
     ImageButton removeItem;
@@ -53,6 +53,9 @@ public class cartActivity extends AppCompatActivity {
         actionNavigationBottom();
 
         if (user != null) {
+
+            Log.e("QUIII", user.getDisplayName());
+
             CallAPI.api.getAllCartItem(user.getUid()).enqueue(new Callback<List<CartItemDTO>>() {
                 @Override
                 public void onResponse(Call<List<CartItemDTO>> call, Response<List<CartItemDTO>> response) {
@@ -77,7 +80,7 @@ public class cartActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<List<CartItemDTO>> call, Throwable t) {
                     Log.e("API Error", t.getMessage(), t);
-                    Toast.makeText(cartActivity.this, "Call error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, "Call error",Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -88,11 +91,13 @@ public class cartActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(cartActivity.this,orderActivity.class);
+                Intent intent1 = new Intent(CartActivity.this, OrderActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("cartItems", arrCartItems);
                 intent1.putExtras(bundle);
-                intent1.putExtra("totalPrice", totalPrice.getText().toString());
+
+                int price = convertVNDtoInt(totalPrice.getText().toString());
+                intent1.putExtra("totalPrice", price+"");
                 startActivity(intent1);
             }
         });
@@ -100,7 +105,7 @@ public class cartActivity extends AppCompatActivity {
     }
 
     private void updateTotalPrice() {
-        double total = 0;
+        int total = 0;
         for (CartItemDTO item : arrCartItems) {
             total += item.getSellingPrice() * item.getQuantity();
         }
@@ -113,7 +118,7 @@ public class cartActivity extends AppCompatActivity {
         totalPrice = findViewById(R.id.totalPrice);
         lv = findViewById(R.id.lv);
         arrCartItems = new ArrayList<>();
-        customAdapterCart = new CustomAdapterCart(cartActivity.this, arrCartItems,totalPrice);
+        customAdapterCart = new CustomAdapterCart(CartActivity.this, arrCartItems,totalPrice);
         lv.setAdapter(customAdapterCart);
         thanhToan = findViewById(R.id.thanhToan);
         textNotify = findViewById(R.id.textNotify);
@@ -121,6 +126,7 @@ public class cartActivity extends AppCompatActivity {
     public void actionNavigationBottom() {
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setSelectedItemId(R.id.cart);
+
 
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -144,5 +150,10 @@ public class cartActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public static int convertVNDtoInt(String priceVND) {
+        String numerics = priceVND.replaceAll("[^\\d]", "");
+        return Integer.parseInt(numerics);
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Order {
     private int id;
-    private int userId;
+    private String userId;
     private double totalPrice;
     private Timestamp orderDate;
     private String status;

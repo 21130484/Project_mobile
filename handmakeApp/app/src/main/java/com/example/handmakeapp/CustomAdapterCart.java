@@ -16,7 +16,10 @@ import com.bumptech.glide.Glide;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.CartItemDTO;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +29,7 @@ public class CustomAdapterCart extends BaseAdapter {
     Context context;
     ArrayList<CartItemDTO> arrayList;
     TextView totalPriceTextView;
+
 
     public CustomAdapterCart(Context context, ArrayList<CartItemDTO> arrayList, TextView totalPriceTextView) {
         this.context = context;
@@ -153,10 +157,14 @@ public class CustomAdapterCart extends BaseAdapter {
         return convertView;
     }
     private void updateTotalPrice() {
-        double total = 0;
+        int total = 0;
         for (CartItemDTO item : arrayList) {
             total += item.getSellingPrice() * item.getQuantity();
         }
-        totalPriceTextView.setText(String.valueOf(total));
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        format.setMaximumFractionDigits(0);
+        format.setCurrency(Currency.getInstance("VND"));
+
+        totalPriceTextView.setText(format.format(total));
     }
 }

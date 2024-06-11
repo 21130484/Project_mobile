@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.model.Order;
 import com.example.handmakeapp.model.OrderItem;
-import com.example.handmakeapp.orderHistoryActivity;
+import com.example.handmakeapp.OrderHistoryActivity;
 
 import java.util.ArrayList;
 
@@ -101,7 +100,7 @@ public class OrderDetailActitvity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Order> call, Response<Order> response) {
                         Order order = response.body();
-                        Intent intent = new Intent(OrderDetailActitvity.this, orderHistoryActivity.class);
+                        Intent intent = new Intent(OrderDetailActitvity.this, OrderHistoryActivity.class);
                         startActivity(intent);
                     }
 

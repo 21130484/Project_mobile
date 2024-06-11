@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.cartActivity;
+import com.example.handmakeapp.CartActivity;
 import com.example.handmakeapp.detail_product.DetailActivity;
 import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
 import com.example.handmakeapp.home_products.adapter.RecyclerItemClickListener;
@@ -65,7 +63,7 @@ public class Home extends AppCompatActivity {
         btn_toCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, cartActivity.class);
+                Intent intent = new Intent(Home.this, CartActivity.class);
                 startActivity(intent);
             }
         });
@@ -129,7 +127,7 @@ public class Home extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (id == R.id.cart) {
-                    startActivity(new Intent(getApplicationContext(), cartActivity.class));
+                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }

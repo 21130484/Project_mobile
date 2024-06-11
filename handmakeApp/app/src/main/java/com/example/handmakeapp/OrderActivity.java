@@ -1,6 +1,5 @@
 package com.example.handmakeapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,12 +30,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class orderActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity {
     TextView price, totalPrice, address, note, feeShip, phoneNumber, name;
     ArrayList<CartItemDTO> cartItems;
     List<String> arrProductId = new ArrayList<>();
     Button back, btnChange, btnOrder;
     ListView listView;
+    int total;
     CustomAdapterOrder customAdapterOrder;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -48,11 +48,10 @@ public class orderActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         List<CartItemDTO> data = new ArrayList<>();
         if (bundle != null) {
-            String total = getIntent().getStringExtra("totalPrice");
-            Double currentTotal = Double.parseDouble(total);
-            price.setText(CurrencyFormatter.formatCurrency(currentTotal));
-            feeShip.setText("10.000đ");
-            totalPrice.setText(CurrencyFormatter.formatCurrency(currentTotal+10));
+            total = Integer.parseInt(getIntent().getStringExtra("totalPrice"));
+            price.setText(CurrencyFormatter.formatCurrency(total));
+            feeShip.setText("30.000đ");
+            totalPrice.setText(CurrencyFormatter.formatCurrency(total+30000));
             data = (ArrayList<CartItemDTO>) bundle.getSerializable("cartItems");
         }
         for (int i = 0; i < data.size(); i++){
@@ -61,8 +60,8 @@ public class orderActivity extends AppCompatActivity {
         }
         Log.e("cartItems : ", cartItems.size() + "");
         customAdapterOrder.notifyDataSetChanged();
-        Toast.makeText(orderActivity.this, "Ok", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(OrderActivity.this, "Ok", Toast.LENGTH_SHORT).show();
+        name.setText(user.getDisplayName());
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,20 +73,22 @@ public class orderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (user != null) {
                     CallAPI.api.checkout(user.getUid(), address.getText().toString(),
-                            10000, note.getText().toString(), arrProductId.toString(),
-                            totalPrice.getText().toString(),
+                            30000, note.getText().toString(), arrProductId.toString(),
+                            total+30000 + "",
                             name.getText().toString(), phoneNumber.getText().toString()).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             customAdapterOrder.notifyDataSetChanged();
-                            Intent intent = new Intent(orderActivity.this, orderHistoryActivity.class);
+                            response.body();
+                            Intent intent = new Intent(OrderActivity.this, OrderHistoryActivity.class);
                             startActivity(intent);
-                            Toast.makeText(orderActivity.this, "Add success", Toast.LENGTH_SHORT).show();
+                            finish();
+                            Toast.makeText(OrderActivity.this, "Add success", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(orderActivity.this, "Add error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(OrderActivity.this, "Add error", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -103,7 +104,7 @@ public class orderActivity extends AppCompatActivity {
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View view1 = LayoutInflater.from(orderActivity.this).inflate(R.layout.dialog_layout, null);
+                View view1 = LayoutInflater.from(OrderActivity.this).inflate(R.layout.dialog_layout, null);
                 TextInputEditText editName = view1.findViewById(R.id.editName);
                 TextInputEditText editPhoneNumber = view1.findViewById(R.id.editPhoneNumber);
                 TextInputEditText editAddress = view1.findViewById(R.id.editAddress);
@@ -111,7 +112,7 @@ public class orderActivity extends AppCompatActivity {
                 editPhoneNumber.setText(phoneNumber.getText());
                 editAddress.setText(address.getText());
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(orderActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this);
                 builder.setTitle("Thay đổi thông tin")
                         .setView(view1)
                         .setPositiveButton("Hoàn tất", null)
@@ -167,7 +168,7 @@ public class orderActivity extends AppCompatActivity {
         btnOrder = findViewById(R.id.doneBtn);
         listView = findViewById(R.id.lv);
         cartItems = new ArrayList<>();
-        customAdapterOrder = new CustomAdapterOrder(orderActivity.this, cartItems);
+        customAdapterOrder = new CustomAdapterOrder(OrderActivity.this, cartItems);
         listView.setAdapter(customAdapterOrder);
         phoneNumber = findViewById(R.id.phoneNumber);
         name = findViewById(R.id.name);

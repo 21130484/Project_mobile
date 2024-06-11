@@ -7,11 +7,11 @@ public class CartItemDTO implements Serializable {
     private int cartId;
     private String name;
     private String description;
-    private double sellingPrice;
+    private int sellingPrice;
     private String path;
     private int quantity;
 
-    public CartItemDTO(int id, int cartId, String name, String description, double sellingPrice, String path, int quantity) {
+    public CartItemDTO(int id, int cartId, String name, String description, int sellingPrice, String path, int quantity) {
         this.id = id;
         this.cartId = cartId;
         this.name = name;
@@ -56,11 +56,11 @@ public class CartItemDTO implements Serializable {
         this.description = description;
     }
 
-    public double getSellingPrice() {
+    public int getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(double sellingPrice) {
+    public void setSellingPrice(int sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 

@@ -24,7 +24,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.cartActivity;
+import com.example.handmakeapp.CartActivity;
 import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Category;
@@ -93,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DetailActivity.this, cartActivity.class);
+                Intent i = new Intent(DetailActivity.this, CartActivity.class);
                 startActivity(i);
             }
         })

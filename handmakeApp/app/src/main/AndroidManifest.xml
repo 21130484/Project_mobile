@@ -78,7 +78,7 @@
         </activity>
 
         <activity
-            android:name=".orderActivity"
+            android:name=".OrderActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
 <!--        CHI TIẾT SẢN PHẨM   -->
@@ -109,13 +109,13 @@
 <!--        GIỎ HÀNG - ĐƠN HÀNG - THANH TOÁN -->
 
         <activity
-            android:name=".cartActivity"
+            android:name=".CartActivity"
             android:exported="true"
             android:theme="@style/Theme.HandmakeApp.NoActionBar">
         </activity>
 
         <activity
-            android:name=".orderHistoryActivity"
+            android:name=".OrderHistoryActivity"
             android:exported="false"
             android:theme="@style/Theme.HandmakeApp.NoActionBar"/>
         <activity

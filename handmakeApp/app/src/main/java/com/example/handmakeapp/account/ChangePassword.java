@@ -46,6 +46,8 @@ public class ChangePassword extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             AndroidToast.showToast(ChangePassword.this, "Thay đổi mật khẩu thành công");
+                                            Intent intent = new Intent(ChangePassword.this, ManagerAccount.class);
+                                            startActivity(intent);
                                         }
                                     }
                                 });
@@ -71,6 +73,7 @@ public class ChangePassword extends AppCompatActivity {
                                                 passwordOld.setVisibility(View.GONE);
                                                 passwordNew.setVisibility(View.GONE);
                                                 passwordNew_repeat.setVisibility(View.GONE);
+
                                             } else {
                                                 AndroidToast.showToast(ChangePassword.this, "Mật khẩu cũ không đúng");
                                             }

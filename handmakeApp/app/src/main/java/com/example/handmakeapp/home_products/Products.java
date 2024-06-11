@@ -24,9 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.account.Account;
 import com.example.handmakeapp.callAPI.CallAPI;
-import com.example.handmakeapp.cartActivity;
+import com.example.handmakeapp.CartActivity;
 import com.example.handmakeapp.detail_product.DetailActivity;
-import com.example.handmakeapp.detail_product.Test_Activity;
 
 import com.example.handmakeapp.model.Category;
 import com.example.handmakeapp.home_products.adapter.ProductListArrayAdapter;
@@ -35,7 +34,6 @@ import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,7 +74,7 @@ public class Products extends AppCompatActivity {
         btn_toCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Products.this, cartActivity.class);
+                Intent intent = new Intent(Products.this, CartActivity.class);
                 startActivity(intent);
             }
         });
@@ -199,7 +197,7 @@ public class Products extends AppCompatActivity {
                     overridePendingTransition(0,0);
                     return true;
                 } else if (id == R.id.cart) {
-                    startActivity(new Intent(getApplicationContext(), cartActivity.class));
+                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
                     overridePendingTransition(0,0);
                     return true;
                 }
