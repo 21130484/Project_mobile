@@ -94,14 +94,14 @@ public class CustomAdapterCart extends BaseAdapter {
                     @Override
                     public void onResponse(Call<CartItemDTO> call, Response<CartItemDTO> response) {
                         boolean isUpdated = response.isSuccessful();
+                        response.body();
                         if (isUpdated) {
-                            Toast.makeText(context, "Update success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Thành công", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<CartItemDTO> call, Throwable t) {
-                        Toast.makeText(context, "Update error", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -120,12 +120,12 @@ public class CustomAdapterCart extends BaseAdapter {
                     CallAPI.api.updateQuantity(currentQuantity, cartItems.getCartId(), cartItems.getId()).enqueue(new Callback<CartItemDTO>() {
                         @Override
                         public void onResponse(Call<CartItemDTO> call, Response<CartItemDTO> response) {
-                            Toast.makeText(context, "Update success", Toast.LENGTH_SHORT).show();
+                            response.body();
+                            Toast.makeText(context, "Thành công", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<CartItemDTO> call, Throwable t) {
-                            Toast.makeText(context, "Update error", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -144,12 +144,13 @@ public class CustomAdapterCart extends BaseAdapter {
                 CallAPI.api.deleteItem(itemToRemove.getCartId(), itemToRemove.getId()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(context, "Remove success", Toast.LENGTH_SHORT).show();
+                        response.body();
+                        Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(context, "Remove error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Xóa sản phẩm thất bại", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

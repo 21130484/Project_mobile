@@ -41,8 +41,6 @@ public class Home extends AppCompatActivity {
     RecyclerView rv_2;
     List<ProductDetail> topSoldoutProducts;
     List<ProductDetail> discountProducts;
-
-    ImageButton btn_toCart;
     ProductListRecyclerViewAdapter adapter;
     ProductListRecyclerViewAdapter adapter_2;
 
@@ -57,15 +55,6 @@ public class Home extends AppCompatActivity {
         rv_1 = findViewById(R.id.rv_1);
         rv_2 = findViewById(R.id.rv_2);
         viewPager2 = findViewById(R.id.viewPager);
-        btn_toCart = findViewById(R.id.btn_toCart);
-
-        btn_toCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, CartActivity.class);
-                startActivity(intent);
-            }
-        });
 
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv_1.setLayoutManager(layoutManager1);
@@ -172,9 +161,7 @@ public class Home extends AppCompatActivity {
 
             @Override
             public void onLongItemClick(View view, int position) {
-//                Toast.makeText(Home.this, "onLongItemClick", Toast.LENGTH_SHORT).show();
-                int idt = mapProducts.get(position).getId();
-                getProductById(idt);
+
             }
         }));
     }

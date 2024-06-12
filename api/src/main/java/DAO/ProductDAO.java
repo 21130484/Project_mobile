@@ -4,6 +4,7 @@ import DBConnection.JDBIConnection;
 import model.Category;
 import model.Product;
 import model.ProductDetail;
+import model.Rate;
 
 import java.util.Collections;
 import java.util.List;
@@ -69,6 +70,8 @@ public class ProductDAO {
         );
         return p;
     }
+
+
     public static void main(String[] args) {
         System.out.println(getAll());
     }

@@ -99,6 +99,7 @@ public class CartActivity extends AppCompatActivity {
                 int price = convertVNDtoInt(totalPrice.getText().toString());
                 intent1.putExtra("totalPrice", price+"");
                 startActivity(intent1);
+                finish();
             }
         });
 //        Toast.makeText(order.this, "oke", Toast.LENGTH_SHORT).show();

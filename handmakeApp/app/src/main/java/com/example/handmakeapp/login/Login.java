@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Login extends AppCompatActivity {
     EditText etEmail,etPassword;
     Button btnLogin;
-    TextView etPasswordForget,signUp;
+    TextView signUp;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -50,19 +50,12 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        etPasswordForget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToForgotPassword();
-            }
-        });
     }
 
     private void Anhxa() {
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
-        etPasswordForget = (TextView) findViewById(R.id.etPasswordForget);
         signUp = (TextView) findViewById(R.id.signUp);
         progressDialog = new ProgressDialog(this);
     }
@@ -80,7 +73,7 @@ public class Login extends AppCompatActivity {
                             goToHome();
                             finishAffinity();
                         } else {
-                            AndroidToast.showToast(Login.this, "Authentication failed.");
+                            AndroidToast.showToast(Login.this, "Đăng nhập thất bại.");
                         }
                     }
                 });

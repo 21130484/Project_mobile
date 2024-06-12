@@ -18,7 +18,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="#5CE3CF"
+                android:background="@color/teal"
                 android:gravity="bottom|end">
 
                 <TextView
@@ -31,19 +31,6 @@
                     android:textAlignment="center"
                     android:textSize="40dp" />
 
-                <ImageButton
-                    android:id="@+id/btn_toCart"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="#5CE3CF"
-                    android:scaleType="centerInside"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.27"
-                    app:layout_constraintStart_toEndOf="@+id/searchview"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.63"
-                    app:srcCompat="@drawable/baseline_shopping_cart_24" />
 
             </LinearLayout>
 
@@ -58,8 +45,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sản phẩm bán chạy"
-                android:textAlignment="viewStart"
-                android:textStyle="bold" />
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/teal"
+                android:textSize="20sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_1"
@@ -70,9 +59,11 @@
                 android:id="@+id/textView22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sản phẩm khuyến mãi"
-                android:textAlignment="textStart"
-                android:textStyle="bold" />
+                android:text="Sản phẩm gợi ý"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/teal"
+                android:textSize="20sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_2"

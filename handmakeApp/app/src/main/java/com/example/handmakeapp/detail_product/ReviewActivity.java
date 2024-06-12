@@ -1,6 +1,5 @@
 package com.example.handmakeapp.detail_product;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,31 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.handmakeapp.CurrencyFormatter;
 import com.example.handmakeapp.R;
-import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
-import com.example.handmakeapp.home_products.adapter.SlideAdapter;
-import com.example.handmakeapp.home_products.mapping.BannerMapping;
-import com.example.handmakeapp.home_products.mapping.ProductMapping;
-import com.example.handmakeapp.model.Image;
-import com.example.handmakeapp.model.Product;
 import com.example.handmakeapp.model.ProductDetail;
 import com.example.handmakeapp.model.Rate;
-import com.squareup.picasso.Picasso;
 
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.HashMap;
 import java.util.List;
 
 public class ReviewActivity extends AppCompatActivity {

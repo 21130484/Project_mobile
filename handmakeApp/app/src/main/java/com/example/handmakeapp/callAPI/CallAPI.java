@@ -23,9 +23,10 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
+
 public interface CallAPI {
 
-    public final static String SERVER_IP = "192.168.1.5".trim();//ipconfig
+    public final static String SERVER_IP = "192.168.219.149".trim();//ipconfig
     public final static String SERVER_PORT = "8080";
 
     public static String getAbsoluteURL() {
@@ -100,6 +101,7 @@ public interface CallAPI {
             @Field("shippingFee") int shippingFee,
             @Field("note") String note,
             @Field("productList") String productList,
+            @Field("productQuantity") String productQuantity,
             @Field("totalPrice") String totalPrice,
             @Field("consigneeName") String consigneeName,
             @Field("phoneNumber") String phoneNumber);

@@ -78,6 +78,12 @@ public class VerifyOTP extends AppCompatActivity {
                 sendEmail();
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void Anhxa() {
@@ -117,7 +123,7 @@ public class VerifyOTP extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            AndroidToast.showToast(VerifyOTP.this, "Authentication failed.");
+                            AndroidToast.showToast(VerifyOTP.this, "Đăng ký thất bại.");
                         }
                     }
                 });

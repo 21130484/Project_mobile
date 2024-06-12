@@ -25,7 +25,9 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
 import com.example.handmakeapp.CartActivity;
+import com.example.handmakeapp.home_products.Home;
 import com.example.handmakeapp.home_products.adapter.ProductListRecyclerViewAdapter;
+import com.example.handmakeapp.home_products.adapter.RecyclerItemClickListener;
 import com.example.handmakeapp.home_products.mapping.ProductMapping;
 import com.example.handmakeapp.model.Category;
 
@@ -39,6 +41,10 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -63,11 +69,9 @@ public class DetailActivity extends AppCompatActivity {
     private AppCompatButton ratingSeeBtn;
 
 
-
-
-
-//   Sản phẩm topp
+    //   Sản phẩm topp
     RecyclerView rv;
+    List<ProductDetail> recommentProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +82,22 @@ public class DetailActivity extends AppCompatActivity {
         ratingWriteBtn = findViewById(R.id.ratingWrite);
         ratingSeeBtn = findViewById(R.id.ratingSee);
         rv = findViewById(R.id.rv);
+
+//        Xử lý sản phẩm liên quan.
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(layoutManager);
+        rv.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), rv, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+//                Toast.makeText(Home.this, "onItemClick", Toast.LENGTH_SHORT).show();
+                int idt = recommentProducts.get(position).getId();
+                getProductById(idt);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+            }
+        }));
 
         new NetworkTask().execute();
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +114,6 @@ public class DetailActivity extends AppCompatActivity {
                 startActivity(i);
             }
         })
-
 
 
         ;
@@ -127,7 +144,6 @@ public class DetailActivity extends AppCompatActivity {
             titleTxt.setText(p.getName());
             priceTxt.setText(String.valueOf(format.format(p.getSellingPrice())));
             descriptionTxt.setText(p.getDescription());
-
 
 
 //            Rating & Review declare START.
@@ -224,6 +240,8 @@ public class DetailActivity extends AppCompatActivity {
             }
             imageSlider.setImageList(imageList);
         }
+
+//        Mua ngay sản phẩm.
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -251,15 +269,10 @@ public class DetailActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(DetailActivity.this, ReviewActivity.class);
                 intent.putExtra("ProductDetail", p);
-                Toast.makeText(DetailActivity.this,"Ok "+p.getName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailActivity.this, "Ok " + p.getName(), Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
-
-
-
-
-
     }
 
     public static int caculatorPecentage(double a, double b) {
@@ -273,10 +286,7 @@ public class DetailActivity extends AppCompatActivity {
     private class NetworkTask extends AsyncTask<Void, Void, List<ProductDetail>> {
         @Override
         protected List<ProductDetail> doInBackground(Void... voids) {
-            List<ProductDetail> recommentProducts = ProductMapping.getInstance().getAllProduct();
-            List<Category> t = ProductMapping.getInstance().getCategories();
-            Log.e("huhu", recommentProducts.size()+"");
-            Log.e("haha", t.size()+"");
+            recommentProducts = ProductMapping.getInstance().getAllProduct();
             return recommentProducts;
         }
 
@@ -285,6 +295,32 @@ public class DetailActivity extends AppCompatActivity {
             ProductListRecyclerViewAdapter adapter = new ProductListRecyclerViewAdapter(products);
             rv.setAdapter(adapter);
         }
+    }
+
+    private void getProductById(int id) {
+        CallAPI.api.getPDById("getProductDetailsById", id).enqueue(new Callback<ProductDetail>() {
+            @Override
+            public void onResponse(Call<ProductDetail> call, Response<ProductDetail> response) {
+                Log.e("Kien", "onSuccess");
+                ProductDetail p = response.body();
+                if (p != null) {
+                    Log.e("Kien", p.toString());
+
+                    //Chuyển sang DetailActivity truyền ProductDetail.
+                    Intent intent = new Intent(DetailActivity.this, DetailActivity.class);
+                    intent.putExtra("productDetail", p);
+                    startActivity(intent);
+
+                } else {
+                    Log.e("Kien", response.code() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductDetail> call, Throwable t) {
+                Log.e("Kien", "Failure" + t.getMessage(), t);
+            }
+        });
     }
 }
 

@@ -57,17 +57,26 @@ public class OrderDAO {
         });
     }
 
-    public int insertOrderDetail(String orderId, String productId) {
+    public int insertOrderDetail(String orderId, String productId, String productQuantity) {
         String productIds = productId.substring(1, productId.length() -1 );
+        String productQuantitys = productQuantity.substring(1, productQuantity.length() -1 );
         StringTokenizer stk = new StringTokenizer(productIds, ", ");
+        StringTokenizer stk1 = new StringTokenizer(productQuantitys, ", ");
         int execute = 0;
         Jdbi jdbi = JDBIConnection.me().connect();
-        while (stk.hasMoreTokens()) {
+        while (stk.hasMoreTokens() && stk1.hasMoreTokens()) {
             String id = stk.nextToken();
-            String sqlSelectProduct = "Select quantity, sellingPrice from product where id = ?";
+            String quantity = stk1.nextToken();
+            String sqlSelectProduct = "Select p.id, p.soldout, p.sellingPrice from product p inner join cart_details cd on p.id = cd.productId" +
+                    " where cd.id = ?";
+            String updateSoldOut = "update product set soldout = ?  where id = ?";
             Product product = jdbi.withHandle(handle ->
                     handle.createQuery(sqlSelectProduct).bind(0, id).mapToBean(Product.class).findOne().orElse(null));
-
+            jdbi.withHandle(handle ->
+                    handle.createUpdate(updateSoldOut)
+                            .bind(0, product.getSoldout() + Integer.parseInt(quantity))
+                            .bind(1, product.getId())
+                            .execute());
             if (product != null) {
                 String sql = "insert into order_details(orderId, productId, quantity, sellingPrice, finalSellingPrice) " +
                         "values(?,?,?,?,?)";
@@ -75,8 +84,8 @@ public class OrderDAO {
                 execute = jdbi.withHandle(handle ->
                         handle.createUpdate(sql)
                                 .bind(0, orderId)
-                                .bind(1, id)
-                                .bind(2, product.getQuantity())
+                                .bind(1, product.getId())
+                                .bind(2, quantity)
                                 .bind(3, sellingPrice)
                                 .bind(4, sellingPrice * product.getQuantity()).execute());
             }

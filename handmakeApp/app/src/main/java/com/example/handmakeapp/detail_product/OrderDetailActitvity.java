@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.handmakeapp.CurrencyFormatter;
 import com.example.handmakeapp.CustomAdapterOrderDetail;
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
@@ -83,12 +84,11 @@ public class OrderDetailActitvity extends AppCompatActivity {
         customAdapterOrderDetail = new CustomAdapterOrderDetail(OrderDetailActitvity.this, (ArrayList<OrderItem>) order.getItemList());
         lvProduct.setAdapter(customAdapterOrderDetail);
 //        Sửa tổng tiền đơn hàng
-        double fee = 30000;
-        String feeS = String.valueOf(fee);
-        feeShip.setText(feeS);
+        int fee = 30000;
+
+        feeShip.setText(CurrencyFormatter.formatCurrency(fee));
         double total = order.getTotalPrice() + fee;
-        String totalP = String.valueOf(total);
-        totalPrice.setText(totalP);
+        totalPrice.setText(CurrencyFormatter.formatCurrency(total));
 
     }
 

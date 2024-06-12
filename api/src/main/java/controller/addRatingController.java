@@ -2,7 +2,9 @@ package controller;
 
 import DAO.RateDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import model.ProductDetail;
 import model.Rate;
+import service.ProductService;
 import service.RateService;
 
 import javax.servlet.ServletException;
@@ -15,8 +17,9 @@ import java.util.List;
 
 @WebServlet("/addRate")
 public class addRatingController extends HttpServlet {
+    private ProductService p = new ProductService();
+    private RateService r = new RateService();
 
-    RateService rateService = new RateService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
      doPost(req,resp);
@@ -34,9 +37,18 @@ public class addRatingController extends HttpServlet {
         String fullName = req.getParameter("fullName");
 
         if(userId != null) {
-            RateDAO rateDAO = new RateDAO();
-            rateDAO.insertIntoRating(productId, userId, starRatings, comment, fullName);
+            r.insertIntoRating(productId, userId, starRatings, comment, fullName);
+//            List<Rate> rateList = rateDAO.getRateByProduct(productId);
+
+            List<Rate> rateList = r.getRateByProduct(productId);
+            ProductDetail productDetail = p.getPDetailsById(productId);
+            productDetail.setRateList(rateList);
+//            ProductDetail productDetail = p.getPDetailsById(productId);
+//            productDetail.setRateList(rateList);
             objectMapper.writeValue(resp.getOutputStream(), null);
+
+
         }
     }
+
 }

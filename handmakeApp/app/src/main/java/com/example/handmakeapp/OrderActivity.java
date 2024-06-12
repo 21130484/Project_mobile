@@ -34,6 +34,7 @@ public class OrderActivity extends AppCompatActivity {
     TextView price, totalPrice, address, note, feeShip, phoneNumber, name;
     ArrayList<CartItemDTO> cartItems;
     List<String> arrProductId = new ArrayList<>();
+    List<String> arrProductQuantity = new ArrayList<>();
     Button back, btnChange, btnOrder;
     ListView listView;
     int total;
@@ -57,6 +58,7 @@ public class OrderActivity extends AppCompatActivity {
         for (int i = 0; i < data.size(); i++){
             cartItems.add(data.get(i));
             arrProductId.add(String.valueOf(data.get(i).getId())); // id of cartItem
+            arrProductQuantity.add(String.valueOf(data.get(i).getQuantity()));
         }
         Log.e("cartItems : ", cartItems.size() + "");
         customAdapterOrder.notifyDataSetChanged();
@@ -73,7 +75,7 @@ public class OrderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (user != null) {
                     CallAPI.api.checkout(user.getUid(), address.getText().toString(),
-                            30000, note.getText().toString(), arrProductId.toString(),
+                            30000, note.getText().toString(), arrProductId.toString(), arrProductQuantity.toString(),
                             total+30000 + "",
                             name.getText().toString(), phoneNumber.getText().toString()).enqueue(new Callback<Void>() {
                         @Override
@@ -83,7 +85,7 @@ public class OrderActivity extends AppCompatActivity {
                             Intent intent = new Intent(OrderActivity.this, OrderHistoryActivity.class);
                             startActivity(intent);
                             finish();
-                            Toast.makeText(OrderActivity.this, "Add success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(OrderActivity.this, "Mua hàng thành công", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override

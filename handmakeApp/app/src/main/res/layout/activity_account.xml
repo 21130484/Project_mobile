@@ -81,22 +81,14 @@
                     android:textSize="30sp"></TextView>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/donHang"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_marginTop="10dp"
-                android:background="#fff"
-                android:gravity="start"
-                android:orientation="vertical"
-                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/donHangCuaToi"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="start"
+                    android:background="#fff"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -130,106 +122,6 @@
                         android:textSize="30sp"></TextView>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/cxn" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="Chờ xác nhận"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/xacnhantc" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="Đã xác nhận"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/xe" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="Đang giao hàng"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/choxntc" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="Đã giao hàng"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/viDiem"
@@ -322,13 +214,6 @@
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:text="0987654321"
-                        android:textColor="@android:color/holo_blue_bright"
-                        android:textSize="20sp"></TextView>
                 </LinearLayout>
 
                 <TextView
@@ -503,9 +388,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:text="CÔNG TY TNHH GIẢI PHÁP CÔNG NGHỆ INFINITY"
+                        android:text="CỬA HÀNG HANDMADE 5 THÀNH VIÊN "
                         android:textColor="@color/black"
-                        android:textSize="28sp"
+                        android:textSize="26sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -567,7 +452,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="infinity@gmail.com"
+                        android:text="lungbaphe772003@gmail.com"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>

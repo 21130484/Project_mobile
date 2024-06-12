@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RateDAO {
 
-    public  static  List<Rate> getRateByProduct(int id) {
+    public static  List<Rate> getRateByProduct(int id) {
         List<Rate> rateList = JDBIConnection.me().connect().withHandle(
                 handle -> handle.createQuery("Select  fullName , starRatings, comment, createDate " +
                                 "from rate where productId = :productID"
@@ -21,7 +21,7 @@ public class RateDAO {
     }
 
 
-    public  void insertIntoRating(int productId, String userId, int starRatings, String comment, String fullName){
+    public static void insertIntoRating(int productId, String userId, int starRatings, String comment, String fullName){
         String sql = "Insert into rate (productId, userId, starRatings, comment, fullName)" +
                 "values(:productId, :userId, :starRatings, :comment, :fullName)";
         JDBIConnection.me().connect().useHandle(handle ->

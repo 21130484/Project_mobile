@@ -1,5 +1,6 @@
 package com.example.handmakeapp.detail_product;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -47,8 +48,9 @@ public class RateDialog extends Dialog {
 
     private RatingBar ratingBar;
     private ImageView image;
-    public RateDialog(@NonNull Context context) {
-        super(context);
+
+    public RateDialog(@NonNull Activity activity) {
+        super(activity);
     }
 
     @Override
@@ -56,7 +58,6 @@ public class RateDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rate_us_dialog);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
         final AppCompatButton submitBtn = findViewById(R.id.submitBtn);
         final AppCompatButton backBtn = findViewById(R.id.backBtn);
         ratingBar = findViewById(R.id.ratingBar);
@@ -67,7 +68,6 @@ public class RateDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 dismiss();
-
             }
         });
 
@@ -108,6 +108,7 @@ public class RateDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 addRatings();
+                getOwnerActivity().recreate();
             }
         });
 
@@ -132,26 +133,19 @@ public class RateDialog extends Dialog {
         String fullName = user.getDisplayName();
         int pid = p.getId();
         String comment = commentTxt.getText().toString();
-        Log.e("Kinn", "Comment: " + comment);
 
         Call<Void> call=  CallAPI.api.addRatings(pid, userId, rateValue, comment, fullName );
 
         call.enqueue(new Callback<Void>() {
-
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-
                 if(response.isSuccessful()) {
                     showThankYouDialog();
-
-
             }
                 else {
                     Toast.makeText(getContext(), "Lỗi xảy ra khi thêm", Toast.LENGTH_SHORT).show();
                     Log.e("RATING", response.message());
-
                 }
-
                 }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {

@@ -51,6 +51,7 @@ public class Products extends AppCompatActivity {
     HashMap<Integer, Integer> categoryIdMapping = new HashMap<>();//vị trí - categoryId
 
     List<ProductDetail> allProducts;
+    List<ProductDetail> filterList;
     ProductListArrayAdapter gridViewAdapter;
     BottomNavigationView bottomNavigation;
 
@@ -95,7 +96,7 @@ public class Products extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectOption = options.get(i);//tên danh mục
-                List<ProductDetail> filterList = null;
+                filterList = null;
                 if (i == 0) {
                     filterList = allProducts;
                     filterCategory(filterList);
@@ -123,7 +124,7 @@ public class Products extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int idt = allProducts.get(position).getId();
+                int idt = (filterList!=null && !filterList.isEmpty()) ? filterList.get(position).getId() : allProducts.get(position).getId();
 
                 getProductById(idt);
             }
@@ -137,7 +138,7 @@ public class Products extends AppCompatActivity {
     }
 
     private void filterText(String newText) {
-        List<ProductDetail> filterList = new ArrayList<>();
+        filterList = new ArrayList<>();
         if (allProducts != null) {
             for (ProductDetail p : allProducts) {
                 if (p.getName().toLowerCase().contains(newText.toLowerCase())) {

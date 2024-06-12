@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,11 +31,20 @@ public class ChangePassword extends AppCompatActivity {
     MailService mailService;
     String password;
 
+    ImageView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         anhXa();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         btn_xacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +104,7 @@ public class ChangePassword extends AppCompatActivity {
         passwordNew_repeat = findViewById(R.id.passwordNew_repeat);
         etCodeOTP = findViewById(R.id.etCodeOTP);
         btn_xacNhan = findViewById(R.id.btn_xacNhan);
+        back = findViewById(R.id.back);
     }
 
     private void sendOTPForgotPassword(String email) {

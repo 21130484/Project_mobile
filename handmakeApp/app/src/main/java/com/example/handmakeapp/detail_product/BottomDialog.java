@@ -1,6 +1,7 @@
 package com.example.handmakeapp.detail_product;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 
 import com.example.handmakeapp.R;
 import com.example.handmakeapp.callAPI.CallAPI;
+import com.example.handmakeapp.home_products.Products;
 import com.example.handmakeapp.model.ProductDetail;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +36,6 @@ import retrofit2.Response;
 
 public class BottomDialog extends BottomSheetDialogFragment {
     private ProductDetail p;
-
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser user = auth.getCurrentUser();
@@ -148,8 +149,11 @@ public class BottomDialog extends BottomSheetDialogFragment {
                               @Override
                               public void onClick(DialogInterface dialog, int which) {
                                   dialog.dismiss();
+
                                   Intent intent = new Intent(getContext(), DetailActivity.class);
+                                  intent.putExtra("productDetail", p);
                                   startActivity(intent);
+                                  getActivity().finish();
                               }
               });
               AlertDialog dialog = builder.create();

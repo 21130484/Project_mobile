@@ -31,9 +31,10 @@ public class CheckoutController extends HttpServlet {
         double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
         String consigneeName = req.getParameter("consigneeName");
         String phoneNumber = req.getParameter("phoneNumber");
+        String productQuantity = req.getParameter("productQuantity");
         String idOrder = orderDAO.insertOrder(userId, shippingFee, note, totalPrice, address, consigneeName, phoneNumber);
         if (!idOrder.isEmpty()) {
-            int execute = orderDAO.insertOrderDetail(idOrder, products);
+            int execute = orderDAO.insertOrderDetail(idOrder, products, productQuantity);
             CartDAO cartDAO = new CartDAO();
             cartDAO.deleteCartDetail(userId);
         }

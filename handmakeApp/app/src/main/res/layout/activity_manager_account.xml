@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".account.ManagerAccount"
     android:orientation="vertical">
+    <Button
+        android:id="@+id/backDetail"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:drawableTint="@color/teal"
+        android:textSize="20dp" />
 
     <ImageView
         android:layout_width="wrap_content"
